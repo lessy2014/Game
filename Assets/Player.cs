@@ -23,10 +23,12 @@ public class Player : MonoBehaviour
     private Animator animator;
     private float currentAxis = 1;
     private SpriteRenderer spriteRenderer;
+    public static Player Instance { get; set; }
 
     private void Awake()
     {
         input = new InputMaster();
+        Instance = this;
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
         boxCollider = gameObject.GetComponent<BoxCollider2D>();
         animator = gameObject.GetComponent<Animator>();
