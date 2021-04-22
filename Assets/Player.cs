@@ -28,6 +28,10 @@ public class Player : MonoBehaviour
     private float currentAxis = 1;
 
     public static Player Instance;
+    private static readonly int IsJumping = Animator.StringToHash("isJumping");
+    private static readonly int IsCrouching = Animator.StringToHash("isCrouching");
+    private static readonly int IsFalling = Animator.StringToHash("isFalling");
+    private static readonly int IsRunning = Animator.StringToHash("isRunning");
 
     private void Awake()
     {
@@ -66,9 +70,9 @@ public class Player : MonoBehaviour
     {
         if (crouchingUnpressed)
             Uncrouch();
-        animator.SetBool("isJumping", rigidbody.velocity.y > 0);
-        animator.SetBool("isFalling", rigidbody.velocity.y < 0);
-        animator.SetBool("isCrouching", crouching);
+        animator.SetBool(IsJumping, rigidbody.velocity.y > 0);
+        animator.SetBool(IsFalling, rigidbody.velocity.y < 0);
+        animator.SetBool(IsCrouching, crouching);
     }
 
     private void Move(float axis)
@@ -76,7 +80,7 @@ public class Player : MonoBehaviour
         if (axis != 0)
             spriteRenderer.flipX = axis < 0;
         movementX = axis * speed;
-        animator.SetBool("isRunning", movementX != 0);
+        animator.SetBool(IsRunning, movementX != 0);
     }
 
     private void Crouch()
@@ -86,7 +90,7 @@ public class Player : MonoBehaviour
         
         crouching = true;
         
-        // Райдер пишет, что последовательный доступ к полям компонента неэффективен.
+        // Райдер пишет, что последовательный доступ к полям компонента неэффективен
         var size = boxCollider.size;
         size = new Vector2(size.x, size.y / 2 - 0.2f);
         boxCollider.size = size;
