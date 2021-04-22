@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 
     private float movementX;
     private new Rigidbody2D rigidbody;
+    public static Player Instance { get; set; }
 
     private void Awake()
     {
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
         input.Player.Move.performed += context => Move(context.ReadValue<float>());
         input.Player.Move.canceled += context => Move(0);
         input.Player.Jump.performed += context => Jump();
+        Instance = this;
     }
 
     private void Update()
