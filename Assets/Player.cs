@@ -29,10 +29,12 @@ public class Player : MonoBehaviour
     {
         input = new InputMaster();
         Instance = this;
+        
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
         boxCollider = gameObject.GetComponent<BoxCollider2D>();
         animator = gameObject.GetComponent<Animator>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        
         input.Player.Move.performed += context => Move(context.ReadValue<float>());
         input.Player.Move.canceled += context => Move(0);
         input.Player.Jump.performed += context => Jump();
@@ -47,11 +49,9 @@ public class Player : MonoBehaviour
             Uncrouch();
         };
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
         if (crouchingUnpressed)
             Uncrouch();
         animator.SetBool("isJumping", rigidbody.velocity.y > 0);
@@ -69,38 +69,53 @@ public class Player : MonoBehaviour
 
     private void Crouch()
     {
-        if (!crouching)
-        {
-            crouching = true;
-            boxCollider.size = new Vector2(boxCollider.size.x, boxCollider.size.y / 2 - 0.2f);
-            boxCollider.offset = new Vector2(boxCollider.offset.x, boxCollider.offset.y * 2);
-        }
+        if (crouching)
+            return;
+        
+        crouching = true;
+        
+        // Райдер пишет, что последовательный доступ к полям компонента неэффективен.
+        var size = boxCollider.size;
+        size = new Vector2(size.x, size.y / 2 - 0.2f);
+        boxCollider.size = size;
+        
+        var offset = boxCollider.offset;
+        offset = new Vector2(offset.x, offset.y * 2);
+        boxCollider.offset = offset;
     }
 
     private void Uncrouch()
     {
-        if (!isCelled && crouching)
-        {
-            crouching = false;
-            boxCollider.size = new Vector2(boxCollider.size.x, (boxCollider.size.y + 0.2f) * 2);
-            boxCollider.offset = new Vector2(boxCollider.offset.x, boxCollider.offset.y / 2);
-            animator.SetBool("isCrouching", false);
-        }
+        if (isCelled || !crouching)
+            return;
+        
+        crouching = false;
+        
+        var size = boxCollider.size;
+        size = new Vector2(size.x, (size.y + 0.2f) * 2);
+        boxCollider.size = size;
+        
+        var offset = boxCollider.offset;
+        offset = new Vector2(offset.x, offset.y / 2);
+        boxCollider.offset = offset;
     }
 
     private void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, layerGrounds);
+        rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
+        
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
         isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds);
     }
 
     private void Jump()
     {
-        if (isGrounded)
-        {
-            rigidbody.velocity = new Vector2(movementX, jumpForce);
-        }
+        if (!isGrounded)
+            return;
+        
+        rigidbody.velocity = new Vector2(movementX, jumpForce);
     }
+    
     private void OnEnable() => input.Enable();
 
     private void OnDisable() => input.Disable();
