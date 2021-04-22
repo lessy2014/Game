@@ -7,34 +7,38 @@ public class Player : MonoBehaviour
 {
     public float speed = 4;
     public float jumpForce = 7;
+    public float groundRadius;
     public Transform groundCheck;
     public Transform cellCheck;
-    public float groundRadius;
     public LayerMask layerGrounds;
 
     private bool isGrounded;
     private bool isCelled;
     private bool crouching;
     private bool crouchingUnpressed;
+    
     private float movementX;
+    
     private new Rigidbody2D rigidbody;
     private new BoxCollider2D boxCollider;
-    private InputMaster input;
-    private Animator animator;
-    private float currentAxis = 1;
     private SpriteRenderer spriteRenderer;
-    public static Player Instance { get; set; }
+    private Animator animator;
+    
+    private InputMaster input;
+    private float currentAxis = 1;
+
+    public static Player Instance;
 
     private void Awake()
     {
-        input = new InputMaster();
+        GetComponents();
         Instance = this;
-        
-        rigidbody = gameObject.GetComponent<Rigidbody2D>();
-        boxCollider = gameObject.GetComponent<BoxCollider2D>();
-        animator = gameObject.GetComponent<Animator>();
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        
+        input = new InputMaster();
+        BindMovement();
+    }
+
+    private void BindMovement()
+    {
         input.Player.Move.performed += context => Move(context.ReadValue<float>());
         input.Player.Move.canceled += context => Move(0);
         input.Player.Jump.performed += context => Jump();
@@ -49,7 +53,15 @@ public class Player : MonoBehaviour
             Uncrouch();
         };
     }
-    
+
+    private void GetComponents()
+    {
+        rigidbody = gameObject.GetComponent<Rigidbody2D>();
+        boxCollider = gameObject.GetComponent<BoxCollider2D>();
+        animator = gameObject.GetComponent<Animator>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+    }
+
     void Update()
     {
         if (crouchingUnpressed)
