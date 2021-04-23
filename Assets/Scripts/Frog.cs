@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Frog : MonoBehaviour
+public class Frog : Entity
 {
 
     private float hp = 10;
@@ -13,6 +13,11 @@ public class Frog : MonoBehaviour
         {
             hp--;
             Debug.Log(hp);
+        }
+
+        if(hp < 1)
+        {
+            Die();
         }
     }
 }
