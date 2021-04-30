@@ -60,11 +60,20 @@ public class AngryOpossum : Entity
         }
     }
 
+    IEnumerator OpossumSpeed()
+    {
+        for(; ; )
+        {
+            speed = Random.Range(1, 10);
+            yield return new WaitForSeconds(4f);
+        }
+    }
+
 
     private void FixedUpdate()
     {
-        speed = Random.Range(4, 6);
-        Angry();
+         StartCoroutine("OpossumSpeed");
+         Angry();
     }
     private void Update()
     {

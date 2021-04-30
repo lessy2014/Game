@@ -19,6 +19,7 @@ public class Opossum : Entity
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        StartCoroutine("");
     }
     private void Idle()
     {
