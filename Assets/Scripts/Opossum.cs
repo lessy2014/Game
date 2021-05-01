@@ -1,25 +1,53 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Opossum : Entity
 {
+    public float groundRadius;
+    public Transform groundCheck;
+    private bool isGrounded;
+    public LayerMask layerGrounds;
+    private float movementX;
+    private float movementY;
+    
+    private new Rigidbody2D rigidbody;
+    private new BoxCollider2D boxCollider;
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
+    
     [SerializeField] private float speed = 5;
     [SerializeField] private int patrolRadius = 5;
     [SerializeField] private bool movingRight;
     public Transform homePoint;
     public Transform player;
     public float stoppingDistance;
-    [SerializeField] bool idle;
-    [SerializeField] bool angry;
-    [SerializeField] bool backHome;
-    [SerializeField] double opossum_homePoint_dist;
-    [SerializeField] double opossum_player_dist;
 
+    private void Awake()
+    {
+        GetComponents();
+    }
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        StartCoroutine(OpossumSpeed());
         StartCoroutine("");
+    }
+    private void GetComponents()
+    {
+        rigidbody = gameObject.GetComponent<Rigidbody2D>();
+        boxCollider = gameObject.GetComponent<BoxCollider2D>();
+        animator = gameObject.GetComponent<Animator>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetType() == this.GetType())
+        {
+            return;
+        }
     }
     private void Idle()
     {
@@ -41,48 +69,48 @@ public class Opossum : Entity
 
     private void Angry()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.position, speed*Time.deltaTime);
+        var delta = transform.position.x - player.transform.position.x - 0.7;
+        if (delta < 0.3 && delta > 0)
+            movementX = 0;
+        else if (delta > 0)
+            movementX = -speed;
+        else 
+            movementX = speed;
+
+        if (isGrounded)
+            movementY = 0.5f;
+        else
+            movementY = 0;
+    }
+    
+    
+    IEnumerator OpossumSpeed()
+    {
+        for(; ; )
+        {
+            speed = Random.Range(3, 5);
+            yield return new WaitForSeconds(1);
+        }
     }
 
-    private void BackHome()
+    private void FixedUpdate()
     {
-        transform.position = Vector2.MoveTowards(transform.position, homePoint.position, speed * Time.deltaTime);
+        rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y + movementY);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
     }
 
     private void Update()
     {
-        opossum_homePoint_dist = Vector2.Distance(transform.position, homePoint.position);
-        opossum_player_dist = Vector2.Distance(transform.position, player.position);
-        idle = true;
-        if (Vector2.Distance(transform.position, homePoint.position) < patrolRadius && !angry)
-        {
-            angry = false;
-            idle = true;
-            print("idle");
-            backHome = false;
-        }
 
-        else if(Vector2.Distance(transform.position, player.position) < stoppingDistance)
+        if(Vector2.Distance(transform.position, player.position) < stoppingDistance)
         {
-            angry = true;
             print("angry");
-            idle = false;
-            backHome = false;
-        }
-
-        else if (Vector2.Distance(transform.position, homePoint.position) > stoppingDistance)
-        {
-            idle = false;
-            backHome = true;
-            print("backHome");
-            angry = false;
-        }
-
-        if (idle)
-            Idle();
-        else if (angry)
             Angry();
-        else if (backHome)
-            BackHome();
+        }
+        else
+        {
+            print("idle");
+            Idle();
+        }
     }
 }
