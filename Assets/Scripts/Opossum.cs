@@ -88,7 +88,7 @@ public class Opossum : Entity
     {
         for(; ; )
         {
-            speed = Random.Range(3, 5);
+            speed = Random.Range(3.0f, 4.0f);
             yield return new WaitForSeconds(1);
         }
     }

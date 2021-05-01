@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed = 4;
+    public float speedMultiplicator = 1;
     public float jumpForce = 7;
     public float groundRadius;
     public Transform groundCheck;
@@ -115,6 +116,42 @@ public class Player : MonoBehaviour
         offset = new Vector2(offset.x, offset.y / 2);
         boxCollider.offset = offset;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == 11)
+        {
+            speed *= 0.8f;
+            if (jumpForce > 3)
+                jumpForce *= 0.8f;
+        }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer == 11)
+        {
+            speed *= 1.25f;
+            if (jumpForce < 7)
+                jumpForce *= 1.25f;
+        }
+    }
+
+    // private void OnCollisionEnter2D(Collision2D other)
+    // {
+    //     if (other.gameObject.layer == 9)
+    //     {
+    //         speed *= 0.8f;
+    //         
+    //     }
+    // }
+    //
+    // private void OnCollisionExit2D(Collision2D other)
+    // {
+    //     if (other.gameObject.layer == 9)
+    //         speed *= 1.25f;
+    // }
 
     private void FixedUpdate()
     {
