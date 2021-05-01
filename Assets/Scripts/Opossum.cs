@@ -8,7 +8,10 @@ public class Opossum : Entity
 {
     public float groundRadius;
     public Transform groundCheck;
+    public Transform rightWallCheck;
+    public Transform leftWallCheck;
     private bool isGrounded;
+    [SerializeField] private bool jump;
     public LayerMask layerGrounds;
     private float movementX;
     private float movementY;
@@ -60,11 +63,16 @@ public class Opossum : Entity
         {
             movingRight = true;
         }
-            
+
         if (movingRight)
-            transform.position = new Vector2(transform.position.x + speed * Time.deltaTime, transform.position.y);
+            movementX = speed;
         else
-            transform.position = new Vector2(transform.position.x - speed * Time.deltaTime, transform.position.y);
+            movementX = -speed;
+
+        if (jump && isGrounded)
+            movementY = 1.2f;
+        else
+            movementY = 0;
     }
 
     private void Angry()
@@ -77,8 +85,10 @@ public class Opossum : Entity
         else 
             movementX = speed;
 
-        if (isGrounded)
-            movementY = 0.5f;
+        if (jump && isGrounded)
+            movementY = 1.2f;
+        else if (isGrounded)
+            movementY = 0.4f;
         else
             movementY = 0;
     }
@@ -97,6 +107,7 @@ public class Opossum : Entity
     {
         rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y + movementY);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
+        jump = Physics2D.OverlapCircle(rightWallCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(leftWallCheck.position, groundRadius, layerGrounds);
     }
 
     private void Update()
