@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0bec48be-bdf1-45f1-852d-c3185a70945d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Opossum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Opossum.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sunnyland/artwork/Sprites/player/hurt/player-hurt-1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sunnyland/artwork/Sprites/player/hurt/player-hurt-1.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sunnyland/artwork/Sprites/player/hurt/player-hurt-2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sunnyland/artwork/Sprites/player/hurt/player-hurt-2.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Game.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Bar.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Bar.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Heart.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Heart.png.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +21,7 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Opossum.cs" />
+        <option value="$PROJECT_DIR$/Assets/HealthBarScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Player.cs" />
       </list>
     </option>
@@ -76,7 +69,7 @@
       <updated>1619109130406</updated>
       <workItem from="1619109215368" duration="1592000" />
       <workItem from="1619898511521" duration="15307000" />
-      <workItem from="1619954394957" duration="7086000" />
+      <workItem from="1619954394957" duration="8814000" />
     </task>
     <servers />
   </component>

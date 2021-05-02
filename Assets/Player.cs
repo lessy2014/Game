@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
     public Transform groundCheck;
     public Transform cellCheck;
     public LayerMask layerGrounds;
-    public float health = 100;
+    public int health = 100;
+    public HealthBar healthBar;
     
     private Stack<Coroutine> gettingDamageStack = new Stack<Coroutine>();
 
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
         Instance = this;
         input = new InputMaster();
         BindMovement();
+        healthBar.SetMaxHealth(health);
     }
 
     private void BindMovement()
@@ -160,6 +162,7 @@ public class Player : MonoBehaviour
         for (;;)
         {
             health -= 10;
+            healthBar.SetHealth(health);
             yield return new WaitForSeconds(3f);
         }
     }

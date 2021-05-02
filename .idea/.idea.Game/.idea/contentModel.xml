@@ -8,6 +8,7 @@
       <e p="Assets" t="Include">
         <e p="Controls.cs" t="Include" />
         <e p="HealthBar.cs" t="Include" />
+        <e p="HealthBarScript.cs" t="Include" />
         <e p="InputMaster.cs" t="Include" />
         <e p="Player.cs" t="Include" />
         <e p="Scripts" t="Include">
