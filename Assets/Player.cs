@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public float speed = 4;
-    public float speedMultiplicator = 1;
+    // public float speedMultiplicator = 1;
     public float jumpForce = 7;
     public float groundRadius;
     public Transform groundCheck;
     public Transform cellCheck;
     public LayerMask layerGrounds;
+    public float health = 100;
+    
+    private Stack<Coroutine> gettingDamageStack = new Stack<Coroutine>();
 
     private bool isGrounded;
     private bool isCelled;
     private bool crouching;
     private bool crouchingUnpressed;
+    private bool isDead;
     
     private float movementX;
     
@@ -26,13 +31,14 @@ public class Player : MonoBehaviour
     private Animator animator;
     
     private InputMaster input;
-    private float currentAxis = 1;
+    // private float currentAxis = 1;
 
     public static Player Instance;
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
     private static readonly int IsCrouching = Animator.StringToHash("isCrouching");
     private static readonly int IsFalling = Animator.StringToHash("isFalling");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
+    private static readonly int IsDead = Animator.StringToHash("isDead");
 
     private void Awake()
     {
@@ -124,8 +130,18 @@ public class Player : MonoBehaviour
             speed *= 0.8f;
             if (jumpForce > 3)
                 jumpForce *= 0.8f;
+            if (health > 0)
+                gettingDamageStack.Push(StartCoroutine(GettingDamage()));
+            else if (!isDead)
+            {
+                isDead = true;
+                foreach (var damage in gettingDamageStack)
+                {
+                    StopCoroutine(damage);
+                }
+                StartCoroutine(Death());
+            }
         }
-
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -135,28 +151,32 @@ public class Player : MonoBehaviour
             speed *= 1.25f;
             if (jumpForce < 7)
                 jumpForce *= 1.25f;
+            StopCoroutine(gettingDamageStack.Pop());
         }
     }
 
-    // private void OnCollisionEnter2D(Collision2D other)
-    // {
-    //     if (other.gameObject.layer == 9)
-    //     {
-    //         speed *= 0.8f;
-    //         
-    //     }
-    // }
-    //
-    // private void OnCollisionExit2D(Collision2D other)
-    // {
-    //     if (other.gameObject.layer == 9)
-    //         speed *= 1.25f;
-    // }
+    IEnumerator GettingDamage()
+    {
+        for (;;)
+        {
+            health -= 10;
+            yield return new WaitForSeconds(3f);
+        }
+    }
+    IEnumerator Death()
+    {
+        animator.SetBool(IsDead, true);
+        speed = 0;
+        jumpForce = 0;
+        yield return new WaitForSeconds(2f);
+        transform.Rotate(Vector3.forward * 90);
+        // Destroy(boxCollider);
+        // Destroy(rigidbody);
+    }
 
     private void FixedUpdate()
     {
         rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
-        
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
         isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds);
     }

@@ -11,13 +11,14 @@ public class Opossum : Entity
     public Transform rightWallCheck;
     public Transform leftWallCheck;
     private bool isGrounded;
+    [SerializeField] private bool angry;
     [SerializeField] private bool jump;
     public LayerMask layerGrounds;
     private float movementX;
     private float movementY;
     
     private new Rigidbody2D rigidbody;
-    private new BoxCollider2D boxCollider;
+    private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     
@@ -36,7 +37,6 @@ public class Opossum : Entity
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         StartCoroutine(OpossumSpeed());
-        StartCoroutine("");
     }
     private void GetComponents()
     {
@@ -115,12 +115,14 @@ public class Opossum : Entity
 
         if(Vector2.Distance(transform.position, player.position) < stoppingDistance)
         {
-            print("angry");
+            // print("angry");
+            angry = true;
             Angry();
         }
         else
         {
-            print("idle");
+            // print("idle");
+            angry = false;
             Idle();
         }
     }
