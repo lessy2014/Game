@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public float speed = 4;
     // public float speedMultiplicator = 1;
     public float jumpForce = 7;
-    [SerializeField]public float groundRadius = 100;
+    [SerializeField]public float groundRadius;
     public Transform groundCheck;
     public Transform cellCheck;
     public LayerMask layerGrounds;
@@ -92,6 +92,15 @@ public class Player : MonoBehaviour
         rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
         isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds);
+        if(health <= 0 && !isDead)
+        {
+            isDead = true;
+            foreach (var damage in gettingDamageStack)
+            {
+                StopCoroutine(damage);
+            }
+            Death();
+        }
     }
 
     private void Move(float axis)
@@ -145,28 +154,21 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == 9)
+        if (other.gameObject.layer == 11)
         {
             speed *= 0.8f;
             if (jumpForce > 3)
                 jumpForce *= 0.8f;
             if (health > 0)
-                gettingDamageStack.Push(StartCoroutine(GettingDamage()));
-            else if (!isDead)
             {
-                isDead = true;
-                foreach (var damage in gettingDamageStack)
-                {
-                    StopCoroutine(damage);
-                }
-                Death();
+                gettingDamageStack.Push(StartCoroutine(GettingDamage()));
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.layer == 9)
+        if (other.gameObject.layer == 11)
         {
             speed *= 1.25f;
             if (jumpForce < 7)
