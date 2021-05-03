@@ -6,10 +6,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    #region init
     public float speed = 4;
     // public float speedMultiplicator = 1;
     public float jumpForce = 7;
-    public float groundRadius;
+    [SerializeField]public float groundRadius = 100;
     public Transform groundCheck;
     public Transform cellCheck;
     public LayerMask layerGrounds;
@@ -20,8 +21,8 @@ public class Player : MonoBehaviour
 
     [SerializeField]private bool isGrounded;
     private bool isCelled;
-    private bool crouching;
-    private bool crouchingUnpressed;
+    //private bool crouching;
+    //private bool crouchingUnpressed;
     private bool isDead;
     
     private float movementX;
@@ -36,10 +37,12 @@ public class Player : MonoBehaviour
 
     public static Player Instance;
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
-    private static readonly int IsCrouching = Animator.StringToHash("isCrouching");
+    //private static readonly int IsCrouching = Animator.StringToHash("isCrouching");
     private static readonly int IsFalling = Animator.StringToHash("isFalling");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
     private static readonly int IsDead = Animator.StringToHash("isDead");
+    private static readonly int DeadAnimationEnded = Animator.StringToHash("deadAnimationEnded");
+    #endregion 
 
     private void Awake()
     {
@@ -55,33 +58,40 @@ public class Player : MonoBehaviour
         input.Player.Move.performed += context => Move(context.ReadValue<float>());
         input.Player.Move.canceled += context => Move(0);
         input.Player.Jump.performed += context => Jump();
-        input.Player.Crouch.performed += context =>
-        {
-            crouchingUnpressed = false;
-            Crouch();
-        };
-        input.Player.Crouch.canceled += context =>
-        {
-            crouchingUnpressed = true;
-            Uncrouch();
-        };
+        //input.Player.Crouch.performed += context =>
+        //{
+        //    crouchingUnpressed = false;
+        //    Crouch();
+        //};
+        //input.Player.Crouch.canceled += context =>
+        //{
+        //    crouchingUnpressed = true;
+        //    Uncrouch();
+        //};
     }
 
     private void GetComponents()
     {
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
         boxCollider = gameObject.GetComponent<BoxCollider2D>();
-        animator = gameObject.GetComponent<Animator>();
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        animator = gameObject.GetComponentInChildren<Animator>();
+        spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()
     {
-        if (crouchingUnpressed)
-            Uncrouch();
-        animator.SetBool(IsJumping, rigidbody.velocity.y > 0);
+        //if (crouchingUnpressed)
+        //    Uncrouch();
+        animator.SetBool(IsJumping, rigidbody.velocity.y > 1);
         animator.SetBool(IsFalling, rigidbody.velocity.y < 0);
-        animator.SetBool(IsCrouching, crouching);
+        //animator.SetBool(IsCrouching, crouching);
+    }
+
+    private void FixedUpdate()
+    {
+        rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
+        isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds);
     }
 
     private void Move(float axis)
@@ -92,42 +102,50 @@ public class Player : MonoBehaviour
         animator.SetBool(IsRunning, movementX != 0);
     }
 
-    private void Crouch()
+    private void Jump()
     {
-        if (crouching)
+        if (!isGrounded)
             return;
-        
-        crouching = true;
-        
-        // Райдер пишет, что последовательный доступ к полям компонента неэффективен
-        var size = boxCollider.size;
-        size = new Vector2(size.x, size.y / 2 - 0.2f);
-        boxCollider.size = size;
-        
-        var offset = boxCollider.offset;
-        offset = new Vector2(offset.x, offset.y * 2);
-        boxCollider.offset = offset;
+
+        rigidbody.velocity = new Vector2(movementX, jumpForce);
     }
 
-    private void Uncrouch()
-    {
-        if (isCelled || !crouching)
-            return;
-        
-        crouching = false;
-        
-        var size = boxCollider.size;
-        size = new Vector2(size.x, (size.y + 0.2f) * 2);
-        boxCollider.size = size;
-        
-        var offset = boxCollider.offset;
-        offset = new Vector2(offset.x, offset.y / 2);
-        boxCollider.offset = offset;
-    }
+    //private void Crouch()
+    //{
+    //    if (crouching)
+    //        return;
+
+    //    crouching = true;
+
+    //    // Райдер пишет, что последовательный доступ к полям компонента неэффективен
+    //    var size = boxCollider.size;
+    //    size = new Vector2(size.x, size.y / 2 - 0.2f);
+    //    boxCollider.size = size;
+
+    //    var offset = boxCollider.offset;
+    //    offset = new Vector2(offset.x, offset.y * 2);
+    //    boxCollider.offset = offset;
+    //}
+
+    //private void Uncrouch()
+    //{
+    //    if (isCelled || !crouching)
+    //        return;
+
+    //    crouching = false;
+
+    //    var size = boxCollider.size;
+    //    size = new Vector2(size.x, (size.y + 0.2f) * 2);
+    //    boxCollider.size = size;
+
+    //    var offset = boxCollider.offset;
+    //    offset = new Vector2(offset.x, offset.y / 2);
+    //    boxCollider.offset = offset;
+    //}
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == 11)
+        if (other.gameObject.layer == 9)
         {
             speed *= 0.8f;
             if (jumpForce > 3)
@@ -141,14 +159,14 @@ public class Player : MonoBehaviour
                 {
                     StopCoroutine(damage);
                 }
-                StartCoroutine(Death());
+                Death();
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.layer == 11)
+        if (other.gameObject.layer == 9)
         {
             speed *= 1.25f;
             if (jumpForce < 7)
@@ -166,30 +184,13 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(3f);
         }
     }
-    IEnumerator Death()
+    private void Death()
     {
         animator.SetBool(IsDead, true);
         speed = 0;
         jumpForce = 0;
-        yield return new WaitForSeconds(2f);
-        transform.Rotate(Vector3.forward * 90);
         // Destroy(boxCollider);
         // Destroy(rigidbody);
-    }
-
-    private void FixedUpdate()
-    {
-        rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
-        isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds);
-    }
-
-    private void Jump()
-    {
-        if (!isGrounded)
-            return;
-        
-        rigidbody.velocity = new Vector2(movementX, jumpForce);
     }
     
     private void OnEnable() => input.Enable();
