@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     
     private Stack<Coroutine> gettingDamageStack = new Stack<Coroutine>();
 
-    private bool isGrounded;
+    [SerializeField]private bool isGrounded;
     private bool isCelled;
     private bool crouching;
     private bool crouchingUnpressed;
