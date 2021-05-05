@@ -42,6 +42,14 @@ public class Player : MonoBehaviour
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
     private static readonly int IsDead = Animator.StringToHash("isDead");
     private static readonly int DeadAnimationEnded = Animator.StringToHash("deadAnimationEnded");
+    private static readonly int IsAttack = Animator.StringToHash("isAttack");
+
+    public bool isAttacking = false;
+    public bool readyToAttack = true;
+
+    public Transform attackPosition;
+    public float attackRange;
+    public LayerMask enemies;
     #endregion 
 
     private void Awake()
@@ -51,6 +59,7 @@ public class Player : MonoBehaviour
         input = new InputMaster();
         BindMovement();
         healthBar.SetMaxHealth(health);
+        readyToAttack = true;
     }
 
     private void BindMovement()
@@ -58,6 +67,7 @@ public class Player : MonoBehaviour
         input.Player.Move.performed += context => Move(context.ReadValue<float>());
         input.Player.Move.canceled += context => Move(0);
         input.Player.Jump.performed += context => Jump();
+        input.Player.Attack.performed += context => Attack();
         //input.Player.Crouch.performed += context =>
         //{
         //    crouchingUnpressed = false;
@@ -115,10 +125,34 @@ public class Player : MonoBehaviour
     {
         if (!isGrounded)
             return;
-
         rigidbody.velocity = new Vector2(movementX, jumpForce);
     }
 
+    private void Attack()
+    {
+        if(isGrounded && readyToAttack)
+        {
+            animator.SetBool(IsAttack, true);
+            isAttacking = true;
+            readyToAttack = false;
+
+            StartCoroutine(AttackAnimation());
+            StartCoroutine(AttackCoolDown());
+        }
+    }
+
+    IEnumerator AttackAnimation()
+    {
+        yield return new WaitForSeconds(0.1f);
+        animator.SetBool(IsAttack, false);
+        isAttacking = false;
+    }
+
+    IEnumerator AttackCoolDown()
+    {
+        yield return new WaitForSeconds(1f);
+        readyToAttack = true; 
+    }
     //private void Crouch()
     //{
     //    if (crouching)
