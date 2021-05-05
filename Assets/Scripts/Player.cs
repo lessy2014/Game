@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     #region init
-    public float speed = 4;
+    public float speed = 5;
     // public float speedMultiplicator = 1;
     public float jumpForce = 7;
     [SerializeField]public float groundRadius;
@@ -82,8 +82,8 @@ public class Player : MonoBehaviour
     {
         //if (crouchingUnpressed)
         //    Uncrouch();
-        animator.SetBool(IsJumping, rigidbody.velocity.y > 1);
-        animator.SetBool(IsFalling, rigidbody.velocity.y < 0);
+        animator.SetBool(IsJumping, rigidbody.velocity.y > 0 && !isGrounded);
+        animator.SetBool(IsFalling, rigidbody.velocity.y < 0 && !isGrounded);
         //animator.SetBool(IsCrouching, crouching);
     }
 
@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
     private void Move(float axis)
     {
         if (axis != 0)
-            spriteRenderer.flipX = axis < 0;
+            spriteRenderer.flipX = axis < 0 && !isDead;
         movementX = axis * speed;
         animator.SetBool(IsRunning, movementX != 0);
     }
