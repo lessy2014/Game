@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
             animator.SetBool(IsAttack, true);
             isAttacking = true;
             readyToAttack = false;
-
+            onAttack();
             StartCoroutine(AttackAnimation());
             StartCoroutine(AttackCoolDown());
         }
@@ -154,10 +154,10 @@ public class Player : MonoBehaviour
     }
 
 
-    // private void OnDrawGizmosSelected()
-    // {
-    //     Gizmos.DrawWireSphere(attackPosition.position, attackRange);
-    // }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(attackPosition.position, attackRange);
+    }
 
     IEnumerator AttackAnimation()
     {
