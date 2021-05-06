@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0bec48be-bdf1-45f1-852d-c3185a70945d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/TrashMonster Variant.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/TrashMonster Variant.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TrashMonster.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TrashMonster.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +22,7 @@
         <option value="$PROJECT_DIR$/Assets/HealthBarScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Player.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/TrashMonster.cs" />
       </list>
     </option>
   </component>
@@ -68,7 +70,7 @@
       <workItem from="1619109215368" duration="1592000" />
       <workItem from="1619898511521" duration="15307000" />
       <workItem from="1619954394957" duration="9601000" />
-      <workItem from="1620263275610" duration="3501000" />
+      <workItem from="1620263275610" duration="6474000" />
     </task>
     <servers />
   </component>

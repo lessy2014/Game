@@ -10,6 +10,9 @@ public class TrashMonster : Entity
     public Transform groundCheck;
     public Transform rightWallCheck;
     public Transform leftWallCheck;
+
+    public GameObject slownessApplier;
+
     private bool isGrounded;
     [SerializeField] private bool angry;
     [SerializeField] private bool jump;
@@ -17,11 +20,13 @@ public class TrashMonster : Entity
     private float movementX;
     private float movementY;
     
+    
     private new Rigidbody2D rigidbody;
     private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
-    
+
+    public float hp = 100;
     [SerializeField] private float speed = 5;
     [SerializeField] private int patrolRadius = 5;
     [SerializeField] private bool movingRight;
@@ -29,6 +34,7 @@ public class TrashMonster : Entity
     public Transform player;
     public float stoppingDistance;
     [SerializeField] private int layer;
+    private static readonly int IsDead = Animator.StringToHash("isDead");
 
     private void Awake()
     {
@@ -47,13 +53,35 @@ public class TrashMonster : Entity
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
         layer = this.gameObject.layer;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    public void TakeDamage(int damage)
     {
-        if (collision.gameObject.GetType() == this.GetType())
+        hp -= damage;
+
+        if (hp <= 0)
         {
-            return;
+            Death();
         }
     }
+
+    void Death()
+    {
+        animator.SetBool(IsDead, true);
+        animator.SetTrigger("Dying");
+        Debug.Log("You killed me dude");
+        // boxCollider.enabled = false;
+        enabled = false;
+        Destroy(slownessApplier);
+        // Destroy(gameObject);
+    }
+
+    // private void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     if (collision.gameObject.GetType() == this.GetType())
+    //     {
+    //         return;
+    //     }
+    // }
     private void Idle()
     {
         if (transform.position.x > homePoint.position.x + patrolRadius)
@@ -83,9 +111,15 @@ public class TrashMonster : Entity
         if (delta < 0.3 && delta > 0)
             movementX = 0;
         else if (delta > 0)
+        {
             movementX = -speed;
-        else 
+            movingRight = false;
+        }
+        else
+        {
             movementX = speed;
+            movingRight = true;
+        }
 
         if (jump && isGrounded)
             movementY = 1.2f;

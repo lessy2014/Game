@@ -136,6 +136,12 @@ public class Player : MonoBehaviour
     {
         if(isGrounded && readyToAttack)
         {
+            var enemiesOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, enemies);
+            foreach (var enemy in enemiesOnHit)
+            {
+                Debug.Log("Take it!");
+                enemy.GetComponent<TrashMonster>().TakeDamage(50);
+            }
             animator.SetBool(IsAttack, true);
             isAttacking = true;
             readyToAttack = false;
@@ -144,6 +150,11 @@ public class Player : MonoBehaviour
             StartCoroutine(AttackCoolDown());
         }
     }
+
+    // private void OnDrawGizmosSelected()
+    // {
+    //     Gizmos.DrawWireSphere(attackPosition.position, attackRange);
+    // }
 
     IEnumerator AttackAnimation()
     {
