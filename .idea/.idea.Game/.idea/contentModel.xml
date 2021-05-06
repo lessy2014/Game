@@ -6,16 +6,21 @@
     <e p="F:\Leonid Programmes\Unity\Projects\TheGame\Game" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="Controls.cs" t="Include" />
-        <e p="HealthBar.cs" t="Include" />
-        <e p="HealthBarScript.cs" t="Include" />
-        <e p="InputMaster.cs" t="Include" />
-        <e p="Player.cs" t="Include" />
+        <e p="GetComponent.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="CameraController.cs" t="Include" />
+          <e p="Controls.cs" t="Include" />
           <e p="Entity.cs" t="Include" />
           <e p="Frog.cs" t="Include" />
-          <e p="Opossum.cs" t="Include" />
+          <e p="HealthBar.cs" t="Include" />
+          <e p="InputMaster.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
+          <e p="TrashMonster.cs" t="Include" />
+        </e>
+        <e p="Sprites" t="Include">
+          <e p="Huntress 2" t="Include">
+            <e p="License.txt" t="Include" />
+          </e>
         </e>
       </e>
       <e p="Game.sln" t="IncludeFlat" />
