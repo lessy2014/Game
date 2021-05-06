@@ -80,10 +80,7 @@ public class TrashMonster : Entity
 
     private void Update()
     {
-        var dist = player.transform.position.x - this.transform.position.x;
-        spriteRenderer.flipX = movingRight && (player.transform.position.x - this.transform.position.x < -2 ||
-            player.transform.position.x - this.transform.position.x > 0);
-        print(dist);
+        spriteRenderer.flipX = movingRight;
 
         if (Vector2.Distance(transform.position, player.position) < stoppingDistance)
         {
@@ -192,8 +189,9 @@ public class TrashMonster : Entity
 
     private void Angry()
     {
-        var delta = transform.position.x - player.transform.position.x - 0.7;
-        if (delta < 0.3 && delta > 0)
+        var delta = transform.position.x - player.transform.position.x;
+        if ((delta < 2 && delta > 0)
+            ||(delta > -2 && delta < 0))
             movementX = 0;
         else if (delta > 0)
         {
