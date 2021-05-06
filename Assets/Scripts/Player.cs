@@ -104,15 +104,15 @@ public class Player : MonoBehaviour
         rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
         isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds);
-        if(health <= 0 && !isDead)
-        {
-            isDead = true;
-            foreach (var damage in gettingDamageStack)
-            {
-                StopCoroutine(damage);
-            }
-            Death();
-        }
+        //if(health <= 0 && !isDead)
+        //{
+        //    isDead = true;
+        //    //foreach (var damage in gettingDamageStack)
+        //    //{
+        //    //    StopCoroutine(damage);
+        //    //}
+        //    Death();
+        //}
     }
 
     private void Move(float axis)
@@ -148,6 +148,7 @@ public class Player : MonoBehaviour
             StartCoroutine(AttackCoolDown());
         }
     }
+
 
     // private void OnDrawGizmosSelected()
     // {
@@ -206,10 +207,10 @@ public class Player : MonoBehaviour
             speed *= 0.8f;
             if (jumpForce > 3)
                 jumpForce *= 0.8f;
-            if (health > 0)
-            {
-                gettingDamageStack.Push(StartCoroutine(GettingDamage()));
-            }
+            //if (health > 0)
+            //{
+            //    gettingDamageStack.Push(StartCoroutine(GettingDamage()));
+            //}
         }
     }
 
@@ -220,17 +221,28 @@ public class Player : MonoBehaviour
             speed *= 1.25f;
             if (jumpForce < 7)
                 jumpForce *= 1.25f;
-            StopCoroutine(gettingDamageStack.Pop());
+            //StopCoroutine(gettingDamageStack.Pop());
         }
     }
 
-    IEnumerator GettingDamage()
+    //IEnumerator GettingDamage()
+    //{
+    //    for (;;)
+    //    {
+    //        health -= 10;
+    //        healthBar.SetHealth(health);
+    //        yield return new WaitForSeconds(3f);
+    //    }
+    //}
+
+    public void TakeDamage(int damage)
     {
-        for (;;)
+        health -= damage;
+        healthBar.SetHealth(health);
+        if (health <= 0)
         {
-            health -= 10;
-            healthBar.SetHealth(health);
-            yield return new WaitForSeconds(3f);
+            isDead = true;
+            Death();
         }
     }
 

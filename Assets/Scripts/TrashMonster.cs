@@ -34,11 +34,20 @@ public class TrashMonster : Entity
     public Transform player;
     public float stoppingDistance;
     [SerializeField] private int layer;
+
+    private static readonly int IsAttack = Animator.StringToHash("isAttack");
+    public bool isAttacking = false;
+    public bool readyToAttack = true;
+    public Transform attackPosition;
+    public float attackRange = 1;
+    public LayerMask players;
+
     private static readonly int IsDying = Animator.StringToHash("isDying");
 
     private void Awake()
     {
         GetComponents();
+        readyToAttack = true;
     }
     private void Start()
     {
@@ -52,6 +61,72 @@ public class TrashMonster : Entity
         animator = gameObject.GetComponent<Animator>();
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
         layer = this.gameObject.layer;
+    }
+
+
+    private void FixedUpdate()
+    {
+        rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y + movementY);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
+        jump = Physics2D.OverlapCircle(rightWallCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(leftWallCheck.position, groundRadius, layerGrounds);
+        var distanceToPlayer = player.transform.position.x - this.transform.position.x;
+        if (distanceToPlayer < 15)
+        {
+            print("hi");
+            Attack();
+        }
+    }
+
+    private void Update()
+    {
+        spriteRenderer.flipX = movingRight;
+
+        if (Vector2.Distance(transform.position, player.position) < stoppingDistance)
+        {
+            // print("angry");
+            angry = true;
+            Angry();
+        }
+        else
+        {
+            // print("idle");
+            angry = false;
+            Idle();
+        }
+    }
+
+
+    private void Attack()
+    {
+        if (readyToAttack)
+        {
+            print("bye");
+            var enemiesOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, players);
+            foreach (var enemy in enemiesOnHit)
+            {
+                Debug.Log("Take it!");
+                enemy.GetComponent<Player>().TakeDamage(10);
+            }
+            animator.SetBool(IsAttack, true);
+            isAttacking = true;
+            readyToAttack = false;
+
+            StartCoroutine(AttackAnimation());
+            StartCoroutine(AttackCoolDown());
+        }
+    }
+
+    IEnumerator AttackAnimation()
+    {
+        yield return new WaitForSeconds(0.1f);
+        animator.SetBool(IsAttack, false);
+        isAttacking = false;
+    }
+
+    IEnumerator AttackCoolDown()
+    {
+        yield return new WaitForSeconds(3f);
+        readyToAttack = true;
     }
 
     public void TakeDamage(int damage)
@@ -137,31 +212,6 @@ public class TrashMonster : Entity
         {
             speed = Random.Range(3.0f, 4.0f);
             yield return new WaitForSeconds(1);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y + movementY);
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
-        jump = Physics2D.OverlapCircle(rightWallCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(leftWallCheck.position, groundRadius, layerGrounds);
-    }
-
-    private void Update()
-    {
-        spriteRenderer.flipX = movingRight;
-
-        if(Vector2.Distance(transform.position, player.position) < stoppingDistance)
-        {
-            // print("angry");
-            angry = true;
-            Angry();
-        }
-        else
-        {
-            // print("idle");
-            angry = false;
-            Idle();
         }
     }
 }
