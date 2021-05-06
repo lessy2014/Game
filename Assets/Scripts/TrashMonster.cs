@@ -34,6 +34,7 @@ public class TrashMonster : Entity
     public Transform player;
     public float stoppingDistance;
     [SerializeField] private int layer;
+    
 
     private static readonly int IsAttack = Animator.StringToHash("isAttack");
     public bool isAttacking = false;
@@ -69,8 +70,8 @@ public class TrashMonster : Entity
         rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y + movementY);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
         jump = Physics2D.OverlapCircle(rightWallCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(leftWallCheck.position, groundRadius, layerGrounds);
-        var distanceToPlayer = player.transform.position.x - this.transform.position.x;
-        if (distanceToPlayer < 15)
+        var distanceToPlayer = Math.Abs(player.transform.position.x - this.transform.position.x);
+        if (distanceToPlayer < 3)
         {
             print("hi");
             Attack();
@@ -79,7 +80,10 @@ public class TrashMonster : Entity
 
     private void Update()
     {
-        spriteRenderer.flipX = movingRight;
+        var dist = player.transform.position.x - this.transform.position.x;
+        spriteRenderer.flipX = movingRight && (player.transform.position.x - this.transform.position.x < -2 ||
+            player.transform.position.x - this.transform.position.x > 0);
+        print(dist);
 
         if (Vector2.Distance(transform.position, player.position) < stoppingDistance)
         {
@@ -101,18 +105,23 @@ public class TrashMonster : Entity
         if (readyToAttack)
         {
             print("bye");
-            var enemiesOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, players);
-            foreach (var enemy in enemiesOnHit)
-            {
-                Debug.Log("Take it!");
-                enemy.GetComponent<Player>().TakeDamage(10);
-            }
+            
             animator.SetBool(IsAttack, true);
             isAttacking = true;
             readyToAttack = false;
 
             StartCoroutine(AttackAnimation());
             StartCoroutine(AttackCoolDown());
+        }
+    }
+
+    private void OnAttack()
+    {
+        var enemiesOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, players);
+        foreach (var enemy in enemiesOnHit)
+        {
+            Debug.Log("Take it!");
+            enemy.GetComponent<Player>().TakeDamage(10);
         }
     }
 
