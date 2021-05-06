@@ -34,7 +34,7 @@ public class TrashMonster : Entity
     public Transform player;
     public float stoppingDistance;
     [SerializeField] private int layer;
-    private static readonly int IsDead = Animator.StringToHash("isDead");
+    private static readonly int IsDying = Animator.StringToHash("isDying");
 
     private void Awake()
     {
@@ -64,9 +64,9 @@ public class TrashMonster : Entity
         }
     }
 
-    void Death()
+    private void Death()
     {
-        animator.SetBool(IsDead, true);
+        animator.SetBool(IsDying, true);
         animator.SetTrigger("Dying");
         Debug.Log("You killed me dude");
         // boxCollider.enabled = false;
@@ -74,6 +74,7 @@ public class TrashMonster : Entity
         Destroy(slownessApplier);
         // Destroy(gameObject);
     }
+
 
     // private void OnCollisionEnter2D(Collision2D collision)
     // {
