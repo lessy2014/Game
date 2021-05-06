@@ -6130,7 +6130,7 @@ MonoBehaviour:
   layerGrounds:
     serializedVersion: 2
     m_Bits: 256
-  health: 100
+  health: 50
   healthBar: {fileID: 737416354}
   isGrounded: 0
   isAttacking: 0

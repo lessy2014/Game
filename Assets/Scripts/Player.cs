@@ -28,7 +28,6 @@ public class Player : MonoBehaviour
     private float movementX;
     
     private new Rigidbody2D rigidbody;
-    private new BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     
@@ -41,7 +40,7 @@ public class Player : MonoBehaviour
     private static readonly int IsFalling = Animator.StringToHash("isFalling");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
     private static readonly int IsDead = Animator.StringToHash("isDead");
-    private static readonly int DeadAnimationEnded = Animator.StringToHash("deadAnimationEnded");
+    private static readonly int IsDying = Animator.StringToHash("isDying");
     private static readonly int IsAttack = Animator.StringToHash("isAttack");
 
     public bool isAttacking = false;
@@ -83,7 +82,6 @@ public class Player : MonoBehaviour
     private void GetComponents()
     {
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
-        boxCollider = gameObject.GetComponent<BoxCollider2D>();
         animator = gameObject.GetComponentInChildren<Animator>();
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
     }
@@ -235,9 +233,15 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(3f);
         }
     }
-    private void Death()
+
+    private void Dead()
     {
         animator.SetBool(IsDead, true);
+    }
+
+    private void Death()
+    {
+        animator.SetBool(IsDying, true);
         speed = 0;
         jumpForce = 0;
         // Destroy(boxCollider);
