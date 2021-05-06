@@ -92,6 +92,10 @@ public class Player : MonoBehaviour
     {
         //if (crouchingUnpressed)
         //    Uncrouch();
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Attack();
+        }
         animator.SetBool(IsJumping, rigidbody.velocity.y > 0 && !isGrounded);
         animator.SetBool(IsFalling, rigidbody.velocity.y < 0 && !isGrounded);
         //animator.SetBool(IsCrouching, crouching);
