@@ -41,6 +41,7 @@ public class TrashMonster : Entity
     private bool isAttacking = false;
     private bool readyToAttack = true;
     private bool onSelf = false;
+    private bool preparingAttack = false;
     public Transform rightAttackPosition;
     public Transform leftAttackPosition;
     public Transform onSelfAttackPosition;
@@ -71,11 +72,13 @@ public class TrashMonster : Entity
 
     private void FixedUpdate()
     {
+        if (preparingAttack)
+            movementX = 0;
         rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y + movementY);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
         jump = Physics2D.OverlapCircle(rightWallCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(leftWallCheck.position, groundRadius, layerGrounds);
-        var distanceToPlayer = Math.Abs(player.transform.position.x - this.transform.position.x);
-        if (distanceToPlayer < 3)
+        var distanceToPlayer = Math.Abs(player.transform.position.x - transform.position.x);
+        if (distanceToPlayer < 3 && !preparingAttack)
             StartCoroutine(WaitBeforeAttack());
         // if (distanceToPlayer < 3 && distanceToPlayer > 1.5)
         // {
@@ -91,18 +94,26 @@ public class TrashMonster : Entity
 
     IEnumerator WaitBeforeAttack()
     {
-        var distanceToPlayer = Math.Abs(player.transform.position.x - this.transform.position.x);
+        preparingAttack = true;
         yield return new WaitForSeconds(1f);
-        if (distanceToPlayer < 3 && distanceToPlayer > 1.5)
+        var distanceToPlayer = Math.Abs(player.transform.position.x - transform.position.x);
+        if (distanceToPlayer < 3)
         {
-            onSelf = false;
-            Attack(IsAttack);
+            yield return new WaitForSeconds(1f);
+            distanceToPlayer = Math.Abs(player.transform.position.x - transform.position.x);
+            if (distanceToPlayer < 3 && distanceToPlayer > 1.5)
+            {
+                onSelf = false;
+                Attack(IsAttack);
+            }
+            else if (distanceToPlayer <= 1.5)
+            {
+                onSelf = true;
+                Attack(IsOnSelfAttack);
+            }
         }
-        else if (distanceToPlayer <= 1.5)
-        {
-            onSelf = true;
-            Attack(IsOnSelfAttack);
-        }
+
+        preparingAttack = false;
     }
 
     private void Update()
@@ -244,6 +255,7 @@ public class TrashMonster : Entity
             movementX = speed;
         else
             movementX = -speed;
+        
 
         if (jump && isGrounded)
             movementY = 1.2f;
