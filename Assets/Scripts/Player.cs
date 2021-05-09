@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
@@ -45,8 +46,9 @@ public class Player : MonoBehaviour
 
     public bool isAttacking = false;
     public bool readyToAttack = true;
-
-    public Transform attackPosition;
+    public bool right = true;
+    public Transform rightAttackPosition;
+    public Transform leftAttackPosition;
     public float attackRange;
     public LayerMask enemies;
     #endregion 
@@ -119,6 +121,10 @@ public class Player : MonoBehaviour
     {
         if (axis != 0)
             spriteRenderer.flipX = axis < 0 && !isDead;
+        if (axis < 0)
+            right = false;
+        else if (axis > 0)
+            right = true;
         movementX = axis * speed;
         animator.SetBool(IsRunning, movementX != 0);
     }
@@ -145,18 +151,30 @@ public class Player : MonoBehaviour
 
     private void onAttack()
     {
-        var enemiesOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, enemies);
-        foreach (var enemy in enemiesOnHit)
+        if (right)
         {
-            Debug.Log("Take it!");
-            enemy.GetComponent<TrashMonster>().TakeDamage(50);
+            var enemiesOnHit = Physics2D.OverlapCircleAll(rightAttackPosition.position, attackRange, enemies);
+            foreach (var enemy in enemiesOnHit)
+            {
+                Debug.Log("Take it!");
+                enemy.GetComponent<TrashMonster>().TakeDamage(50);
+            }
+        }
+        else
+        {
+            var enemiesOnHit = Physics2D.OverlapCircleAll(leftAttackPosition.position, attackRange, enemies);
+            foreach (var enemy in enemiesOnHit)
+            {
+                Debug.Log("Take it!");
+                enemy.GetComponent<TrashMonster>().TakeDamage(50);
+            } 
         }
     }
 
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(attackPosition.position, attackRange);
+        Gizmos.DrawWireSphere(rightAttackPosition.position, attackRange);
     }
 
     IEnumerator AttackAnimation()
