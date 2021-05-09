@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public LayerMask layerGrounds;
     public int health = 100;
     public HealthBar healthBar;
+    public int cleavePower = 3;
 
     [SerializeField]private bool isGrounded;
     private bool isCelled;
@@ -171,20 +172,18 @@ public class Player : MonoBehaviour
         if (right)
         {
             var enemiesOnHit = Physics2D.OverlapCircleAll(rightAttackPosition.position, attackRange, enemies);
-            foreach (var enemy in enemiesOnHit)
+            for (var i = 0; i < cleavePower; i++)
             {
-                Debug.Log("Take it!");
-                enemy.GetComponent<TrashMonster>().TakeDamage(50);
+                enemiesOnHit[i].GetComponent<TrashMonster>().TakeDamage(50);
             }
         }
         else
         {
             var enemiesOnHit = Physics2D.OverlapCircleAll(leftAttackPosition.position, attackRange, enemies);
-            foreach (var enemy in enemiesOnHit)
+            for (var i = 0; i < cleavePower; i++)
             {
-                Debug.Log("Take it!");
-                enemy.GetComponent<TrashMonster>().TakeDamage(50);
-            } 
+                enemiesOnHit[i].GetComponent<TrashMonster>().TakeDamage(50);
+            }
         }
     }
 
