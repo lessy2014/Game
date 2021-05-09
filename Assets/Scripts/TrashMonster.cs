@@ -75,18 +75,33 @@ public class TrashMonster : Entity
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
         jump = Physics2D.OverlapCircle(rightWallCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(leftWallCheck.position, groundRadius, layerGrounds);
         var distanceToPlayer = Math.Abs(player.transform.position.x - this.transform.position.x);
+        if (distanceToPlayer < 3)
+            StartCoroutine(WaitBeforeAttack());
+        // if (distanceToPlayer < 3 && distanceToPlayer > 1.5)
+        // {
+        //     onSelf = false;
+        //     Attack(IsAttack);
+        // }
+        // else if (distanceToPlayer <= 1.5)
+        // {
+        //     onSelf = true;
+        //     Attack(IsOnSelfAttack);
+        // }
+    }
+
+    IEnumerator WaitBeforeAttack()
+    {
+        var distanceToPlayer = Math.Abs(player.transform.position.x - this.transform.position.x);
+        yield return new WaitForSeconds(1f);
         if (distanceToPlayer < 3 && distanceToPlayer > 1.5)
         {
             onSelf = false;
-            print("hi");
             Attack(IsAttack);
         }
         else if (distanceToPlayer <= 1.5)
         {
             onSelf = true;
-            print("GERARA HER");
             Attack(IsOnSelfAttack);
-            
         }
     }
 
@@ -113,8 +128,6 @@ public class TrashMonster : Entity
     {
         if (readyToAttack)
         {
-            print("bye");
-            
             animator.SetBool(id, true);
             isAttacking = true;
             readyToAttack = false;
@@ -147,7 +160,6 @@ public class TrashMonster : Entity
             var enemiesOnHit = Physics2D.OverlapCircleAll(onSelfAttackPosition.position, attackRange, players);
             foreach (var enemy in enemiesOnHit)
             {
-                Debug.Log("Take it!");
                 enemy.GetComponent<Player>().TakeDamage(10);
             }
             onSelf = false;
@@ -157,7 +169,6 @@ public class TrashMonster : Entity
             var enemiesOnHit = Physics2D.OverlapCircleAll(rightAttackPosition.position, attackRange, players);
             foreach (var enemy in enemiesOnHit)
             {
-                Debug.Log("Take it!");
                 enemy.GetComponent<Player>().TakeDamage(10);
             }
         }
@@ -166,7 +177,6 @@ public class TrashMonster : Entity
             var enemiesOnHit = Physics2D.OverlapCircleAll(leftAttackPosition.position, attackRange, players);
             foreach (var enemy in enemiesOnHit)
             {
-                Debug.Log("Take it!");
                 enemy.GetComponent<Player>().TakeDamage(10);
             }
         }
@@ -204,7 +214,6 @@ public class TrashMonster : Entity
     {
         animator.SetBool(IsDying, true);
         animator.SetTrigger("Dying");
-        Debug.Log("You killed me dude");
         // boxCollider.enabled = false;
         enabled = false;
         Destroy(slownessApplier);
