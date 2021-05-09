@@ -95,11 +95,11 @@ public class TrashMonster : Entity
     IEnumerator WaitBeforeAttack()
     {
         preparingAttack = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         var distanceToPlayer = Math.Abs(player.transform.position.x - transform.position.x);
         if (distanceToPlayer < 3)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             distanceToPlayer = Math.Abs(player.transform.position.x - transform.position.x);
             if (distanceToPlayer < 3 && distanceToPlayer > 1.5)
             {

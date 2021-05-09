@@ -41,14 +41,15 @@ public class Player : MonoBehaviour
     private static readonly int IsDead = Animator.StringToHash("isDead");
     private static readonly int IsDying = Animator.StringToHash("isDying");
     private static readonly int IsAttack = Animator.StringToHash("isAttack");
+    private static readonly int IsSecondAttack = Animator.StringToHash("isSecondAttack");
+    private static readonly int IsThirdAttack = Animator.StringToHash("isThirdAttack");
 
-    public bool isAttacking = false;
-    public bool readyToAttack = true;
+    private bool isAttacking = false;
     public bool right = true;
     public Transform rightAttackPosition;
     public Transform leftAttackPosition;
     public float attackRange;
-    private bool[] comboAttack = new[] {false, false, false};
+    private bool[] comboAttack = new[] {true, false, false, false};
     public LayerMask enemies;
     #endregion 
 
@@ -59,7 +60,6 @@ public class Player : MonoBehaviour
         input = new InputMaster();
         BindMovement();
         healthBar.SetMaxHealth(health);
-        readyToAttack = true;
     }
 
     private void BindMovement()
@@ -128,14 +128,42 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
-        if(isGrounded && readyToAttack)
+        if (isGrounded && comboAttack[2] && !isAttacking)
+        {
+            animator.SetBool(IsThirdAttack, true);
+            comboAttack[2] = false;
+            StartCoroutine(AttackAnimation(IsThirdAttack, 0.683f));
+            StartCoroutine(AttackCoolDown(2));
+        }
+        else if (isGrounded && comboAttack[1] && !isAttacking)
+        {
+            animator.SetBool(IsSecondAttack, true);
+            comboAttack[1] = false;
+            StartCoroutine(AttackAnimation(IsSecondAttack, 0.433f));
+            StartCoroutine(AttackCoolDown(1));
+        }
+        else if(isGrounded && comboAttack[0] && !isAttacking)
         {
             animator.SetBool(IsAttack, true);
-            isAttacking = true;
-            readyToAttack = false;
-            StartCoroutine(AttackAnimation());
-            StartCoroutine(AttackCoolDown());
+            comboAttack[0] = false;
+            StartCoroutine(AttackAnimation(IsAttack, 0.683f));
+            StartCoroutine(AttackCoolDown(0));
         }
+    }
+    IEnumerator AttackAnimation(int id, float attackDuration)
+    {
+        isAttacking = true;
+        yield return new WaitForSeconds(attackDuration);
+        isAttacking = false;
+        animator.SetBool(id, false);
+    }
+
+    IEnumerator AttackCoolDown(int attackNumber)
+    {
+        comboAttack[attackNumber + 1] = true;
+        yield return new WaitForSeconds(1.5f);
+        comboAttack[attackNumber+1] = false;
+        comboAttack[0] = true; 
     }
 
     private void onAttack()
@@ -166,19 +194,7 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(rightAttackPosition.position, attackRange);
         Gizmos.DrawWireSphere(leftAttackPosition.position, attackRange);
     }
-
-    IEnumerator AttackAnimation()
-    {
-        yield return new WaitForSeconds(0.1f);
-        animator.SetBool(IsAttack, false);
-        isAttacking = false;
-    }
-
-    IEnumerator AttackCoolDown()
-    {
-        yield return new WaitForSeconds(1f);
-        readyToAttack = true; 
-    }
+    
     //private void Crouch()
     //{
     //    if (crouching)
