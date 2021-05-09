@@ -131,6 +131,7 @@ public class Player : MonoBehaviour
     {
         if (isGrounded && comboAttack[2] && !isAttacking)
         {
+            cleavePower = 7;
             animator.SetBool(IsThirdAttack, true);
             comboAttack[2] = false;
             StartCoroutine(AttackAnimation(IsThirdAttack, 0.683f));
@@ -138,6 +139,7 @@ public class Player : MonoBehaviour
         }
         else if (isGrounded && comboAttack[1] && !isAttacking)
         {
+            cleavePower = 5;
             animator.SetBool(IsSecondAttack, true);
             comboAttack[1] = false;
             StartCoroutine(AttackAnimation(IsSecondAttack, 0.433f));
@@ -145,6 +147,7 @@ public class Player : MonoBehaviour
         }
         else if(isGrounded && comboAttack[0] && !isAttacking)
         {
+            cleavePower = 3;
             animator.SetBool(IsAttack, true);
             comboAttack[0] = false;
             StartCoroutine(AttackAnimation(IsAttack, 0.683f));
@@ -175,6 +178,7 @@ public class Player : MonoBehaviour
             for (var i = 0; i < cleavePower; i++)
             {
                 enemiesOnHit[i].GetComponent<TrashMonster>().TakeDamage(50);
+                print(enemiesOnHit[i].gameObject.name);
             }
         }
         else

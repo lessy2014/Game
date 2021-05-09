@@ -83,7 +83,7 @@ public class TrashMonster : Entity
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
         jump = Physics2D.OverlapCircle(rightWallCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(leftWallCheck.position, groundRadius, layerGrounds);
         var distanceToPlayer = Math.Abs(player.transform.position.x - transform.position.x);
-        if (distanceToPlayer < 3 && !preparingAttack)
+        if (distanceToPlayer < 3 && !preparingAttack && enabled)
             StartCoroutine(WaitBeforeAttack());
         // if (distanceToPlayer < 3 && distanceToPlayer > 1.5)
         // {
@@ -247,6 +247,7 @@ public class TrashMonster : Entity
         // boxCollider.enabled = false;
         enabled = false;
         Destroy(slownessApplier);
+        StopAllCoroutines();
         // Destroy(gameObject);
     }
 
