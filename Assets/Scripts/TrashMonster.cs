@@ -37,9 +37,13 @@ public class TrashMonster : Entity
     
 
     private static readonly int IsAttack = Animator.StringToHash("isAttack");
-    public bool isAttacking = false;
-    public bool readyToAttack = true;
-    public Transform attackPosition;
+    private static readonly int IsOnSelfAttack = Animator.StringToHash("isOnSelfAttack");
+    private bool isAttacking = false;
+    private bool readyToAttack = true;
+    private bool onSelf = false;
+    public Transform rightAttackPosition;
+    public Transform leftAttackPosition;
+    public Transform onSelfAttackPosition;
     public float attackRange = 1;
     public LayerMask players;
 
@@ -71,10 +75,18 @@ public class TrashMonster : Entity
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
         jump = Physics2D.OverlapCircle(rightWallCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(leftWallCheck.position, groundRadius, layerGrounds);
         var distanceToPlayer = Math.Abs(player.transform.position.x - this.transform.position.x);
-        if (distanceToPlayer < 3)
+        if (distanceToPlayer < 3 && distanceToPlayer > 1.5)
         {
+            onSelf = false;
             print("hi");
-            Attack();
+            Attack(IsAttack);
+        }
+        else if (distanceToPlayer <= 1.5)
+        {
+            onSelf = true;
+            print("GERARA HER");
+            Attack(IsOnSelfAttack);
+            
         }
     }
 
@@ -97,35 +109,78 @@ public class TrashMonster : Entity
     }
 
 
-    private void Attack()
+    private void Attack(int id)
     {
         if (readyToAttack)
         {
             print("bye");
             
-            animator.SetBool(IsAttack, true);
+            animator.SetBool(id, true);
             isAttacking = true;
             readyToAttack = false;
 
-            StartCoroutine(AttackAnimation());
+            StartCoroutine(AttackAnimation(id));
             StartCoroutine(AttackCoolDown());
         }
     }
 
-    private void OnAttack()
+    private void JumpOnPlayer()
     {
-        var enemiesOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, players);
-        foreach (var enemy in enemiesOnHit)
-        {
-            Debug.Log("Take it!");
-            enemy.GetComponent<Player>().TakeDamage(10);
-        }
+        if (movingRight)
+            gameObject.transform.position = rightAttackPosition.position;
+        else
+            gameObject.transform.position = leftAttackPosition.position;
     }
 
-    IEnumerator AttackAnimation()
+    private void JumpFromPlayer()
+    {
+        if (movingRight)
+            gameObject.transform.position = leftAttackPosition.position;
+        else
+            gameObject.transform.position = rightAttackPosition.position;
+    }
+
+    private void OnAttack()
+    {
+        if (onSelf)
+        {
+            var enemiesOnHit = Physics2D.OverlapCircleAll(onSelfAttackPosition.position, attackRange, players);
+            foreach (var enemy in enemiesOnHit)
+            {
+                Debug.Log("Take it!");
+                enemy.GetComponent<Player>().TakeDamage(10);
+            }
+            onSelf = false;
+        }
+        else if (movingRight)
+        {
+            var enemiesOnHit = Physics2D.OverlapCircleAll(rightAttackPosition.position, attackRange, players);
+            foreach (var enemy in enemiesOnHit)
+            {
+                Debug.Log("Take it!");
+                enemy.GetComponent<Player>().TakeDamage(10);
+            }
+        }
+        else
+        {
+            var enemiesOnHit = Physics2D.OverlapCircleAll(leftAttackPosition.position, attackRange, players);
+            foreach (var enemy in enemiesOnHit)
+            {
+                Debug.Log("Take it!");
+                enemy.GetComponent<Player>().TakeDamage(10);
+            }
+        }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(rightAttackPosition.position, attackRange);
+        Gizmos.DrawWireSphere(leftAttackPosition.position, attackRange);
+    }
+
+    IEnumerator AttackAnimation(int id)
     {
         yield return new WaitForSeconds(0.1f);
-        animator.SetBool(IsAttack, false);
+        animator.SetBool(id, false);
         isAttacking = false;
     }
 

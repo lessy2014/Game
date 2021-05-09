@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
             animator.SetBool(IsAttack, true);
             isAttacking = true;
             readyToAttack = false;
-            onAttack();
+            // onAttack();
             StartCoroutine(AttackAnimation());
             StartCoroutine(AttackCoolDown());
         }
@@ -276,8 +276,7 @@ public class Player : MonoBehaviour
     private void Death()
     {
         animator.SetBool(IsDying, true);
-        speed = 0;
-        jumpForce = 0;
+        input.Disable();
         // Destroy(boxCollider);
         // Destroy(rigidbody);
     }
