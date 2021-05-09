@@ -16,6 +16,7 @@ public class TrashMonster : Entity
     private bool isGrounded;
     [SerializeField] private bool angry;
     [SerializeField] private bool jump;
+    private bool gotDamage = false;
     public LayerMask layerGrounds;
     private float movementX;
     private float movementY;
@@ -74,6 +75,10 @@ public class TrashMonster : Entity
     {
         if (preparingAttack)
             movementX = 0;
+        if (gotDamage && movingRight)
+            movementX = -speed;
+        else if (gotDamage && !movingRight)
+            movementX = speed;
         rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y + movementY);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
         jump = Physics2D.OverlapCircle(rightWallCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(leftWallCheck.position, groundRadius, layerGrounds);
@@ -213,12 +218,26 @@ public class TrashMonster : Entity
 
     public void TakeDamage(int damage)
     {
+        preparingAttack = false;
         hp -= damage;
+        DoKnockBack();
 
         if (hp <= 0)
         {
             Death();
         }
+    }
+    
+    public void DoKnockBack()
+    {
+        StartCoroutine(DisableMovement(1f));
+        rigidbody.velocity = new Vector2(0, 5f);
+    }
+    IEnumerator DisableMovement(float time)
+    {
+        gotDamage = true;
+        yield return new WaitForSeconds(time);
+        gotDamage = false;
     }
 
     private void Death()
