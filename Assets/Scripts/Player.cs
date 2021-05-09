@@ -52,6 +52,7 @@ public class Player : MonoBehaviour
     public float attackRange;
     private bool[] comboAttack = new[] {true, false, false, false};
     public LayerMask enemies;
+    private bool nextAttack;
     #endregion 
 
     private void Awake()
@@ -177,7 +178,8 @@ public class Player : MonoBehaviour
             var enemiesOnHit = Physics2D.OverlapCircleAll(rightAttackPosition.position, attackRange, enemies);
             for (var i = 0; i < cleavePower; i++)
             {
-                enemiesOnHit[i].GetComponent<TrashMonster>().TakeDamage(50);
+                if (i > enemiesOnHit.Length-1) break;
+                enemiesOnHit[i].GetComponent<Entity>().GetDamage(50);
                 // print(enemiesOnHit[i].gameObject.name);
             }
         }
@@ -186,7 +188,8 @@ public class Player : MonoBehaviour
             var enemiesOnHit = Physics2D.OverlapCircleAll(leftAttackPosition.position, attackRange, enemies);
             for (var i = 0; i < cleavePower; i++)
             {
-                enemiesOnHit[i].GetComponent<TrashMonster>().TakeDamage(50);
+                if (i > enemiesOnHit.Length-1) break;
+                enemiesOnHit[i].GetComponent<Entity>().GetDamage(50);
             }
         }
     }

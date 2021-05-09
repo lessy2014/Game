@@ -216,7 +216,7 @@ public class TrashMonster : Entity
         readyToAttack = true;
     }
 
-    public void TakeDamage(int damage)
+    public override void GetDamage(int damage)
     {
         preparingAttack = false;
         hp -= damage;
