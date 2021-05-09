@@ -4,6 +4,7 @@
     <list default="true" id="0bec48be-bdf1-45f1-852d-c3185a70945d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TrashMonster.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TrashMonster.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +74,7 @@
       <workItem from="1619954394957" duration="9601000" />
       <workItem from="1620263275610" duration="7242000" />
       <workItem from="1620286377228" duration="2218000" />
-      <workItem from="1620561441469" duration="19715000" />
+      <workItem from="1620561441469" duration="20276000" />
     </task>
     <servers />
   </component>

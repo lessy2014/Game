@@ -178,7 +178,7 @@ public class Player : MonoBehaviour
             for (var i = 0; i < cleavePower; i++)
             {
                 enemiesOnHit[i].GetComponent<TrashMonster>().TakeDamage(50);
-                print(enemiesOnHit[i].gameObject.name);
+                // print(enemiesOnHit[i].gameObject.name);
             }
         }
         else
