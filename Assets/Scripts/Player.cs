@@ -46,13 +46,17 @@ public class Player : MonoBehaviour
     private static readonly int IsThirdAttack = Animator.StringToHash("isThirdAttack");
 
     private bool isAttacking = false;
+    
     public bool right = true;
     public Transform rightAttackPosition;
     public Transform leftAttackPosition;
     public float attackRange;
-    private bool[] comboAttack = new[] {true, false, false, false};
+    //private bool[] comboAttack = new[] {true, false, false};
     public LayerMask enemies;
-    private bool nextAttack;
+    [SerializeField]int attackCounter;
+    private bool canRunFirstAttack = true;
+    private bool canRunSecondAttack;
+    private bool canRunThirdAttack;
     #endregion 
 
     private void Awake()
@@ -97,6 +101,12 @@ public class Player : MonoBehaviour
         {
             Attack();
         }
+        if (attackCounter == 1 && canRunFirstAttack)
+            firstAttack();
+        if (attackCounter >= 2 && canRunSecondAttack)
+            secondAttack();
+        if (attackCounter == 3 && canRunThirdAttack)
+            thirdAttack();
         animator.SetBool(IsJumping, rigidbody.velocity.y > 0 && !isGrounded);
         animator.SetBool(IsFalling, rigidbody.velocity.y < 0 && !isGrounded);
         //animator.SetBool(IsCrouching, crouching);
@@ -130,29 +140,50 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
-        if (isGrounded && comboAttack[2] && !isAttacking)
+        if(isGrounded && attackCounter<3)
+            attackCounter++;
+    }
+    private void RunSecondAttack()
+    {
+        canRunSecondAttack = true;
+        canRunFirstAttack = false;
+    }
+
+    private void RunThirdAttack()
+    {
+        canRunThirdAttack = true;
+        canRunSecondAttack = false;
+    }
+    private void firstAttack()
+    {
+        print("first attack");
+        cleavePower = 3;
+        animator.SetBool(IsAttack, true);
+        StartCoroutine(AttackAnimation(IsAttack, 0.6f));
+        StartCoroutine(AttackCoolDown(2f));
+    }
+    private void secondAttack()
+    {
+        if (isGrounded && attackCounter >= 2)
         {
-            cleavePower = 7;
-            animator.SetBool(IsThirdAttack, true);
-            comboAttack[2] = false;
-            StartCoroutine(AttackAnimation(IsThirdAttack, 0.683f));
-            StartCoroutine(AttackCoolDown(2));
-        }
-        else if (isGrounded && comboAttack[1] && !isAttacking)
-        {
+            print("second attack");
             cleavePower = 5;
             animator.SetBool(IsSecondAttack, true);
-            comboAttack[1] = false;
-            StartCoroutine(AttackAnimation(IsSecondAttack, 0.433f));
-            StartCoroutine(AttackCoolDown(1));
+            StartCoroutine(AttackAnimation(IsSecondAttack, 0.45f));
+            canRunSecondAttack = false;
         }
-        else if(isGrounded && comboAttack[0] && !isAttacking)
+    }
+
+    private void thirdAttack()
+    {
+        if (isGrounded && attackCounter >= 3)
         {
-            cleavePower = 3;
-            animator.SetBool(IsAttack, true);
-            comboAttack[0] = false;
-            StartCoroutine(AttackAnimation(IsAttack, 0.683f));
-            StartCoroutine(AttackCoolDown(0));
+            print("third attack");
+            cleavePower = 7;
+            animator.SetBool(IsThirdAttack, true);
+            StartCoroutine(AttackAnimation(IsThirdAttack, 0.683f));
+            attackCounter++;
+            canRunThirdAttack = false;
         }
     }
     IEnumerator AttackAnimation(int id, float attackDuration)
@@ -163,12 +194,13 @@ public class Player : MonoBehaviour
         animator.SetBool(id, false);
     }
 
-    IEnumerator AttackCoolDown(int attackNumber)
+    IEnumerator AttackCoolDown(float attackDuration)
     {
-        comboAttack[attackNumber + 1] = true;
-        yield return new WaitForSeconds(1.5f);
-        comboAttack[attackNumber+1] = false;
-        comboAttack[0] = true; 
+        yield return new WaitForSeconds(attackDuration);
+        canRunFirstAttack = true;
+        canRunSecondAttack = false;
+        canRunThirdAttack = false;
+        attackCounter = 0;
     }
 
     private void onAttack()

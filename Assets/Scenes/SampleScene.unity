@@ -8047,8 +8047,9 @@ MonoBehaviour:
   layerGrounds:
     serializedVersion: 2
     m_Bits: 256
-  health: 50
+  health: 50000
   healthBar: {fileID: 737416354}
+  cleavePower: 3
   isGrounded: 0
   right: 1
   rightAttackPosition: {fileID: 1412505979}
