@@ -127,7 +127,6 @@ public class Player : MonoBehaviour
             right = false;
         else if (axis > 0)
             right = true;
-        // movementX = axis * speed;
         movementX = axis;
         animator.SetBool(IsRunning, movementX != 0);
     }

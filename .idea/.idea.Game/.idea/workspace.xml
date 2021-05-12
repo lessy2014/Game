@@ -4,7 +4,10 @@
     <list default="true" id="0bec48be-bdf1-45f1-852d-c3185a70945d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/indexLayout.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" afterDir="false" />
+=======
+>>>>>>> 244d8e779108a3fa11701bebeab60546909856f5
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
@@ -82,8 +85,12 @@
       <workItem from="1620286377228" duration="2218000" />
       <workItem from="1620561441469" duration="20276000" />
       <workItem from="1620757774008" duration="675000" />
+<<<<<<< HEAD
       <workItem from="1620786944205" duration="1404000" />
       <workItem from="1620839892640" duration="262000" />
+=======
+      <workItem from="1620799838137" duration="375000" />
+>>>>>>> 244d8e779108a3fa11701bebeab60546909856f5
     </task>
     <servers />
   </component>
