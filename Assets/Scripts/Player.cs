@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
+        rigidbody.velocity = new Vector2(movementX * speed, rigidbody.velocity.y);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
         isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds);
     }
@@ -127,7 +127,8 @@ public class Player : MonoBehaviour
             right = false;
         else if (axis > 0)
             right = true;
-        movementX = axis * speed;
+        // movementX = axis * speed;
+        movementX = axis;
         animator.SetBool(IsRunning, movementX != 0);
     }
 
