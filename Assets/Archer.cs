@@ -89,9 +89,9 @@ public class Archer : MonoBehaviour
             jump();
         else if (!isGrounded)
             AirControl();
-        else if (distanceToPlayer > 1 && isRight && isGrounded && Grounded(leftFall)) 
+        else if (distanceToPlayer > 0.5 && isRight ) 
             movingToPlayer(leftPosition);
-        else if (distanceToPlayer > 1 && !isRight && isGrounded && Grounded(rightFall))
+        else if (distanceToPlayer > 0.5 && !isRight )
             movingToPlayer(rightPosition);
         else
         {
@@ -116,7 +116,8 @@ public class Archer : MonoBehaviour
     {
         // animator.SetBool(IsRunning, true);
         var delta = transform.position.x - playerPosition.position.x;
-        if (delta < 0.2 && delta > 0 ||delta > -0.2 && delta < 0)
+        var extraDelta = transform.position.x - player.position.x;
+        if (delta < 0.1 && delta > 0 ||delta > -0.1 && delta < 0 || (!Grounded(leftFall) || !Grounded(rightFall)) && Math.Abs(extraDelta) < 0.2 )
             movementX = 0;
         else if (delta > 0)
         {

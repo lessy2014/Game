@@ -12,6 +12,7 @@
         <e p="FirstAttack.cs" t="Include" />
         <e p="GetComponent.cs" t="Include" />
         <e p="PauseMenu.cs" t="Include" />
+        <e p="Reset.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="CameraController.cs" t="Include" />
           <e p="Controls.cs" t="Include" />
