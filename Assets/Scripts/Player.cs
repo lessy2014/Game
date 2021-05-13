@@ -42,21 +42,13 @@ public class Player : MonoBehaviour
     private static readonly int IsDead = Animator.StringToHash("isDead");
     private static readonly int IsDying = Animator.StringToHash("isDying");
     private static readonly int IsAttack = Animator.StringToHash("isAttack");
-    private static readonly int IsSecondAttack = Animator.StringToHash("isSecondAttack");
-    private static readonly int IsThirdAttack = Animator.StringToHash("isThirdAttack");
-
-    private bool isAttacking = false;
+    
     
     public bool right = true;
     public Transform rightAttackPosition;
     public Transform leftAttackPosition;
     public float attackRange;
-    //private bool[] comboAttack = new[] {true, false, false};
     public LayerMask enemies;
-    [SerializeField]int attackCounter;
-    private bool canRunFirstAttack = true;
-    private bool canRunSecondAttack;
-    private bool canRunThirdAttack;
     #endregion 
 
     private void Awake()
@@ -101,12 +93,6 @@ public class Player : MonoBehaviour
         {
             Attack();
         }
-        // if (attackCounter == 1 && canRunFirstAttack)
-        //     firstAttack();
-        // if (attackCounter >= 2 && canRunSecondAttack)
-        //     secondAttack();
-        // if (attackCounter == 3 && canRunThirdAttack)
-        //     thirdAttack();
         animator.SetBool(IsJumping, rigidbody.velocity.y > 0 && !isGrounded);
         animator.SetBool(IsFalling, rigidbody.velocity.y < 0 && !isGrounded);
         //animator.SetBool(IsCrouching, crouching);
@@ -142,68 +128,7 @@ public class Player : MonoBehaviour
     {
         if (isGrounded)
             animator.SetBool(IsAttack, true);
-        // if(isGrounded && attackCounter<3)
-        //     attackCounter++;
     }
-    // private void RunSecondAttack()
-    // {
-    //     canRunSecondAttack = true;
-    //     canRunFirstAttack = false;
-    // }
-    //
-    // private void RunThirdAttack()
-    // {
-    //     canRunThirdAttack = true;
-    //     canRunSecondAttack = false;
-    // }
-    // private void firstAttack()
-    // {
-    //     print("first attack");
-    //     cleavePower = 3;
-    //     animator.SetBool(IsAttack, true);
-    //     StartCoroutine(AttackAnimation(IsAttack, 0.6f));
-    //     StartCoroutine(AttackCoolDown(2f));
-    // }
-    // private void secondAttack()
-    // {
-    //     if (isGrounded && attackCounter >= 2)
-    //     {
-    //         print("second attack");
-    //         cleavePower = 5;
-    //         animator.SetBool(IsSecondAttack, true);
-    //         StartCoroutine(AttackAnimation(IsSecondAttack, 0.45f));
-    //         // canRunSecondAttack = false;
-    //     }
-    // }
-    //
-    // private void thirdAttack()
-    // {
-    //     if (isGrounded && attackCounter >= 3)
-    //     {
-    //         print("third attack");
-    //         cleavePower = 7;
-    //         animator.SetBool(IsThirdAttack, true);
-    //         StartCoroutine(AttackAnimation(IsThirdAttack, 0.683f));
-    //         attackCounter++;
-    //         canRunThirdAttack = false;
-    //     }
-    // }
-    // IEnumerator AttackAnimation(int id, float attackDuration)
-    // {
-    //     isAttacking = true;
-    //     yield return new WaitForSeconds(attackDuration);
-    //     isAttacking = false;
-    //     animator.SetBool(id, false);
-    // }
-    //
-    // IEnumerator AttackCoolDown(float attackDuration)
-    // {
-    //     yield return new WaitForSeconds(attackDuration);
-    //     canRunFirstAttack = true;
-    //     canRunSecondAttack = false;
-    //     canRunThirdAttack = false;
-    //     attackCounter = 0;
-    // }
 
     private void onAttack()
     {
@@ -214,7 +139,6 @@ public class Player : MonoBehaviour
             {
                 if (i > enemiesOnHit.Length-1) break;
                 enemiesOnHit[i].GetComponent<Entity>().GetDamage(50);
-                // print(enemiesOnHit[i].gameObject.name);
             }
         }
         else
@@ -307,8 +231,6 @@ public class Player : MonoBehaviour
     {
         animator.SetBool(IsDying, true);
         input.Disable();
-        // Destroy(boxCollider);
-        // Destroy(rigidbody);
     }
     
     private void OnEnable() => input.Enable();
