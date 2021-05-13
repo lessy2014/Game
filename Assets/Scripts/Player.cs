@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
 {
     #region init
     public float speed = 5;
-    // public float speedMultiplicator = 1;
     public float jumpForce = 7;
     [SerializeField]public float groundRadius;
     public Transform groundCheck;
@@ -18,12 +17,14 @@ public class Player : MonoBehaviour
     public int health = 100;
     public HealthBar healthBar;
     public int cleavePower = 3;
+    public float ySpeed;
 
-    [SerializeField]private bool isGrounded;
+    public bool isGrounded;
     private bool isCelled;
     //private bool crouching;
     //private bool crouchingUnpressed;
-    private bool isDead;
+    public bool isDead;
+    public bool isJumping;
     
     private float movementX;
     
@@ -89,6 +90,7 @@ public class Player : MonoBehaviour
     {
         //if (crouchingUnpressed)
         //    Uncrouch();
+        ySpeed = rigidbody.velocity.y;
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Attack();
@@ -102,6 +104,8 @@ public class Player : MonoBehaviour
     {
         rigidbody.velocity = new Vector2(movementX * speed, rigidbody.velocity.y);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
+        if (isGrounded)
+            isJumping = false;
         isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds);
     }
 
@@ -122,6 +126,7 @@ public class Player : MonoBehaviour
         if (!isGrounded)
             return;
         rigidbody.velocity = new Vector2(movementX, jumpForce);
+        isJumping = true;
     }
 
     private void Attack()
