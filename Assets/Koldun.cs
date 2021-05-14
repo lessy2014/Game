@@ -23,7 +23,6 @@ public class Koldun : Support
         {
             animator.SetBool(IsJumping, false);
             jumped = false;
-            print("fallen");
         }
 
     }
