@@ -14,7 +14,7 @@ public class TrashMonster : Entity
     public GameObject slownessApplier;
 
     private bool isGrounded;
-    [SerializeField] private bool angry;
+    // [SerializeField] private bool angry;
     [SerializeField] private bool jump;
     private bool gotDamage = false;
     public LayerMask layerGrounds;
@@ -34,12 +34,12 @@ public class TrashMonster : Entity
     public Transform homePoint;
     public Transform player;
     public float stoppingDistance;
-    [SerializeField] private int layer;
+    // [SerializeField] private int layer;
     
 
     private static readonly int IsAttack = Animator.StringToHash("isAttack");
     private static readonly int IsOnSelfAttack = Animator.StringToHash("isOnSelfAttack");
-    private bool isAttacking = false;
+    // private bool isAttacking = false;
     private bool readyToAttack = true;
     private bool onSelf = false;
     private bool preparingAttack = false;
@@ -67,7 +67,7 @@ public class TrashMonster : Entity
         boxCollider = gameObject.GetComponent<BoxCollider2D>();
         animator = gameObject.GetComponent<Animator>();
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
-        layer = this.gameObject.layer;
+        // layer = this.gameObject.layer;
     }
 
 
@@ -85,16 +85,6 @@ public class TrashMonster : Entity
         var distanceToPlayer = Math.Abs(player.transform.position.x - transform.position.x);
         if (distanceToPlayer < 3 && !preparingAttack && enabled)
             StartCoroutine(WaitBeforeAttack());
-        // if (distanceToPlayer < 3 && distanceToPlayer > 1.5)
-        // {
-        //     onSelf = false;
-        //     Attack(IsAttack);
-        // }
-        // else if (distanceToPlayer <= 1.5)
-        // {
-        //     onSelf = true;
-        //     Attack(IsOnSelfAttack);
-        // }
     }
 
     IEnumerator WaitBeforeAttack()
@@ -127,14 +117,12 @@ public class TrashMonster : Entity
 
         if (Vector2.Distance(transform.position, player.position) < stoppingDistance)
         {
-            // print("angry");
-            angry = true;
+            // angry = true;
             Angry();
         }
         else
         {
-            // print("idle");
-            angry = false;
+            // angry = false;
             Idle();
         }
     }
@@ -145,7 +133,7 @@ public class TrashMonster : Entity
         if (readyToAttack)
         {
             animator.SetBool(id, true);
-            isAttacking = true;
+            // isAttacking = true;
             readyToAttack = false;
 
             StartCoroutine(AttackAnimation(id));
@@ -207,7 +195,7 @@ public class TrashMonster : Entity
     {
         yield return new WaitForSeconds(0.1f);
         animator.SetBool(id, false);
-        isAttacking = false;
+        // isAttacking = false;
     }
 
     IEnumerator AttackCoolDown()
@@ -243,22 +231,11 @@ public class TrashMonster : Entity
     private void Death()
     {
         animator.SetBool(IsDying, true);
-        animator.SetTrigger("Dying");
-        // boxCollider.enabled = false;
         enabled = false;
         Destroy(slownessApplier);
         StopAllCoroutines();
-        // Destroy(gameObject);
     }
-
-
-    // private void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if (collision.gameObject.GetType() == this.GetType())
-    //     {
-    //         return;
-    //     }
-    // }
+    
     private void Idle()
     {
         if (transform.position.x > homePoint.position.x + patrolRadius)
