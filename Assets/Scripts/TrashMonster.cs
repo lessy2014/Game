@@ -48,6 +48,7 @@ public class TrashMonster : Entity
     public Transform onSelfAttackPosition;
     public float attackRange = 1;
     public LayerMask players;
+    public bool isDead;
 
     private static readonly int IsDying = Animator.StringToHash("isDying");
 
@@ -210,8 +211,9 @@ public class TrashMonster : Entity
         hp -= damage;
         DoKnockBack();
 
-        if (hp <= 0)
+        if (hp <= 0 && !isDead)
         {
+            isDead = true;
             Death();
         }
     }
