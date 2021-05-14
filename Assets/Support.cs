@@ -11,16 +11,17 @@ public class Support : MonoBehaviour
     public bool isInJump;
     public bool isDead;
     public bool isGrounded;
-    public float speed = 5;
+    public float speed = 4f;
     public float jumpForce = 7;
     private float distanceToPlayer;
+    public float realDistanceToPlayer;
     public float groundRadius = 1;
     
     public LayerMask layerGrounds;
     public float movementX;
     public float movementY;
     
-    private new Rigidbody2D rigidbody;
+    public new Rigidbody2D rigidbody;
     private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
     public Animator animator;
@@ -67,6 +68,7 @@ public class Support : MonoBehaviour
         State();
         animator.SetBool(IsJumping, movementY>0 && !isGrounded);
         animator.SetBool(IsFalling, movementY<0 && !isGrounded);
+        animator.SetBool(IsRunning, movementX != 0);
         rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
     }
 
@@ -82,13 +84,14 @@ public class Support : MonoBehaviour
             distanceToPlayer = Math.Abs(leftPosition.position.x - transform.position.x);
         else
             distanceToPlayer = Math.Abs(rightPosition.position.x - transform.position.x);
+        realDistanceToPlayer = Math.Abs((player.position - transform.position).magnitude);
         if (isDead)
         {
             animator.SetBool(IsDead, true);
             enabled = false;
             StopAllCoroutines();
         }
-
+        
         if (isJumping)
         {
             print("JumpInSup");
@@ -106,6 +109,8 @@ public class Support : MonoBehaviour
             spriteRenderer.flipX = !isRight;
             // animator.SetBool(IsRunning, false);
         }
+        if (realDistanceToPlayer > 15)
+            TeleportToPlayer();
     }
 
     public bool Grounded(Transform fall)
@@ -138,6 +143,10 @@ public class Support : MonoBehaviour
                 movementX = 1.3f * speed;
             spriteRenderer.flipX = false;
         }
+    }
+    public void TeleportToPlayer()
+    {
+        transform.position = player.transform.position;
     }
 
     virtual public void jump()

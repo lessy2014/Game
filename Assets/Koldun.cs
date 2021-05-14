@@ -17,6 +17,7 @@ public class Koldun : Support
     public override void FixedUpdate()
     {
         State();
+        rigidbody.velocity = new Vector2( movementX, rigidbody.velocity.y);
         animator.SetBool(IsRunning, movementX != 0);
         if (isGrounded && jumped)
         {
@@ -29,16 +30,18 @@ public class Koldun : Support
 
     public override void jump()
     {
+        rigidbody.velocity = new Vector2(0, movementY);
+        movementX = 0;
         animator.SetBool(IsJumping, true);
-            jumped = true;
-            print("jumped");
+        jumped = true;
     }
 
     public override void AirControl()
     {
+        rigidbody.velocity = new Vector2(0, movementY);
+        movementX = 0;
         animator.SetBool(IsJumping, true);
         jumped = true;
-        print("flying");
     }
 
     public void TeleportToPlayer()
