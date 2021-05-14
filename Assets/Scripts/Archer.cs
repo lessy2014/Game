@@ -8,7 +8,7 @@ namespace Assets.Scripts
 {
     class Archer: Support
     {
-        public void Awake()
+        public override void Awake()
         {
             GetComponents();
             Instance = this;

@@ -17,13 +17,13 @@ public class Support : MonoBehaviour
     public float groundRadius = 1;
     
     public LayerMask layerGrounds;
-    private float movementX;
-    private float movementY;
+    public float movementX;
+    public float movementY;
     
     private new Rigidbody2D rigidbody;
     private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
-    private Animator animator;
+    public Animator animator;
     private InputMaster input;
     private float maxDistanceToPlayer;
 
@@ -37,9 +37,9 @@ public class Support : MonoBehaviour
 
 
     // private static readonly int IsIdle = Animator.StringToHash("isIdling");
-    private static readonly int IsJumping = Animator.StringToHash("isJumping");
+    public static readonly int IsJumping = Animator.StringToHash("isJumping");
     private static readonly int IsFalling = Animator.StringToHash("isFalling");
-    private static readonly int IsRunning = Animator.StringToHash("isRunning");
+    public static readonly int IsRunning = Animator.StringToHash("isRunning");
     private static readonly int IsDead = Animator.StringToHash("isDead");
     // private static readonly int IsDying = Animator.StringToHash("isDying");
     // private static readonly int IsAttack = Animator.StringToHash("isAttack");
@@ -62,7 +62,15 @@ public class Support : MonoBehaviour
 
     }
 
-    public void FixedUpdate()
+    public virtual void FixedUpdate()
+    {
+        State();
+        animator.SetBool(IsJumping, movementY>0 && !isGrounded);
+        animator.SetBool(IsFalling, movementY<0 && !isGrounded);
+        rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
+    }
+
+    public void State()
     {
         isRight = player.GetComponent<Player>().right;
         isJumping = player.GetComponent<Player>().isJumping;
@@ -70,11 +78,6 @@ public class Support : MonoBehaviour
         // movementY = player.GetComponent<Player>().ySpeed;
         movementY = rigidbody.velocity.y;
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
-        if (isGrounded)
-            isInJump = false;
-        animator.SetBool(IsJumping, movementY>0 && !isGrounded);
-        animator.SetBool(IsFalling, movementY<0 && !isGrounded);
-        animator.SetBool(IsRunning, movementX != 0);
         if (isRight)
             distanceToPlayer = Math.Abs(leftPosition.position.x - transform.position.x);
         else
@@ -85,8 +88,12 @@ public class Support : MonoBehaviour
             enabled = false;
             StopAllCoroutines();
         }
+
         if (isJumping)
+        {
+            print("JumpInSup");
             jump();
+        }
         else if (!isGrounded)
             AirControl();
         else if (distanceToPlayer > 0.5 && isRight ) 
@@ -99,8 +106,6 @@ public class Support : MonoBehaviour
             spriteRenderer.flipX = !isRight;
             // animator.SetBool(IsRunning, false);
         }
-        rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
-
     }
 
     public bool Grounded(Transform fall)
@@ -135,19 +140,18 @@ public class Support : MonoBehaviour
         }
     }
 
-    public void jump()
+    virtual public void jump()
     {
         // animator.SetBool(IsRunning, false);
         if (isGrounded)
         {
             spriteRenderer.flipX = !isRight;
-            print("DidThis");
             rigidbody.velocity = new Vector2(movementX, jumpForce);
         }
 
     }
 
-    public void AirControl()
+    virtual public void AirControl()
     {
         movingToPlayer(player.transform);
     }
