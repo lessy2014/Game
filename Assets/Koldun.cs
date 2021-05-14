@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,15 @@ using UnityEngine.PlayerLoop;
 
 public class Koldun : Support
 {
+    public GameObject hat;
+    public GameObject magicBall;
     public bool jumped;
     public static Koldun Instance;
+    public bool isAtacking;
+    public Transform hatPos;
+    public Transform magicBallPos;
+    public float offset = - 45;
+    public Quaternion rotation;
 
     public override void Awake()
     {
@@ -16,6 +24,13 @@ public class Koldun : Support
     
     public override void FixedUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !isAtacking)
+        {
+            isAtacking = true;
+            StartCoroutine(AttackCooldown());
+            var difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - magicBallPos.position;
+            Attack(difference);
+        }
         State();
         rigidbody.velocity = new Vector2( movementX, rigidbody.velocity.y);
         animator.SetBool(IsRunning, movementX != 0);
@@ -25,6 +40,23 @@ public class Koldun : Support
             jumped = false;
         }
 
+    }
+
+    public void Attack(Vector3 direction)
+    {
+        var roatZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        rotation = Quaternion.Euler(0, 0, roatZ + offset);
+        animator.Play("do_magic_mage");
+    }
+
+    IEnumerator AttackCooldown()
+    {
+        yield return new WaitForSeconds(3f);
+        isAtacking = false;
+    }
+    public void Magic()
+    {
+        Instantiate(magicBall, magicBallPos.position, rotation);
     }
 
     public override void jump()

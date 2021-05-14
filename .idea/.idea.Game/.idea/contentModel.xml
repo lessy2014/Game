@@ -8,11 +8,13 @@
       <e p="Assets" t="Include">
         <e p="AnimatorBoolFalse.cs" t="Include" />
         <e p="AnimatorBoolFalse2.cs" t="Include" />
+        <e p="Doing_magic_mage.cs" t="Include" />
         <e p="FirstAttack.cs" t="Include" />
         <e p="get_back_mage_script.cs" t="Include" />
         <e p="GetComponent.cs" t="Include" />
         <e p="Jump_mage_script.cs" t="Include" />
         <e p="Koldun.cs" t="Include" />
+        <e p="magic_ball_script.cs" t="Include" />
         <e p="PauseMenu.cs" t="Include" />
         <e p="Reset.cs" t="Include" />
         <e p="Scripts" t="Include">

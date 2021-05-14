@@ -25,7 +25,6 @@ public class Support : MonoBehaviour
     private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
     public Animator animator;
-    private InputMaster input;
     private float maxDistanceToPlayer;
 
     public Transform player;
@@ -43,11 +42,12 @@ public class Support : MonoBehaviour
     public static readonly int IsRunning = Animator.StringToHash("isRunning");
     private static readonly int IsDead = Animator.StringToHash("isDead");
     // private static readonly int IsDying = Animator.StringToHash("isDying");
-    // private static readonly int IsAttack = Animator.StringToHash("isAttack");
+    public static readonly int IsAttack = Animator.StringToHash("isAttack");
     // Start is called before the first frame update
     public virtual void Awake()
     {
-        throw new NotImplementedException();
+        Instance = this;
+        // throw new NotImplementedException();
         // input = new InputMaster();
         // BindMovement();
     }
@@ -57,10 +57,6 @@ public class Support : MonoBehaviour
         boxCollider = gameObject.GetComponent<BoxCollider2D>();
         animator = gameObject.GetComponent<Animator>();
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
-    }
-    private void BindMovement()
-    {
-
     }
 
     public virtual void FixedUpdate()
@@ -94,7 +90,6 @@ public class Support : MonoBehaviour
         
         if (isJumping)
         {
-            print("JumpInSup");
             jump();
         }
         else if (!isGrounded)
