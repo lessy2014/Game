@@ -269,12 +269,14 @@ MonoBehaviour:
   isGrounded: 0
   speed: 5
   jumpForce: 7
+  realDistanceToPlayer: 0
   groundRadius: 1
   layerGrounds:
     serializedVersion: 2
     m_Bits: 256
   movementX: 0
   movementY: 0
+  rigidbody: {fileID: 0}
   animator: {fileID: 0}
   player: {fileID: 1690360150}
   leftPosition: {fileID: 1710059261}
@@ -301,6 +303,36 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &56824674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 56824675}
+  m_Layer: 12
+  m_Name: LeftFall_M
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &56824675
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56824674}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.13, y: -0.28, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2144086838}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &70218266
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1553,7 +1585,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722990112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.28, y: -0.86, z: 0}
+  m_LocalPosition: {x: 0.45, y: -0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 55037447}
@@ -1663,6 +1695,36 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &827400572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 827400573}
+  m_Layer: 12
+  m_Name: RightFall_M
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &827400573
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827400572}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.63, y: -0.37, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2144086838}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &893654327
 GameObject:
   m_ObjectHideFlags: 0
@@ -7183,18 +7245,20 @@ MonoBehaviour:
   isGrounded: 0
   speed: 5
   jumpForce: 7
+  realDistanceToPlayer: 0
   groundRadius: 1
   layerGrounds:
     serializedVersion: 2
     m_Bits: 256
   movementX: 0
   movementY: 0
+  rigidbody: {fileID: 0}
   animator: {fileID: 0}
   player: {fileID: 1690360150}
   leftPosition: {fileID: 649804781}
   rightPosition: {fileID: 722990113}
-  rightFall: {fileID: 722990113}
-  leftFall: {fileID: 649804781}
+  rightFall: {fileID: 827400573}
+  leftFall: {fileID: 56824675}
   groundCheck: {fileID: 443654971}
   jumped: 0
 --- !u!50 &2144086835
@@ -7231,8 +7295,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.077869415, y: 0.7118931}
-  m_Size: {x: 1.1403198, y: 1.167942}
+  m_Offset: {x: -0.09195328, y: 0.7118931}
+  m_Size: {x: 0.8305054, y: 1.167942}
   m_Direction: 0
 --- !u!212 &2144086837
 SpriteRenderer:
@@ -7296,7 +7360,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 33.29, y: -1.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 827400573}
+  - {fileID: 56824675}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

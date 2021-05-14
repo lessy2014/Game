@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResetAttacks : StateMachineBehaviour
+public class ThirdAttack : StateMachineBehaviour
 {
     private static readonly int IsSecondAttack = Animator.StringToHash("isSecondAttack");
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
