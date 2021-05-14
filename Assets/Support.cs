@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Archer : MonoBehaviour
+public class Support : MonoBehaviour
 {
     public bool isRight;
     // public bool movingRight;
@@ -25,6 +25,7 @@ public class Archer : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private InputMaster input;
+    private float maxDistanceToPlayer;
 
     public Transform player;
     public Transform leftPosition;
@@ -32,7 +33,7 @@ public class Archer : MonoBehaviour
     public Transform rightFall;
     public Transform leftFall;
     public Transform groundCheck;
-    public static Archer Instance;
+    public static Support Instance;
 
 
     // private static readonly int IsIdle = Animator.StringToHash("isIdling");
@@ -43,14 +44,13 @@ public class Archer : MonoBehaviour
     // private static readonly int IsDying = Animator.StringToHash("isDying");
     // private static readonly int IsAttack = Animator.StringToHash("isAttack");
     // Start is called before the first frame update
-    private void Awake()
+    public virtual void Awake()
     {
-        GetComponents();
-        Instance = this;
+        throw new NotImplementedException();
         // input = new InputMaster();
         // BindMovement();
     }
-    private void GetComponents()
+    public void GetComponents()
     {
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
         boxCollider = gameObject.GetComponent<BoxCollider2D>();
@@ -62,7 +62,7 @@ public class Archer : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         isRight = player.GetComponent<Player>().right;
         isJumping = player.GetComponent<Player>().isJumping;
@@ -103,7 +103,7 @@ public class Archer : MonoBehaviour
 
     }
 
-    private bool Grounded(Transform fall)
+    public bool Grounded(Transform fall)
     {
         return Physics2D.OverlapCircle(fall.position, groundRadius, layerGrounds);
     }
@@ -112,7 +112,7 @@ public class Archer : MonoBehaviour
         
     }
 
-    private void movingToPlayer(Transform playerPosition)
+    public void movingToPlayer(Transform playerPosition)
     {
         // animator.SetBool(IsRunning, true);
         var delta = transform.position.x - playerPosition.position.x;
@@ -135,7 +135,7 @@ public class Archer : MonoBehaviour
         }
     }
 
-    private void jump()
+    public void jump()
     {
         // animator.SetBool(IsRunning, false);
         if (isGrounded)
@@ -147,7 +147,7 @@ public class Archer : MonoBehaviour
 
     }
 
-    private void AirControl()
+    public void AirControl()
     {
         movingToPlayer(player.transform);
     }
