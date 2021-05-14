@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
+<<<<<<< HEAD
+    <e p="C:\Users\platina\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\platina\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_Game.-1976217036.00" t="ExcludeRecursive" />
+    <e p="C:\Users\platina\Desktop\prog\c#\Game" t="IncludeRecursive">
+=======
     <e p="C:\Users\lessy\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
     <e p="C:\Users\lessy\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_Game.1894406576.00" t="ExcludeRecursive" />
     <e p="D:\TheGameProject\Game" t="IncludeRecursive">
+>>>>>>> 4dec6282b6a493a8e3b22ceb1dcbfeb9344e1528
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="AnimatorBoolFalse.cs" t="Include" />
@@ -60,6 +66,7 @@
         </e>
         <e p="Support.cs" t="Include" />
         <e p="ThirdAttack.cs" t="Include" />
+        <e p="Trigger.cs" t="Include" />
       </e>
       <e p="Game.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />

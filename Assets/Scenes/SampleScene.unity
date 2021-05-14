@@ -273,6 +273,9 @@ MonoBehaviour:
   layerGrounds:
     serializedVersion: 2
     m_Bits: 256
+  movementX: 0
+  movementY: 0
+  animator: {fileID: 0}
   player: {fileID: 1690360150}
   leftPosition: {fileID: 1710059261}
   rightPosition: {fileID: 1412505979}
@@ -6955,12 +6958,16 @@ MonoBehaviour:
   layerGrounds:
     serializedVersion: 2
     m_Bits: 256
+  movementX: 0
+  movementY: 0
+  animator: {fileID: 0}
   player: {fileID: 1690360150}
   leftPosition: {fileID: 649804781}
   rightPosition: {fileID: 722990113}
   rightFall: {fileID: 722990113}
   leftFall: {fileID: 649804781}
   groundCheck: {fileID: 443654971}
+  jumped: 0
 --- !u!50 &2144086835
 Rigidbody2D:
   serializedVersion: 4
@@ -7074,7 +7081,7 @@ Animator:
   m_GameObject: {fileID: 2144086833}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0bdcb4c642110764baaa5be11f764b02, type: 2}
+  m_Controller: {fileID: 9100000, guid: 874d7fd0a5209c2489205a330169242b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
