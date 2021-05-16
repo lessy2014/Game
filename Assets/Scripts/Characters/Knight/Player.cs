@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 {
     #region init
     public float speed = 5;
+    public bool isJumpCancel = false;
+    public float shortJumpForce = 4;
     public float jumpForce = 7;
     [SerializeField]public float groundRadius;
     public Transform groundCheck;
@@ -66,17 +68,14 @@ public class Player : MonoBehaviour
         input.Player.Move.performed += context => Move(context.ReadValue<float>());
         input.Player.Move.canceled += context => Move(0);
         input.Player.Jump.performed += context => Jump();
+        input.Player.Jump.canceled += context => CancelJump();
         input.Player.Attack.performed += context => Attack();
-        //input.Player.Crouch.performed += context =>
-        //{
-        //    crouchingUnpressed = false;
-        //    Crouch();
-        //};
-        //input.Player.Crouch.canceled += context =>
-        //{
-        //    crouchingUnpressed = true;
-        //    Uncrouch();
-        //};
+    }
+
+    private void CancelJump()
+    {
+        if (rigidbody.velocity.y > shortJumpForce)
+            rigidbody.velocity = new Vector2(movementX, shortJumpForce);
     }
 
     private void GetComponents()
