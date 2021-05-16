@@ -7,7 +7,8 @@ public class Trigger : MonoBehaviour
 {
     public bool isTriggered = false;
 
-    public GameObject monster;
+    public GameObject wall;
+    public TrashMonster monster;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,7 @@ public class Trigger : MonoBehaviour
         if (!other.CompareTag("Player") || isTriggered)
             return;
         isTriggered = true;
-        Instantiate(monster, new Vector3(24, 0.82f, 400), Quaternion.identity);
+        Instantiate(monster, new Vector3(50, 0.82f, 400), Quaternion.identity);
+        wall.SetActive(true);
     }
 }

@@ -87,8 +87,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //if (crouchingUnpressed)
-        //    Uncrouch();
         ySpeed = rigidbody.velocity.y;
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -96,7 +94,6 @@ public class Player : MonoBehaviour
         }
         animator.SetBool(IsJumping, rigidbody.velocity.y > 0 && !isGrounded);
         animator.SetBool(IsFalling, rigidbody.velocity.y < 0 && !isGrounded);
-        //animator.SetBool(IsCrouching, crouching);
     }
 
     private void FixedUpdate()
@@ -162,39 +159,6 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(rightAttackPosition.position, attackRange);
         Gizmos.DrawWireSphere(leftAttackPosition.position, attackRange);
     }
-    
-    //private void Crouch()
-    //{
-    //    if (crouching)
-    //        return;
-
-    //    crouching = true;
-
-    //    // Райдер пишет, что последовательный доступ к полям компонента неэффективен
-    //    var size = boxCollider.size;
-    //    size = new Vector2(size.x, size.y / 2 - 0.2f);
-    //    boxCollider.size = size;
-
-    //    var offset = boxCollider.offset;
-    //    offset = new Vector2(offset.x, offset.y * 2);
-    //    boxCollider.offset = offset;
-    //}
-
-    //private void Uncrouch()
-    //{
-    //    if (isCelled || !crouching)
-    //        return;
-
-    //    crouching = false;
-
-    //    var size = boxCollider.size;
-    //    size = new Vector2(size.x, (size.y + 0.2f) * 2);
-    //    boxCollider.size = size;
-
-    //    var offset = boxCollider.offset;
-    //    offset = new Vector2(offset.x, offset.y / 2);
-    //    boxCollider.offset = offset;
-    //}
 
     private void OnTriggerEnter2D(Collider2D other)
     {
