@@ -62094,6 +62094,10 @@ PrefabInstance:
       propertyPath: monster
       value: 
       objectReference: {fileID: 8650731317711954741, guid: 54f12d43ddfcaef46b26dafe05a6e299, type: 3}
+    - target: {fileID: 7485416090287910717, guid: 46b702a147f03404584ac258c941b303, type: 3}
+      propertyPath: homePoint
+      value: 
+      objectReference: {fileID: 1192175766}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46b702a147f03404584ac258c941b303, type: 3}
 --- !u!1 &722990112
@@ -67225,7 +67229,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690360146}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 127.2, y: 0.9, z: 342.22614}
+  m_LocalPosition: {x: 29.48, y: 0.9, z: 342.22614}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 396855706}

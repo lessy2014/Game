@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Trigger : MonoBehaviour
 {
@@ -9,10 +11,12 @@ public class Trigger : MonoBehaviour
 
     public GameObject wall;
     public TrashMonster monster;
+
+    public Transform homePoint;
     // Start is called before the first frame update
     void Start()
     {
-        
+        monster.homePoint = homePoint;
     }
 
     // Update is called once per frame
