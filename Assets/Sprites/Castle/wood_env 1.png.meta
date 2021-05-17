@@ -617,6 +617,9 @@ TextureImporter:
   - first:
       213: 6433814711514932787
     second: wood_env 1_204
+  - first:
+      213: 8294713004116445570
+    second: wood_env 1_205
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -5006,6 +5009,27 @@ TextureImporter:
       bones: []
       spriteID: 336a78e6460894950800000000000000
       internalID: 6433814711514932787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wood_env 1_205
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 41
+        width: 96
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2898c2ca78dbc1370800000000000000
+      internalID: 8294713004116445570
       vertices: []
       indices: 
       edges: []
