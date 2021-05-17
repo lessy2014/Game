@@ -6,11 +6,13 @@
     <e p="F:\Leonid Programmes\Unity\Projects\TheGame\Game" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="Attack_archer_script.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="CameraController.cs" t="Include" />
           <e p="Characters" t="Include">
             <e p="Archer" t="Include">
               <e p="Archer.cs" t="Include" />
+              <e p="arrow_fly.cs" t="Include" />
             </e>
             <e p="Enemies" t="Include">
               <e p="TrashMonster.cs" t="Include" />

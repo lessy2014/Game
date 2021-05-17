@@ -23,7 +23,7 @@ public class Support : MonoBehaviour
     
     public new Rigidbody2D rigidbody;
     private BoxCollider2D boxCollider;
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     public Animator animator;
     private float maxDistanceToPlayer;
 
