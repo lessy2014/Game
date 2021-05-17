@@ -290,7 +290,7 @@ MonoBehaviour:
   isAtacking: 0
   arrowLeftPos: {fileID: 1326559547}
   arrowRightPos: {fileID: 997267086}
-  arrow: {fileID: 1948239004117293860, guid: 032edf2524dc4594696c0f382659b052, type: 3}
+  arrow: {fileID: 3160899355911795218, guid: 032edf2524dc4594696c0f382659b052, type: 3}
 --- !u!95 &55037452
 Animator:
   serializedVersion: 3
