@@ -14,9 +14,13 @@ namespace Assets.Scripts
     class Archer: Support
     {
         public bool isAtacking;
+        private Vector3 distanceToEnemy;
         public Transform arrowLeftPos;
         public Transform arrowRightPos;
         public GameObject arrow;
+        private LayerMask rayIgnore = (1 << 12) | (1 << 11) | (1 << 10) | (1 << 0);
+        private LayerMask rayTo = (1 << 8) | (1 << 9);
+        public float closestEnemy;
         public override void Awake()
         {
             GetComponents();
@@ -31,14 +35,32 @@ namespace Assets.Scripts
             {
                 foreach (var i in entity)
                     tr.Add(i.transform);
-                var distanceToEnemy = (GetClosestEnemy(tr.ToArray()).position - transform.position);
-                if (distanceToEnemy.magnitude < 20 && !isAtacking && distanceToEnemy.x > 0 == isRight)
+                var closesetEnemyTransform = GetClosestEnemy(tr.ToArray());
+                if (closesetEnemyTransform != null)
                 {
-                    Attack(distanceToEnemy);
+                    distanceToEnemy = closesetEnemyTransform.position - transform.position;
+                    closestEnemy = distanceToEnemy.magnitude;
+                    if (distanceToEnemy.magnitude < 20 && !isAtacking)
+                    {
+                        var wallInfo = Physics2D.Raycast(transform.position, distanceToEnemy,
+                            distanceToEnemy.magnitude, rayTo);
+                        if (wallInfo.collider != null)
+                        {
+                            // print(wallInfo.collider.gameObject.layer);
+                            if (wallInfo.collider.gameObject.layer == 9)
+                            {
+                                Attack(distanceToEnemy);
+                            }
+                        }
+                    }
                 }
             }
         }
-         public Transform GetClosestEnemy(Transform[] enemies)
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawRay(transform.position, distanceToEnemy);
+        }
+        public Transform GetClosestEnemy(Transform[] enemies)
         {
             Transform tMin = null;
             float minDist = Mathf.Infinity;
@@ -46,7 +68,7 @@ namespace Assets.Scripts
             foreach (Transform t in enemies)
             {
                 float dist = Vector3.Distance(t.position, currentPos);
-                if (dist < minDist)
+                if (dist < minDist && isRight == (t.position - currentPos).x > 0)  
                 {
                     tMin = t;
                     minDist = dist;
