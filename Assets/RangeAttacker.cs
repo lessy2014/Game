@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangeAttaker : MonoBehaviour
+public class RangeAttacker : Entity
 {
     public Transform groundCheck;
     public Transform rightWallCheck;
@@ -12,10 +12,12 @@ public class RangeAttaker : MonoBehaviour
     public bool isGrounded;
     public bool isMovingRight;
     public bool isStuck;
-    
+
     private float groundRadius = 0.3f;
-    public float speed = 0.2f;
-    private float attackRange = 10;
+    public float speed = 1.5f;
+    private float attackRange = 8;
+    private float attackHeight = 6;
+    private float partitionStep = 0.2f;
     private float jumpForce = 3;
     public float movementX;
     public float movementY;
@@ -55,7 +57,7 @@ public class RangeAttaker : MonoBehaviour
     private void Update()
     {
         if (Vector2.Distance(transform.position, playerTransform.position) < attackRange)
-            Angry();
+            Attack();
         else
             MoveToPlayer();
     }
@@ -73,8 +75,35 @@ public class RangeAttaker : MonoBehaviour
 
     }
 
-    private void Angry()
+    // private void Attack()
+    // {
+    //     
+    // }
+    
+    private void Attack()
     {
+        movementX = 0;
+        var isCollided = false;
+        var position = transform.position;
+        var isPlayerRight = playerTransform.position.x > position.x;
+        var previous = position;
+        for (var i = partitionStep; i < attackRange && !isCollided; i += partitionStep)
+        {
+            float parabolaValue;
+            var x = i;
+            if (isPlayerRight)
+                parabolaValue = -1 * attackHeight / (2 * attackRange) * x * (x - attackRange);
+            else
+            {
+                x *= -1;
+                parabolaValue = -1 * attackHeight / (2 * attackRange) * x * (x + attackRange);
+            }
+            var current = new Vector3(x + position.x, parabolaValue + position.y);
+            Debug.DrawLine(previous, current, Color.red, 2f);
+            isCollided = !(Physics2D.Raycast(previous,
+                current - previous, (current - previous).magnitude, 1 << layerGround.value).collider is null);
+            previous = current;
+        }
         
     }
 }
