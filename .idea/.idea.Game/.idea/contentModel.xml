@@ -23,6 +23,7 @@
               <e p="AnimatorBoolFalse.cs" t="Include" />
               <e p="AnimatorBoolFalse2.cs" t="Include" />
               <e p="FirstAttack.cs" t="Include" />
+              <e p="old_player.cs" t="Include" />
               <e p="Player.cs" t="Include" />
               <e p="Reset.cs" t="Include" />
               <e p="SecondAttack.cs" t="Include" />
