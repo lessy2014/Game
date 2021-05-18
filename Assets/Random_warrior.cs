@@ -249,6 +249,11 @@ public class Random_warrior : Entity
         Destroy(slownessApplier);
         StopAllCoroutines();
     }
+
+    private void TotallyDead()
+    {
+        Destroy(gameObject);
+    }
     
     private void Idle()
     {
