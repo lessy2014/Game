@@ -9,6 +9,8 @@
         <e p="Attack_archer_script.cs" t="Include" />
         <e p="Random_warrior.cs" t="Include" />
         <e p="RangeAttacker.cs" t="Include" />
+        <e p="runningBetweenAttacks.cs" t="Include" />
+        <e p="runningBetweenAttacks2.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="CameraController.cs" t="Include" />
           <e p="Characters" t="Include">
@@ -96,6 +98,7 @@
             <e p="public-license.txt" t="Include" />
           </e>
         </e>
+        <e p="TransitionThree.cs" t="Include" />
       </e>
       <e p="Game.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />

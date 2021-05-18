@@ -84,7 +84,10 @@ namespace Assets.Scripts
 
         public void Shoot()
         {
-            Instantiate(arrow, arrowPos.position,  Quaternion.Euler(0, 0,0 ));
+            if (isRight)
+                Instantiate(arrow, arrowPos.position,  Quaternion.Euler(0, 0,0 ));
+            else
+                Instantiate(arrow, arrowPos.position,  Quaternion.Euler(0, 180,0 ));
         }
         IEnumerator AttackCooldown()
         {
