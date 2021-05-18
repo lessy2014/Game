@@ -118,12 +118,10 @@ public class TrashMonster : Entity
 
         if (Vector2.Distance(transform.position, player.position) < stoppingDistance)
         {
-            // angry = true;
             Angry();
         }
         else
         {
-            // angry = false;
             Idle();
         }
     }
