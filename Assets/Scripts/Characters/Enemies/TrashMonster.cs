@@ -279,7 +279,7 @@ public class TrashMonster : Entity
 
         if (jump && isGrounded)
             movementY = 1.2f;
-        else if (isGrounded)
+        else if (isGrounded && !preparingAttack)
             movementY = 0.4f;
         else
             movementY = 0;

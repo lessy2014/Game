@@ -37,9 +37,11 @@ public class Player : MonoBehaviour
     private InputMaster input;
     
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
+    private static readonly int IsDead = Animator.StringToHash("isDead");
     // private static readonly int IsCrouching = Animator.StringToHash("isCrouching");
     private static readonly int IsFalling = Animator.StringToHash("isFalling");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
+    private static readonly int IsAttack = Animator.StringToHash("isAttack");
     
     public static Player Instance;
     
@@ -63,7 +65,8 @@ public class Player : MonoBehaviour
         input.Player.Move.canceled += context => Move(0);
         input.Player.Jump.performed += context =>
         {
-            Jump();
+            if (isGrounded)
+                Jump();
         };
         // input.Player.Jump.canceled += context => CancelJump();
         input.Player.Attack.performed += context => Attack();
@@ -105,18 +108,16 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
-        if (isGrounded)
-        {
-            rigidbody.velocity = new Vector2(movementX, jumpForce);
-            FindObjectOfType<Support>().jump();
+        rigidbody.velocity = new Vector2(movementX, jumpForce);
+        FindObjectOfType<Support>().jump();
+        animator.Play("NEW jump");
             // isJumping = true;
-        }
     }
 
     private void Attack()
     {
         if (isGrounded)
-            animator.Play("First Attack");
+            animator.SetBool(IsAttack, true);
     }
 
     private void OnAttack()
@@ -156,6 +157,7 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             isDead = true;
+            animator.SetBool(IsDead, true);
             animator.Play("Death");
             input.Disable();
         }

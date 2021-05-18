@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Support : MonoBehaviour
@@ -106,7 +107,7 @@ public class Support : MonoBehaviour
         else
         {
             movementX = 0;
-            spriteRenderer.flipX = !isRight;
+            idle();
             // animator.SetBool(IsRunning, false);
         }
         if (realDistanceToPlayer > 15)
@@ -119,7 +120,11 @@ public class Support : MonoBehaviour
     }
     private void idle()
     {
-        
+        if (isRight)
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+        else
+            gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+        // spriteRenderer.flipX = !isRight;
     }
 
     public void movingToPlayer(Transform playerPosition)
@@ -128,24 +133,26 @@ public class Support : MonoBehaviour
         var delta = transform.position.x - playerPosition.position.x;
         var extraDelta = transform.position.x - player.position.x;
         if (delta < 0.1 && delta > 0 || delta > -0.1 && delta < 0 ||
-            (!Grounded(leftFall) || !Grounded(rightFall)) && Math.Abs(extraDelta) < 0.2)
+            !Grounded(rightFall) && Math.Abs(extraDelta) < 0.2)
         {
-            spriteRenderer.flipX = !isRight;
             movementX = 0;
+            idle();
         }
         else if (delta > 0)
         {
             movementX = -speed;
             if (!isGrounded)
                 movementX = 1.3f * (-speed);
-            spriteRenderer.flipX = true;
+            gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+            // spriteRenderer.flipX = true;
         }
         else
         {
             movementX = speed;
             if (!isGrounded)
                 movementX = 1.3f * speed;
-            spriteRenderer.flipX = false;
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            // spriteRenderer.flipX = false;
         }
     }
     public void TeleportToPlayer()
@@ -158,7 +165,8 @@ public class Support : MonoBehaviour
         // animator.SetBool(IsRunning, false);
         if (isGrounded)
         {
-            spriteRenderer.flipX = !isRight;
+            idle();
+            // spriteRenderer.flipX = !isRight;
             rigidbody.velocity = new Vector2(movementX, jumpForce);
         }
 

@@ -32,7 +32,7 @@ public class Jump_mage_script : StateMachineBehaviour
         // else
         //     Koldun.Instance.transform.position = new Vector3(Player.Instance.transform.position.x+1f,
         //         Player.Instance.transform.position.y, Player.Instance.transform.position.z);
-        Koldun.Instance.transform.position = Player.Instance.supportPosition.position;
+        Koldun.Instance.transform.position = Player.Instance.groundCheck.position;
         animator.Play("get_back_mage");
     }
 
