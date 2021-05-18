@@ -52,6 +52,10 @@
           <e p="BgTemple" t="Include">
             <e p="_license.txt" t="Include" />
           </e>
+          <e p="Bringer-Of-Death" t="Include">
+            <e p="Contact.txt" t="Include" />
+            <e p="License.txt" t="Include" />
+          </e>
           <e p="Castle" t="Include">
             <e p="about.txt" t="Include" />
           </e>

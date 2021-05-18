@@ -13,7 +13,7 @@ public class Random_warrior : Entity
 
     public GameObject slownessApplier;
 
-    private bool isGrounded;
+    [SerializeField] private bool isGrounded;
     [SerializeField] private bool jump;
     private bool gotDamage = false;
     public LayerMask layerGrounds;
@@ -269,7 +269,7 @@ public class Random_warrior : Entity
         
 
         if (jump && isGrounded)
-            movementY = 1.2f;
+            movementY = 0.5f;
         else
             movementY = 0;
     }
@@ -292,7 +292,7 @@ public class Random_warrior : Entity
         }
 
         if (jump && isGrounded)
-            movementY = 1.2f;
+            movementY = 0.5f;
         else
             movementY = 0;
     }
