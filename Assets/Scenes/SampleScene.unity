@@ -67533,7 +67533,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1412505978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.01, y: -0.3, z: 0}
+  m_LocalPosition: {x: -0.01, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1690360150}
@@ -67917,7 +67917,7 @@ MonoBehaviour:
   jumpForce: 7
   groundRadius: 0.2
   attackRange: 1
-  health: 100
+  health: 50000
   cleavePower: 3
   movementX: 0
   movementY: 0
@@ -67930,6 +67930,9 @@ MonoBehaviour:
   layerGrounds:
     serializedVersion: 2
     m_Bits: 256
+  enemies:
+    serializedVersion: 2
+    m_Bits: 512
   healthBar: {fileID: 737416354}
 --- !u!70 &1690360154
 CapsuleCollider2D:

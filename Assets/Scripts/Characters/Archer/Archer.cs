@@ -77,7 +77,7 @@ namespace Assets.Scripts
         }
         public void Attack(Vector3 enemyDirection)
         {
-            animator.Play("Attack_archer");
+            // animator.Play("Attack_archer");
             isAtacking = true;
             StartCoroutine(AttackCooldown());
         }

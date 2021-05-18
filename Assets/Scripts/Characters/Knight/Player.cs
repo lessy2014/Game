@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     public Transform supportPosition;
     
     public LayerMask layerGrounds;
+    public LayerMask enemies;
     public HealthBar healthBar;
     private new Rigidbody2D rigidbody;
     private Animator animator;
@@ -117,18 +118,24 @@ public class Player : MonoBehaviour
     private void Attack()
     {
         if (isGrounded)
+        {
             animator.SetBool(IsAttack, true);
+        }
     }
 
     private void OnAttack()
     {
-        var enemiesOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, 9);
+        var enemiesOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, enemies);
         for (var i = 0; i < cleavePower; i++)
         {
             if (i > enemiesOnHit.Length-1) break;
             enemiesOnHit[i].GetComponent<Entity>().GetDamage(50);
         }
     }
+    private void OnDrawGizmosSelected()
+     {
+         Gizmos.DrawWireSphere(attackPosition.position, attackRange);
+     }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
