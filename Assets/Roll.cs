@@ -30,18 +30,22 @@ public class Roll : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // Player.Instance.movementX = 0;
-        Player.Instance.collider.direction = CapsuleDirection2D.Vertical;
-        Player.Instance.collider.size = new Vector2(0.798872f, 1.410948f);
-        Player.Instance.collider.offset = new Vector2(-0.009661674f, -0.07829249f);
-        animator.SetBool(IsSecondAttack, Player.Instance.swordInJump);
-        if (!animator.GetBool(IsRunning))
-            Player.Instance.movementX = 0;
-        else if (Player.Instance.right)
-            Player.Instance.movementX = 1f;
+        if (Player.Instance.isCelled)
+            animator.Play("NEW roll");
         else
-            Player.Instance.movementX = -1f;
-        Player.Instance.rolling = false;
+        {
+            Player.Instance.collider.direction = CapsuleDirection2D.Vertical;
+            Player.Instance.collider.size = new Vector2(0.798872f, 1.410948f);
+            Player.Instance.collider.offset = new Vector2(-0.009661674f, -0.07829249f);
+            animator.SetBool(IsSecondAttack, Player.Instance.swordInJump);
+            if (!animator.GetBool(IsRunning))
+                Player.Instance.movementX = 0;
+            else if (Player.Instance.right)
+                Player.Instance.movementX = 1f;
+            else
+                Player.Instance.movementX = -1f;
+            Player.Instance.rolling = false;
+        }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

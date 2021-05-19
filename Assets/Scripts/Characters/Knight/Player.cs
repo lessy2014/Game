@@ -26,11 +26,11 @@ public class Player : MonoBehaviour
     public bool right;
     public bool rolling;
     // public bool isJumping;
-    // private bool isCelled;
+    public bool isCelled;
     // private bool crouching;
 
     public Transform groundCheck;
-    // public Transform cellCheck;
+    public Transform cellCheck;
     public Transform attackPosition;
     public Transform supportPosition;
     
@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
         // if (isGrounded && isJumping)
         //     isJumping = false;
-        // isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds);
+        isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds);
     }
 
     private void Move(float axis)
