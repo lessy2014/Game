@@ -24,13 +24,6 @@ public class Koldun : Support
     
     public override void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !isAtacking)
-        {
-            isAtacking = true;
-            StartCoroutine(AttackCooldown());
-            var difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - magicBallPos.position;
-            Attack(difference);
-        }
         State();
         rigidbody.velocity = new Vector2( movementX, rigidbody.velocity.y);
         animator.SetBool(IsRunning, movementX != 0);
@@ -40,6 +33,17 @@ public class Koldun : Support
             jumped = false;
         }
 
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !isAtacking)
+        {
+            isAtacking = true;
+            StartCoroutine(AttackCooldown());
+            var difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - magicBallPos.position;
+            Attack(difference);
+        }
     }
 
     public void Attack(Vector3 direction)
