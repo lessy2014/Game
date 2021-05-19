@@ -17,7 +17,8 @@ public class Player : MonoBehaviour
     
     public float movementX;
     public float movementY;
-    
+
+    public bool swordInJump;
     public bool isGrounded;
     public bool isDead;
     public bool right;
@@ -43,7 +44,8 @@ public class Player : MonoBehaviour
     private static readonly int IsFalling = Animator.StringToHash("isFalling");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
     private static readonly int IsAttack = Animator.StringToHash("isAttack");
-    
+    private static readonly int IsSecondAttack = Animator.StringToHash("isSecondAttack");
+
     public static Player Instance;
     
     private void Awake()
@@ -76,6 +78,7 @@ public class Player : MonoBehaviour
     {
         animator.SetBool(IsJumping, rigidbody.velocity.y > 0 && !isGrounded);
         animator.SetBool(IsFalling, rigidbody.velocity.y < 0 && !isGrounded);
+        swordInJump = animator.GetBool(IsSecondAttack);
     }
 
     private void FixedUpdate()
@@ -112,15 +115,13 @@ public class Player : MonoBehaviour
         rigidbody.velocity = new Vector2(movementX, jumpForce);
         FindObjectOfType<Support>().jump();
         animator.Play("NEW jump");
-            // isJumping = true;
+        // swordInJump = false;
+        // isJumping = true;
     }
 
     private void Attack()
     {
-        if (isGrounded)
-        {
-            animator.SetBool(IsAttack, true);
-        }
+        animator.SetBool(IsAttack, true);
     }
 
     private void OnAttack()

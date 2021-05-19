@@ -67917,10 +67917,11 @@ MonoBehaviour:
   jumpForce: 7
   groundRadius: 0.2
   attackRange: 1
-  health: 50000
+  health: 100
   cleavePower: 3
   movementX: 0
   movementY: 0
+  swordInJump: 0
   isGrounded: 0
   isDead: 0
   right: 0

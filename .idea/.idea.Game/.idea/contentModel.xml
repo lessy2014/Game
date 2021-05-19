@@ -7,6 +7,9 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Attack_archer_script.cs" t="Include" />
+        <e p="FlyingAttack.cs" t="Include" />
+        <e p="FlyingFalling.cs" t="Include" />
+        <e p="Jump.cs" t="Include" />
         <e p="Random_warrior.cs" t="Include" />
         <e p="RangeAttacker.cs" t="Include" />
         <e p="runningBetweenAttacks.cs" t="Include" />
