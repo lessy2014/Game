@@ -12,6 +12,7 @@
         <e p="Jump.cs" t="Include" />
         <e p="Random_warrior.cs" t="Include" />
         <e p="RangeAttacker.cs" t="Include" />
+        <e p="Roll.cs" t="Include" />
         <e p="runningBetweenAttacks.cs" t="Include" />
         <e p="runningBetweenAttacks2.cs" t="Include" />
         <e p="Scripts" t="Include">

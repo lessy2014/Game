@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
     public bool isGrounded;
     public bool isDead;
     public bool right;
+    public bool rolling;
     // public bool isJumping;
     // private bool isCelled;
     // private bool crouching;
@@ -73,6 +76,11 @@ public class Player : MonoBehaviour
         };
         // input.Player.Jump.canceled += context => CancelJump();
         input.Player.Attack.performed += context => Attack();
+        input.Player.Roll.performed += context =>
+        {
+            if (isGrounded)
+                Roll();
+        };
     }
     void Update()
     {
@@ -85,6 +93,7 @@ public class Player : MonoBehaviour
     {
         movementY = rigidbody.velocity.y;
         rigidbody.velocity = new Vector2(movementX * speed, movementY);
+        // print(rigidbody.velocity.x);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
         // if (isGrounded && isJumping)
         //     isJumping = false;
@@ -93,20 +102,21 @@ public class Player : MonoBehaviour
 
     private void Move(float axis)
     {
-        // if (axis != 0)
-        //     spriteRenderer.flipX = axis < 0 && !isDead;
-        if (axis < 0)
+        if (!rolling)
         {
-            right = false;
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-        else if (axis > 0)
-        {
-            right = true;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            if (axis < 0)
+            {
+                right = false;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else if (axis > 0)
+            {
+                right = true;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            movementX = axis;
         }
 
-        movementX = axis;
         animator.SetBool(IsRunning, movementX != 0);
     }
 
@@ -117,6 +127,12 @@ public class Player : MonoBehaviour
         animator.Play("NEW jump");
         // swordInJump = false;
         // isJumping = true;
+    }
+
+    private void Roll()
+    {
+        animator.Play("NEW roll");
+        rolling = true;
     }
 
     private void Attack()
@@ -169,6 +185,19 @@ public class Player : MonoBehaviour
             animator.Play("Death");
             input.Disable();
         }
+    }
+
+    private void DisableWithoutMovement()
+    {
+        DisableInputException(input.Player.Move);
+    }
+    private void DisableInputException(InputAction exception)
+    {
+        input.Player.Attack.Disable();
+        input.Player.Jump.Disable();
+        input.Player.Roll.Disable();
+        // OnDisable();
+        // exception.Enable();
     }
     
     
