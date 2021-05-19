@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
             movementX = axis;
         }
 
-        animator.SetBool(IsRunning, movementX != 0);
+        animator.SetBool(IsRunning, movementX != 0 && !rolling);
     }
 
     private void Jump()
