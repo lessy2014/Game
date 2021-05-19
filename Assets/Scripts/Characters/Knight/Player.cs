@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     public LayerMask layerGrounds;
     public LayerMask enemies;
     public HealthBar healthBar;
+    public CapsuleCollider2D collider;
     private new Rigidbody2D rigidbody;
     private Animator animator;
     private InputMaster input;
@@ -64,6 +65,7 @@ public class Player : MonoBehaviour
     {
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponentInChildren<Animator>();
+        collider = gameObject.GetComponent<CapsuleCollider2D>();
     }
     private void BindMovement()
     {
@@ -132,7 +134,6 @@ public class Player : MonoBehaviour
     private void Roll()
     {
         animator.Play("NEW roll");
-        rolling = true;
     }
 
     private void Attack()
