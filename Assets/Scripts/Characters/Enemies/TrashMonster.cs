@@ -50,11 +50,15 @@ public class TrashMonster : Entity
     public LayerMask players;
     public bool isDead;
 
+    public AudioSource sound;
+    public AudioClip hitSound;
+
     private static readonly int IsDying = Animator.StringToHash("isDying");
 
     private void Awake()
     {
         GetComponents();
+        sound = gameObject.GetComponent<AudioSource>();
         readyToAttack = true;
     }
     private void Start()
@@ -205,6 +209,7 @@ public class TrashMonster : Entity
 
     public override void GetDamage(int damage)
     {
+        PlayHitSound();
         preparingAttack = false;
         hp -= damage;
         DoKnockBack();
@@ -283,6 +288,11 @@ public class TrashMonster : Entity
             movementY = 0.4f;
         else
             movementY = 0;
+    }
+
+    public void PlayHitSound()
+    {
+        sound.PlayOneShot(hitSound);
     }
     
     

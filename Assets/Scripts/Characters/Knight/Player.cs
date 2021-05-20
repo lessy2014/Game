@@ -50,6 +50,13 @@ public class Player : MonoBehaviour
     private static readonly int IsAttack = Animator.StringToHash("isAttack");
     private static readonly int IsSecondAttack = Animator.StringToHash("isSecondAttack");
 
+    public AudioSource sound;
+    public AudioClip removeSword;
+    public AudioClip attackSound;
+    public AudioClip runSound;
+    public AudioClip landingSound;
+    public AudioClip jumpSound;
+
     public static Player Instance;
     
     private void Awake()
@@ -66,6 +73,7 @@ public class Player : MonoBehaviour
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponentInChildren<Animator>();
         collider = gameObject.GetComponent<CapsuleCollider2D>();
+        sound = gameObject.GetComponentInChildren<AudioSource>();
     }
     private void BindMovement()
     {
@@ -150,6 +158,41 @@ public class Player : MonoBehaviour
             enemiesOnHit[i].GetComponent<Entity>().GetDamage(50);
         }
     }
+
+    private void PlayAttackSound()
+    {
+        sound.mute = false;
+        sound.pitch = UnityEngine.Random.Range(0.8f, 1.4f);
+        sound.PlayOneShot(attackSound);
+    }
+
+    private void PlayRemoveSwardSound()
+    {
+        sound.PlayOneShot(removeSword);
+    }
+
+    private void PlayRunSound()
+    {
+        sound.PlayOneShot(runSound);
+    }
+
+    private void PlayLandingSound()
+    {
+        sound.PlayOneShot(landingSound);
+    }
+
+    private void PlayJumpSound()
+    {
+        sound.PlayOneShot(jumpSound);
+    }
+
+    private void StopSound()
+    {
+        print("stop");
+        sound.Stop();
+    }
+
+
     private void OnDrawGizmosSelected()
      {
          Gizmos.DrawWireSphere(attackPosition.position, attackRange);

@@ -15,10 +15,13 @@ public class Koldun : Support
     public Transform magicBallPos;
     public float offset = - 45;
     public Quaternion rotation;
+    public AudioSource sound;
+    public AudioClip fireballSound;
 
     public override void Awake()
     {
         GetComponents();
+        sound = gameObject.GetComponentInChildren<AudioSource>();
         Instance = this;
     }
     
@@ -83,6 +86,11 @@ public class Koldun : Support
     {
         transform.position = player.transform.position;
         print("teleported");
+    }
+
+    public void PlayFireBallSound()
+    {
+        sound.PlayOneShot(fireballSound);
     }
     
 }
