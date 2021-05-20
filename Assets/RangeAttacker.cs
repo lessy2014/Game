@@ -1,10 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RangeAttacker : Entity
 {
+    public projectile bullet;
+    
     public Transform groundCheck;
     public Transform rightWallCheck;
     public Transform leftWallCheck;
@@ -12,12 +16,14 @@ public class RangeAttacker : Entity
     public bool isGrounded;
     public bool isMovingRight;
     public bool isStuck;
+    public bool isAttackOnCooldown;
 
     private float groundRadius = 0.3f;
-    public float speed = 1.5f;
-    private float attackRange = 8;
-    private float attackHeight = 6;
     private float partitionStep = 0.2f;
+    public float attackCooldown = 2;
+    public float speed = 1.5f;
+    [FormerlySerializedAs("attackRange")] public float maxAttackRange = 8;
+    public float attackHeight = 6;
     private float jumpForce = 3;
     public float movementX;
     public float movementY;
@@ -48,7 +54,7 @@ public class RangeAttacker : Entity
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
     }
 
-    void Start()
+    void Awake()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         GetComponents();
@@ -56,9 +62,9 @@ public class RangeAttacker : Entity
 
     private void Update()
     {
-        if (Vector2.Distance(transform.position, playerTransform.position) < attackRange)
+        if (GetDistanceToPlayer() <= maxAttackRange && !isAttackOnCooldown)
             Attack();
-        else
+        else if (GetDistanceToPlayer() > maxAttackRange)
             MoveToPlayer();
     }
 
@@ -75,35 +81,69 @@ public class RangeAttacker : Entity
 
     }
 
-    // private void Attack()
-    // {
-    //     
-    // }
-    
     private void Attack()
     {
         movementX = 0;
+
+        var isCollided = CheckCollision();
+        if (isCollided) return;
+        isAttackOnCooldown = true;
+
+        var projectile = Instantiate(bullet, transform.position, Quaternion.identity);
+        projectile.Launch(CalculateProjectileVector());
+        StartCoroutine(AttackCooldown());
+    }
+
+    private IEnumerator AttackCooldown()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        isAttackOnCooldown = false;
+    }
+
+    private double GetDistanceToPlayer()
+    {
+        return Vector2.Distance(transform.position, playerTransform.position);
+    }
+
+    private Vector2 CalculateProjectileVector()
+    {
+        var distance = Math.Min(GetDistanceToPlayer(), maxAttackRange);
+        var angleSin = 4 * attackHeight /
+                       Math.Sqrt(16 * attackHeight * attackHeight + distance * distance);
+        var angleCos = Math.Sqrt(1 - angleSin * angleSin);
+        var velocity = Math.Sqrt( 2 * attackHeight * 9.81 / (angleSin * angleSin));
+
+        if (transform.position.x > playerTransform.position.x)
+            return new Vector2(-(float) angleCos, (float) angleSin).normalized * (float) velocity;
+        return new Vector2((float) angleCos, (float) angleSin).normalized * (float) velocity;
+    }
+
+    private bool CheckCollision()
+    {
         var isCollided = false;
+        var distance = (float) Math.Min(GetDistanceToPlayer(), maxAttackRange);
         var position = transform.position;
         var isPlayerRight = playerTransform.position.x > position.x;
         var previous = position;
-        for (var i = partitionStep; i < attackRange && !isCollided; i += partitionStep)
+        for (var i = partitionStep; i < distance && !isCollided; i += partitionStep)
         {
             float parabolaValue;
             var x = i;
             if (isPlayerRight)
-                parabolaValue = -1 * attackHeight / (2 * attackRange) * x * (x - attackRange);
+                parabolaValue = -1 * attackHeight / (2 * distance) * x * (x - distance);
             else
             {
                 x *= -1;
-                parabolaValue = -1 * attackHeight / (2 * attackRange) * x * (x + attackRange);
+                parabolaValue = -1 * attackHeight / (2 * distance) * x * (x + distance);
             }
+
             var current = new Vector3(x + position.x, parabolaValue + position.y);
             Debug.DrawLine(previous, current, Color.red, 2f);
             isCollided = !(Physics2D.Raycast(previous,
-                current - previous, (current - previous).magnitude, 1 << layerGround.value).collider is null);
+                current - previous, (current - previous).magnitude, layerGround).collider is null);
             previous = current;
         }
-        
+
+        return isCollided;
     }
 }
