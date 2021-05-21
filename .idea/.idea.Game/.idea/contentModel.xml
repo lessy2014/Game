@@ -13,6 +13,8 @@
         <e p="Random_warrior.cs" t="Include" />
 >>>>>>> 3d0351c066a076beb26634bc7a2738dfa3cc5b47
         <e p="RangeAttacker.cs" t="Include" />
+        <e p="runningBetweenAttacks.cs" t="Include" />
+        <e p="runningBetweenAttacks2.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="CameraController.cs" t="Include" />
           <e p="Characters" t="Include">
@@ -27,6 +29,7 @@
               <e p="AnimatorBoolFalse.cs" t="Include" />
               <e p="AnimatorBoolFalse2.cs" t="Include" />
               <e p="FirstAttack.cs" t="Include" />
+              <e p="old_player.cs" t="Include" />
               <e p="Player.cs" t="Include" />
               <e p="Reset.cs" t="Include" />
               <e p="SecondAttack.cs" t="Include" />
@@ -99,6 +102,7 @@
             <e p="public-license.txt" t="Include" />
           </e>
         </e>
+        <e p="TransitionThree.cs" t="Include" />
       </e>
       <e p="Game.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />

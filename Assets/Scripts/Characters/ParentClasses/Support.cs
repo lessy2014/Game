@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Support : MonoBehaviour
@@ -28,8 +29,10 @@ public class Support : MonoBehaviour
     private float maxDistanceToPlayer;
 
     public Transform player;
-    public Transform leftPosition;
-    public Transform rightPosition;
+
+    public Transform playerPosition;
+    // public Transform leftPosition;
+    // public Transform rightPosition;
     public Transform rightFall;
     public Transform leftFall;
     public Transform groundCheck;
@@ -71,15 +74,18 @@ public class Support : MonoBehaviour
     public void State()
     {
         isRight = player.GetComponent<Player>().right;
-        isJumping = player.GetComponent<Player>().isJumping;
         isDead = player.GetComponent<Player>().isDead;
-        // movementY = player.GetComponent<Player>().ySpeed;
         movementY = rigidbody.velocity.y;
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
-        if (isRight)
-            distanceToPlayer = Math.Abs(leftPosition.position.x - transform.position.x);
-        else
-            distanceToPlayer = Math.Abs(rightPosition.position.x - transform.position.x);
+        distanceToPlayer = playerPosition.position.x - transform.position.x;
+        // if (distanceToPlayer > 0)
+        //     isRight = true;
+        // else
+        //     isRight = false;
+        // if (isRight)
+        //     distanceToPlayer = Math.Abs(leftPosition.position.x - transform.position.x);
+        // else
+        //     distanceToPlayer = Math.Abs(rightPosition.position.x - transform.position.x);
         realDistanceToPlayer = Math.Abs((player.position - transform.position).magnitude);
         if (isDead)
         {
@@ -94,14 +100,14 @@ public class Support : MonoBehaviour
         }
         else if (!isGrounded)
             AirControl();
-        else if (distanceToPlayer > 0.5 && isRight ) 
-            movingToPlayer(leftPosition);
-        else if (distanceToPlayer > 0.5 && !isRight )
-            movingToPlayer(rightPosition);
+        else if (realDistanceToPlayer > 0.5)
+        {
+            movingToPlayer(playerPosition);
+        }
         else
         {
             movementX = 0;
-            spriteRenderer.flipX = !isRight;
+            idle();
             // animator.SetBool(IsRunning, false);
         }
         if (realDistanceToPlayer > 15)
@@ -114,7 +120,11 @@ public class Support : MonoBehaviour
     }
     private void idle()
     {
-        
+        if (isRight)
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+        else
+            gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+        // spriteRenderer.flipX = !isRight;
     }
 
     public void movingToPlayer(Transform playerPosition)
@@ -122,21 +132,27 @@ public class Support : MonoBehaviour
         // animator.SetBool(IsRunning, true);
         var delta = transform.position.x - playerPosition.position.x;
         var extraDelta = transform.position.x - player.position.x;
-        if (delta < 0.1 && delta > 0 ||delta > -0.1 && delta < 0 || (!Grounded(leftFall) || !Grounded(rightFall)) && Math.Abs(extraDelta) < 0.2 )
+        if (delta < 0.1 && delta > 0 || delta > -0.1 && delta < 0 ||
+            !Grounded(rightFall) && Math.Abs(extraDelta) < 0.2)
+        {
             movementX = 0;
+            idle();
+        }
         else if (delta > 0)
         {
             movementX = -speed;
             if (!isGrounded)
                 movementX = 1.3f * (-speed);
-            spriteRenderer.flipX = true;
+            gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+            // spriteRenderer.flipX = true;
         }
         else
         {
             movementX = speed;
             if (!isGrounded)
                 movementX = 1.3f * speed;
-            spriteRenderer.flipX = false;
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            // spriteRenderer.flipX = false;
         }
     }
     public void TeleportToPlayer()
@@ -149,7 +165,8 @@ public class Support : MonoBehaviour
         // animator.SetBool(IsRunning, false);
         if (isGrounded)
         {
-            spriteRenderer.flipX = !isRight;
+            idle();
+            // spriteRenderer.flipX = !isRight;
             rigidbody.velocity = new Vector2(movementX, jumpForce);
         }
 
