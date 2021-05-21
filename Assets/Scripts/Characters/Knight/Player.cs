@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     public bool isDead;
     public bool right;
     public bool rolling;
+    public bool blocked;
     // public bool isJumping;
     public bool isCelled;
     // private bool crouching;
@@ -91,6 +92,11 @@ public class Player : MonoBehaviour
             if (isGrounded)
                 Roll();
         };
+        input.Player.Block.performed += context =>
+        {
+            if (isGrounded)
+                Block();
+        };
     }
     void Update()
     {
@@ -137,6 +143,11 @@ public class Player : MonoBehaviour
         animator.Play("NEW jump");
         // swordInJump = false;
         // isJumping = true;
+    }
+
+    private void Block()
+    {
+        animator.Play("blockParry");
     }
 
     private void Roll()
@@ -220,15 +231,20 @@ public class Player : MonoBehaviour
     
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        healthBar.SetHealth(health);
-        if (health <= 0)
+        if (!blocked)
         {
-            isDead = true;
-            animator.SetBool(IsDead, true);
-            animator.Play("Death");
-            input.Disable();
+            health -= damage;
+            healthBar.SetHealth(health);
+            if (health <= 0)
+            {
+                isDead = true;
+                animator.SetBool(IsDead, true);
+                animator.Play("Death");
+                input.Disable();
+            }
         }
+        else
+            blocked = false;
     }
 
     private void DisableWithoutMovement()
@@ -245,7 +261,7 @@ public class Player : MonoBehaviour
     }
     
     
-    private void OnEnable() => input.Enable();
+    public void OnEnable() => input.Enable();
 
-    private void OnDisable() => input.Disable();
+    public void OnDisable() => input.Disable();
 }
