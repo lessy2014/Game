@@ -15,8 +15,7 @@ namespace Assets.Scripts
     {
         public bool isAtacking;
         private Vector3 distanceToEnemy;
-        public Transform arrowLeftPos;
-        public Transform arrowRightPos;
+        public Transform arrowPos;
         public GameObject arrow;
         private LayerMask rayIgnore = (1 << 12) | (1 << 11) | (1 << 10) | (1 << 0);
         private LayerMask rayTo = (1 << 8) | (1 << 9);
@@ -78,7 +77,7 @@ namespace Assets.Scripts
         }
         public void Attack(Vector3 enemyDirection)
         {
-            animator.Play("Attack_archer");
+            // animator.Play("Attack_archer");
             isAtacking = true;
             StartCoroutine(AttackCooldown());
         }
@@ -86,9 +85,9 @@ namespace Assets.Scripts
         public void Shoot()
         {
             if (isRight)
-                Instantiate(arrow, arrowRightPos.position,  Quaternion.Euler(0, 0,0 ));
+                Instantiate(arrow, arrowPos.position,  Quaternion.Euler(0, 0,0 ));
             else
-                Instantiate(arrow, arrowLeftPos.position,  Quaternion.Euler(0, 180,0 ));
+                Instantiate(arrow, arrowPos.position,  Quaternion.Euler(0, 180,0 ));
         }
         IEnumerator AttackCooldown()
         {
