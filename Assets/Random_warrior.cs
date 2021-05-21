@@ -74,6 +74,12 @@ public class Random_warrior : Entity
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
     }
 
+    public override void FlyFromTornado()
+    {
+        rigidbody.velocity = new Vector2(0, 10);
+        DisableMovement(1f);
+    }
+
 
     private void FixedUpdate()
     {

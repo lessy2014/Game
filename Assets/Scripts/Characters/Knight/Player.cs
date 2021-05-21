@@ -14,7 +14,8 @@ public class Player : MonoBehaviour
     public float jumpForce = 7;
     public float groundRadius = 0.2f;
     public float attackRange = 1f;
-    public int health = 100;
+    public float health = 100;
+    public float rage = 0;
     public int cleavePower = 3;
     
     public float movementX;
@@ -28,6 +29,8 @@ public class Player : MonoBehaviour
     public bool blocked;
     private bool canBlock = true;
     private bool canRoll = true;
+    public bool rageMode;
+    public bool specialAttack;
     // public bool isJumping;
     public bool isCelled;
     // private bool crouching;
@@ -40,10 +43,13 @@ public class Player : MonoBehaviour
     public LayerMask layerGrounds;
     public LayerMask enemies;
     public HealthBar healthBar;
+    public HealthBar rageBar;
     public CapsuleCollider2D collider;
     private new Rigidbody2D rigidbody;
     private Animator animator;
     private InputMaster input;
+    public GameObject splash;
+    public GameObject tornado;
     
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
     private static readonly int IsDead = Animator.StringToHash("isDead");
@@ -69,6 +75,8 @@ public class Player : MonoBehaviour
         input = new InputMaster();
         BindMovement();
         healthBar.SetMaxHealth(health);
+        rageBar.SetMaxHealth(100);
+        rageBar.SetHealth(0);
     }
 
     private void GetComponents()
@@ -105,6 +113,19 @@ public class Player : MonoBehaviour
         animator.SetBool(IsJumping, rigidbody.velocity.y > 0 && !isGrounded);
         animator.SetBool(IsFalling, rigidbody.velocity.y < 0 && !isGrounded);
         swordInJump = animator.GetBool(IsSecondAttack);
+        if (rageMode)
+        {
+            speed = 6;
+            animator.speed = 1.5f;
+            rage -= 10 * Time.deltaTime;
+            rageBar.SetHealth(rage);
+            if (rage <= 0)
+            {
+                animator.speed = 1;
+                speed = 4;
+                rageMode = false;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -179,13 +200,43 @@ public class Player : MonoBehaviour
 
     private void OnAttack()
     {
+        if (rageMode && !specialAttack)
+            CreateSplash();
         var enemiesOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, enemies);
         for (var i = 0; i < cleavePower; i++)
         {
             if (i > enemiesOnHit.Length-1) break;
             enemiesOnHit[i].GetComponent<Entity>().GetDamage(50);
+            rage += 50;
+            rageBar.SetHealth(rage);
+            if (rage >= 100)
+            {
+                rageMode = true;
+                rage = 100;
+            }
         }
     }
+
+    public void CreateSplash()
+    {
+        if (right)
+            Instantiate(splash, attackPosition.position + 1.5f * Vector3.right, Quaternion.Euler(0, 0, 0));
+        else
+            Instantiate(splash, attackPosition.position + 1.5f * Vector3.left, quaternion.Euler(0, 180, 0));
+    }
+
+    public void CreateTornado()
+    {
+        if (specialAttack)
+        {
+            if (right)
+                Instantiate(tornado, attackPosition.position + 1.5f * Vector3.right + Vector3.up, Quaternion.Euler(0, 0, 0));
+            else
+                Instantiate(tornado, attackPosition.position + 1.5f * Vector3.left + Vector3.up, quaternion.Euler(0, 180, 0));
+            specialAttack = false;
+        }
+    }
+    
 
     private void PlayAttackSound()
     {
