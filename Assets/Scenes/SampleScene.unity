@@ -68632,7 +68632,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690360146}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 115.9, y: -2.2, z: 0}
+  m_LocalPosition: {x: 33.5, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 396855706}
@@ -68711,9 +68711,9 @@ MonoBehaviour:
   right: 0
   rolling: 0
   blocked: 0
+  isWithSword: 0
   rageMode: 0
   specialAttack: 0
-  isWithSword: 0
   isCelled: 0
   groundCheck: {fileID: 396855706}
   cellCheck: {fileID: 525549522}
