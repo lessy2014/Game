@@ -15,22 +15,18 @@ public class Koldun : Support
     public Transform magicBallPos;
     public float offset = - 45;
     public Quaternion rotation;
+    public AudioSource sound;
+    public AudioClip fireballSound;
 
     public override void Awake()
     {
         GetComponents();
+        sound = gameObject.GetComponentInChildren<AudioSource>();
         Instance = this;
     }
     
     public override void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !isAtacking)
-        {
-            isAtacking = true;
-            StartCoroutine(AttackCooldown());
-            var difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - magicBallPos.position;
-            Attack(difference);
-        }
         State();
         rigidbody.velocity = new Vector2( movementX, rigidbody.velocity.y);
         animator.SetBool(IsRunning, movementX != 0);
@@ -40,6 +36,17 @@ public class Koldun : Support
             jumped = false;
         }
 
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !isAtacking)
+        {
+            isAtacking = true;
+            StartCoroutine(AttackCooldown());
+            var difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - magicBallPos.position;
+            Attack(difference);
+        }
     }
 
     public void Attack(Vector3 direction)
@@ -79,6 +86,11 @@ public class Koldun : Support
     {
         transform.position = player.transform.position;
         print("teleported");
+    }
+
+    public void PlayFireBallSound()
+    {
+        sound.PlayOneShot(fireballSound);
     }
     
 }

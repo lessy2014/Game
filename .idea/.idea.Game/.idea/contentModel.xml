@@ -8,11 +8,18 @@
       <e p="Assets" t="Include">
         <e p="Attack_archer_script.cs" t="Include" />
 <<<<<<< HEAD
+<<<<<<< HEAD
         <e p="projectile.cs" t="Include" />
 =======
+=======
+        <e p="FlyingAttack.cs" t="Include" />
+        <e p="FlyingFalling.cs" t="Include" />
+        <e p="Jump.cs" t="Include" />
+>>>>>>> newPlayer
         <e p="Random_warrior.cs" t="Include" />
 >>>>>>> 3d0351c066a076beb26634bc7a2738dfa3cc5b47
         <e p="RangeAttacker.cs" t="Include" />
+        <e p="Roll.cs" t="Include" />
         <e p="runningBetweenAttacks.cs" t="Include" />
         <e p="runningBetweenAttacks2.cs" t="Include" />
         <e p="Scripts" t="Include">

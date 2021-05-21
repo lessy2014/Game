@@ -20,8 +20,6 @@ public class AnimatorBoolFalse : StateMachineBehaviour
     {
         if (animator.GetBool(IsAttack))
             animator.Play("Second Attack");
-        // if (animator.GetBool(IsRunning))
-        //     animator.Play("NEW runningWithSword");
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

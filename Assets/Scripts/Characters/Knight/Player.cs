@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -17,22 +19,25 @@ public class Player : MonoBehaviour
     
     public float movementX;
     public float movementY;
-    
+
+    public bool swordInJump;
     public bool isGrounded;
     public bool isDead;
     public bool right;
+    public bool rolling;
     // public bool isJumping;
-    // private bool isCelled;
+    public bool isCelled;
     // private bool crouching;
 
     public Transform groundCheck;
-    // public Transform cellCheck;
+    public Transform cellCheck;
     public Transform attackPosition;
     public Transform supportPosition;
     
     public LayerMask layerGrounds;
     public LayerMask enemies;
     public HealthBar healthBar;
+    public CapsuleCollider2D collider;
     private new Rigidbody2D rigidbody;
     private Animator animator;
     private InputMaster input;
@@ -43,7 +48,15 @@ public class Player : MonoBehaviour
     private static readonly int IsFalling = Animator.StringToHash("isFalling");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
     private static readonly int IsAttack = Animator.StringToHash("isAttack");
-    
+    private static readonly int IsSecondAttack = Animator.StringToHash("isSecondAttack");
+
+    public AudioSource sound;
+    public AudioClip removeSword;
+    public AudioClip attackSound;
+    public AudioClip runSound;
+    public AudioClip landingSound;
+    public AudioClip jumpSound;
+
     public static Player Instance;
     
     private void Awake()
@@ -59,6 +72,8 @@ public class Player : MonoBehaviour
     {
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponentInChildren<Animator>();
+        collider = gameObject.GetComponent<CapsuleCollider2D>();
+        sound = gameObject.GetComponentInChildren<AudioSource>();
     }
     private void BindMovement()
     {
@@ -71,40 +86,48 @@ public class Player : MonoBehaviour
         };
         // input.Player.Jump.canceled += context => CancelJump();
         input.Player.Attack.performed += context => Attack();
+        input.Player.Roll.performed += context =>
+        {
+            if (isGrounded)
+                Roll();
+        };
     }
     void Update()
     {
         animator.SetBool(IsJumping, rigidbody.velocity.y > 0 && !isGrounded);
         animator.SetBool(IsFalling, rigidbody.velocity.y < 0 && !isGrounded);
+        swordInJump = animator.GetBool(IsSecondAttack);
     }
 
     private void FixedUpdate()
     {
         movementY = rigidbody.velocity.y;
         rigidbody.velocity = new Vector2(movementX * speed, movementY);
+        // print(rigidbody.velocity.x);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
         // if (isGrounded && isJumping)
         //     isJumping = false;
-        // isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds);
+        isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds);
     }
 
     private void Move(float axis)
     {
-        // if (axis != 0)
-        //     spriteRenderer.flipX = axis < 0 && !isDead;
-        if (axis < 0)
+        if (!rolling)
         {
-            right = false;
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-        else if (axis > 0)
-        {
-            right = true;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            if (axis < 0)
+            {
+                right = false;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else if (axis > 0)
+            {
+                right = true;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            movementX = axis;
         }
 
-        movementX = axis;
-        animator.SetBool(IsRunning, movementX != 0);
+        animator.SetBool(IsRunning, movementX != 0 && !rolling);
     }
 
     private void Jump()
@@ -112,15 +135,18 @@ public class Player : MonoBehaviour
         rigidbody.velocity = new Vector2(movementX, jumpForce);
         FindObjectOfType<Support>().jump();
         animator.Play("NEW jump");
-            // isJumping = true;
+        // swordInJump = false;
+        // isJumping = true;
+    }
+
+    private void Roll()
+    {
+        animator.Play("NEW roll");
     }
 
     private void Attack()
     {
-        if (isGrounded)
-        {
-            animator.SetBool(IsAttack, true);
-        }
+        animator.SetBool(IsAttack, true);
     }
 
     private void OnAttack()
@@ -132,6 +158,41 @@ public class Player : MonoBehaviour
             enemiesOnHit[i].GetComponent<Entity>().GetDamage(50);
         }
     }
+
+    private void PlayAttackSound()
+    {
+        sound.mute = false;
+        sound.pitch = UnityEngine.Random.Range(0.8f, 1.4f);
+        sound.PlayOneShot(attackSound);
+    }
+
+    private void PlayRemoveSwardSound()
+    {
+        sound.PlayOneShot(removeSword);
+    }
+
+    private void PlayRunSound()
+    {
+        sound.PlayOneShot(runSound);
+    }
+
+    private void PlayLandingSound()
+    {
+        sound.PlayOneShot(landingSound);
+    }
+
+    private void PlayJumpSound()
+    {
+        sound.PlayOneShot(jumpSound);
+    }
+
+    private void StopSound()
+    {
+        print("stop");
+        sound.Stop();
+    }
+
+
     private void OnDrawGizmosSelected()
      {
          Gizmos.DrawWireSphere(attackPosition.position, attackRange);
@@ -168,6 +229,19 @@ public class Player : MonoBehaviour
             animator.Play("Death");
             input.Disable();
         }
+    }
+
+    private void DisableWithoutMovement()
+    {
+        DisableInputException(input.Player.Move);
+    }
+    private void DisableInputException(InputAction exception)
+    {
+        input.Player.Attack.Disable();
+        input.Player.Jump.Disable();
+        input.Player.Roll.Disable();
+        // OnDisable();
+        // exception.Enable();
     }
     
     
