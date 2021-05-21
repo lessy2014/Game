@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     public bool right;
     public bool rolling;
     public bool blocked;
+    public bool isWithSword;
     private bool canBlock = true;
     private bool canRoll = true;
     public bool rageMode;
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
     
     public LayerMask layerGrounds;
     public LayerMask enemies;
+    public LayerMask destructibleObjects;
     public HealthBar healthBar;
     public HealthBar rageBar;
     public CapsuleCollider2D collider;
@@ -133,10 +135,10 @@ public class Player : MonoBehaviour
         movementY = rigidbody.velocity.y;
         rigidbody.velocity = new Vector2(movementX * speed, movementY);
         // print(rigidbody.velocity.x);
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(groundCheck.position, groundRadius, destructibleObjects);
         // if (isGrounded && isJumping)
         //     isJumping = false;
-        isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds);
+        isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(cellCheck.position, groundRadius, destructibleObjects);
     }
 
     private void Move(float axis)
@@ -203,6 +205,7 @@ public class Player : MonoBehaviour
         if (rageMode && !specialAttack)
             CreateSplash();
         var enemiesOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, enemies);
+        var objOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, destructibleObjects);
         for (var i = 0; i < cleavePower; i++)
         {
             if (i > enemiesOnHit.Length-1) break;
@@ -240,7 +243,6 @@ public class Player : MonoBehaviour
 
     private void PlayAttackSound()
     {
-        sound.mute = false;
         sound.pitch = UnityEngine.Random.Range(0.8f, 1.4f);
         sound.PlayOneShot(attackSound);
     }
@@ -263,6 +265,16 @@ public class Player : MonoBehaviour
     private void PlayJumpSound()
     {
         sound.PlayOneShot(jumpSound);
+    }
+
+    private void WithSword()
+    {
+        isWithSword = true;
+    }
+
+    private void WithoutSword()
+    {
+        isWithSword = false;
     }
 
     private void StopSound()

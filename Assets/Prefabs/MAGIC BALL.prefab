@@ -125,6 +125,9 @@ MonoBehaviour:
   enemies:
     serializedVersion: 2
     m_Bits: 512
+  destructibleObjects:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!58 &-3913758138428610831
 CircleCollider2D:
   m_ObjectHideFlags: 0

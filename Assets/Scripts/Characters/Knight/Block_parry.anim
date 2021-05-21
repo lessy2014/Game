@@ -21,7 +21,11 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 1075423825034056700, guid: b184f466e7064b842947c720bac4141d, type: 3}
+<<<<<<< HEAD
     - time: 0.083333336
+=======
+    - time: 0.16666667
+>>>>>>> dd59c66feb36f332b4ef636aae92feab4fde4fa6
       value: {fileID: 5394183733801526263, guid: b184f466e7064b842947c720bac4141d, type: 3}
     - time: 0.16666667
       value: {fileID: 2121196686736080109, guid: b184f466e7064b842947c720bac4141d, type: 3}
@@ -91,7 +95,18 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+<<<<<<< HEAD
   - time: 1
+=======
+  - time: 0
+    functionName: StopSound
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.4333333
+>>>>>>> dd59c66feb36f332b4ef636aae92feab4fde4fa6
     functionName: OnEnable
     data: 
     objectReferenceParameter: {fileID: 0}

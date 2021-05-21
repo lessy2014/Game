@@ -19,6 +19,7 @@ public class Support : MonoBehaviour
     public float groundRadius = 1;
     
     public LayerMask layerGrounds;
+    public LayerMask destructibleObjects;
     public float movementX;
     public float movementY;
     
@@ -76,7 +77,7 @@ public class Support : MonoBehaviour
         isRight = player.GetComponent<Player>().right;
         isDead = player.GetComponent<Player>().isDead;
         movementY = rigidbody.velocity.y;
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(groundCheck.position, groundRadius, destructibleObjects);
         distanceToPlayer = playerPosition.position.x - transform.position.x;
         // if (distanceToPlayer > 0)
         //     isRight = true;
