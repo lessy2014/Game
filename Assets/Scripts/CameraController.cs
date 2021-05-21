@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
             position.y += 2;
             camera.orthographicSize += Time.deltaTime * 4;
         }
-        else if (camera.orthographicSize > 3)
+        else if (camera.orthographicSize > 3 && !player.isWithSword)
         {
             position.y += 5;
             camera.orthographicSize -= Time.deltaTime * 4;
