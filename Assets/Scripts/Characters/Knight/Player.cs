@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     public bool right;
     public bool rolling;
     public bool blocked;
+    private bool canBlock = true;
+    private bool canRoll = true;
     // public bool isJumping;
     public bool isCelled;
     // private bool crouching;
@@ -89,12 +91,12 @@ public class Player : MonoBehaviour
         input.Player.Attack.performed += context => Attack();
         input.Player.Roll.performed += context =>
         {
-            if (isGrounded)
+            if (isGrounded && canRoll)
                 Roll();
         };
         input.Player.Block.performed += context =>
         {
-            if (isGrounded)
+            if (isGrounded && canBlock)
                 Block();
         };
     }
@@ -148,11 +150,26 @@ public class Player : MonoBehaviour
     private void Block()
     {
         animator.Play("blockParry");
+        StartCoroutine(BlockCooldown());
+    }
+
+    private IEnumerator BlockCooldown()
+    {
+        canBlock = false;
+        yield return new WaitForSeconds(2f);
+        canBlock = true;
     }
 
     private void Roll()
     {
         animator.Play("NEW roll");
+        StartCoroutine(RollColldown());
+    }
+    private IEnumerator RollColldown()
+    {
+        canRoll = false;
+        yield return new WaitForSeconds(2f);
+        canRoll = true;
     }
 
     private void Attack()
