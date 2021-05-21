@@ -7,6 +7,7 @@ public class Block_and_parry : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     private static readonly int IsSecondAttack = Animator.StringToHash("isSecondAttack");
     private static readonly int ParryAttack = Animator.StringToHash("ParryAttack");
+    private static readonly int IsAttack = Animator.StringToHash("isAttack");
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Player.Instance.blocked = true;
@@ -19,7 +20,12 @@ public class Block_and_parry : StateMachineBehaviour
         if (Player.Instance.blocked == false)
         {
             Player.Instance.OnEnable();
-            animator.SetBool(ParryAttack, true);
+            // Тут нужен будет какой-нибудь спецэффект, типа искр от удара клинками, звук какой-нибудь, хз
+            if (animator.GetBool(IsAttack))
+            {
+                animator.SetBool(IsAttack, false);
+                animator.SetBool(ParryAttack, true);
+            }
         }
     }
 
