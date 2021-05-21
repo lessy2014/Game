@@ -23,7 +23,7 @@ public class RangeAttacker : Entity
     public float attackCooldown = 2;
     public float speed = 1.5f;
     [FormerlySerializedAs("attackRange")] public float maxAttackRange = 8;
-    public float attackHeight = 6;
+    public float attackHeight = 3;
     private float jumpForce = 3;
     public float movementX;
     public float movementY;
@@ -62,9 +62,9 @@ public class RangeAttacker : Entity
 
     private void Update()
     {
-        if (GetDistanceToPlayer() <= maxAttackRange && !isAttackOnCooldown)
+        if (GetDistanceToPlayer() <= maxAttackRange && !isAttackOnCooldown && IsCanReachPlayer())
             Attack();
-        else if (GetDistanceToPlayer() > maxAttackRange)
+        else if (GetDistanceToPlayer() > maxAttackRange || !IsCanReachPlayer())
             MoveToPlayer();
     }
 
@@ -84,9 +84,8 @@ public class RangeAttacker : Entity
     private void Attack()
     {
         movementX = 0;
-
-        var isCollided = CheckCollision();
-        if (isCollided) return;
+        
+        if (!IsCanReachPlayer()) return;
         isAttackOnCooldown = true;
 
         var projectile = Instantiate(bullet, transform.position, Quaternion.identity);
@@ -118,14 +117,15 @@ public class RangeAttacker : Entity
         return new Vector2((float) angleCos, (float) angleSin).normalized * (float) velocity;
     }
 
-    private bool CheckCollision()
+    private bool IsCanReachPlayer()
     {
-        var isCollided = false;
+        var isReachGround = false;
+        var isReachPlayer = false;
         var distance = (float) Math.Min(GetDistanceToPlayer(), maxAttackRange);
         var position = transform.position;
         var isPlayerRight = playerTransform.position.x > position.x;
         var previous = position;
-        for (var i = partitionStep; i < distance && !isCollided; i += partitionStep)
+        for (var i = partitionStep; i < distance && !(isReachGround || isReachPlayer); i += partitionStep)
         {
             float parabolaValue;
             var x = i;
@@ -139,11 +139,18 @@ public class RangeAttacker : Entity
 
             var current = new Vector3(x + position.x, parabolaValue + position.y);
             Debug.DrawLine(previous, current, Color.red, 2f);
-            isCollided = !(Physics2D.Raycast(previous,
-                current - previous, (current - previous).magnitude, layerGround).collider is null);
+            var target = Physics2D.Raycast(previous,
+                current - previous, (current - previous).magnitude, (1 << 8) | (1 << 10)).collider;
+            if (!(target is null))
+            {
+                if (target.CompareTag("Player"))
+                    isReachPlayer = true;
+                else
+                    isReachGround = true;
+            }
             previous = current;
         }
 
-        return isCollided;
+        return isReachPlayer;
     }
 }
