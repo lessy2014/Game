@@ -62204,7 +62204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2487dc1a773764aa366f5a53d33742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1690360150}
+  player: {fileID: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -62666,6 +62666,10 @@ PrefabInstance:
       propertyPath: homePoint
       value: 
       objectReference: {fileID: 1192175766}
+    - target: {fileID: 7485416090287910719, guid: 46b702a147f03404584ac258c941b303, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46b702a147f03404584ac258c941b303, type: 3}
 --- !u!1 &722990112
@@ -68432,6 +68436,7 @@ MonoBehaviour:
   right: 0
   rolling: 0
   blocked: 0
+  isWithSword: 0
   isCelled: 0
   groundCheck: {fileID: 396855706}
   cellCheck: {fileID: 525549522}

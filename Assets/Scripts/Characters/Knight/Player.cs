@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public bool right;
     public bool rolling;
     public bool blocked;
+    public bool isWithSword;
     private bool canBlock = true;
     private bool canRoll = true;
     // public bool isJumping;
@@ -189,7 +190,6 @@ public class Player : MonoBehaviour
 
     private void PlayAttackSound()
     {
-        sound.mute = false;
         sound.pitch = UnityEngine.Random.Range(0.8f, 1.4f);
         sound.PlayOneShot(attackSound);
     }
@@ -212,6 +212,16 @@ public class Player : MonoBehaviour
     private void PlayJumpSound()
     {
         sound.PlayOneShot(jumpSound);
+    }
+
+    private void WithSword()
+    {
+        isWithSword = true;
+    }
+
+    private void WithoutSword()
+    {
+        isWithSword = false;
     }
 
     private void StopSound()
