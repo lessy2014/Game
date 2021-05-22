@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,8 @@ public class Player : MonoBehaviour
     public float jumpForce = 7;
     public float groundRadius = 0.2f;
     public float attackRange = 1f;
-    public int health = 100;
+    public float health = 100;
+    public float rage = 0;
     public int cleavePower = 3;
     
     public float movementX;
@@ -25,6 +26,12 @@ public class Player : MonoBehaviour
     public bool isDead;
     public bool right;
     public bool rolling;
+    public bool blocked;
+    public bool isWithSword;
+    private bool canBlock = true;
+    private bool canRoll = true;
+    public bool rageMode;
+    public bool specialAttack;
     // public bool isJumping;
     public bool isCelled;
     // private bool crouching;
@@ -36,11 +43,15 @@ public class Player : MonoBehaviour
     
     public LayerMask layerGrounds;
     public LayerMask enemies;
+    public LayerMask destructibleObjects;
     public HealthBar healthBar;
+    public HealthBar rageBar;
     public CapsuleCollider2D collider;
     private new Rigidbody2D rigidbody;
     private Animator animator;
     private InputMaster input;
+    public GameObject splash;
+    public GameObject tornado;
     
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
     private static readonly int IsDead = Animator.StringToHash("isDead");
@@ -66,6 +77,8 @@ public class Player : MonoBehaviour
         input = new InputMaster();
         BindMovement();
         healthBar.SetMaxHealth(health);
+        rageBar.SetMaxHealth(100);
+        rageBar.SetHealth(0);
     }
 
     private void GetComponents()
@@ -88,8 +101,13 @@ public class Player : MonoBehaviour
         input.Player.Attack.performed += context => Attack();
         input.Player.Roll.performed += context =>
         {
-            if (isGrounded)
+            if (isGrounded && canRoll)
                 Roll();
+        };
+        input.Player.Block.performed += context =>
+        {
+            if (isGrounded && canBlock)
+                Block();
         };
     }
     void Update()
@@ -97,6 +115,19 @@ public class Player : MonoBehaviour
         animator.SetBool(IsJumping, rigidbody.velocity.y > 0 && !isGrounded);
         animator.SetBool(IsFalling, rigidbody.velocity.y < 0 && !isGrounded);
         swordInJump = animator.GetBool(IsSecondAttack);
+        if (rageMode)
+        {
+            speed = 6;
+            animator.speed = 1.5f;
+            rage -= 10 * Time.deltaTime;
+            rageBar.SetHealth(rage);
+            if (rage <= 0)
+            {
+                animator.speed = 1;
+                speed = 4;
+                rageMode = false;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -104,10 +135,10 @@ public class Player : MonoBehaviour
         movementY = rigidbody.velocity.y;
         rigidbody.velocity = new Vector2(movementX * speed, movementY);
         // print(rigidbody.velocity.x);
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(groundCheck.position, groundRadius, destructibleObjects);
         // if (isGrounded && isJumping)
         //     isJumping = false;
-        isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds);
+        isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(cellCheck.position, groundRadius, destructibleObjects);
     }
 
     private void Move(float axis)
@@ -139,9 +170,29 @@ public class Player : MonoBehaviour
         // isJumping = true;
     }
 
+    private void Block()
+    {
+        animator.Play("blockParry");
+        StartCoroutine(BlockCooldown());
+    }
+
+    private IEnumerator BlockCooldown()
+    {
+        canBlock = false;
+        yield return new WaitForSeconds(2f);
+        canBlock = true;
+    }
+
     private void Roll()
     {
         animator.Play("NEW roll");
+        StartCoroutine(RollColldown());
+    }
+    private IEnumerator RollColldown()
+    {
+        canRoll = false;
+        yield return new WaitForSeconds(2f);
+        canRoll = true;
     }
 
     private void Attack()
@@ -151,17 +202,47 @@ public class Player : MonoBehaviour
 
     private void OnAttack()
     {
+        if (rageMode && !specialAttack)
+            CreateSplash();
         var enemiesOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, enemies);
+        var objOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, destructibleObjects);
         for (var i = 0; i < cleavePower; i++)
         {
             if (i > enemiesOnHit.Length-1) break;
             enemiesOnHit[i].GetComponent<Entity>().GetDamage(50);
+            rage += 50;
+            rageBar.SetHealth(rage);
+            if (rage >= 100)
+            {
+                rageMode = true;
+                rage = 100;
+            }
         }
     }
 
+    public void CreateSplash()
+    {
+        if (right)
+            Instantiate(splash, attackPosition.position + 1.5f * Vector3.right, Quaternion.Euler(0, 0, 0));
+        else
+            Instantiate(splash, attackPosition.position + 1.5f * Vector3.left, quaternion.Euler(0, 180, 0));
+    }
+
+    public void CreateTornado()
+    {
+        if (specialAttack)
+        {
+            if (right)
+                Instantiate(tornado, attackPosition.position + 1.5f * Vector3.right + Vector3.up, Quaternion.Euler(0, 0, 0));
+            else
+                Instantiate(tornado, attackPosition.position + 1.5f * Vector3.left + Vector3.up, quaternion.Euler(0, 180, 0));
+            specialAttack = false;
+        }
+    }
+    
+
     private void PlayAttackSound()
     {
-        sound.mute = false;
         sound.pitch = UnityEngine.Random.Range(0.8f, 1.4f);
         sound.PlayOneShot(attackSound);
     }
@@ -184,6 +265,16 @@ public class Player : MonoBehaviour
     private void PlayJumpSound()
     {
         sound.PlayOneShot(jumpSound);
+    }
+
+    private void WithSword()
+    {
+        isWithSword = true;
+    }
+
+    private void WithoutSword()
+    {
+        isWithSword = false;
     }
 
     private void StopSound()
@@ -220,15 +311,20 @@ public class Player : MonoBehaviour
     
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        healthBar.SetHealth(health);
-        if (health <= 0)
+        if (!blocked)
         {
-            isDead = true;
-            animator.SetBool(IsDead, true);
-            animator.Play("Death");
-            input.Disable();
+            health -= damage;
+            healthBar.SetHealth(health);
+            if (health <= 0)
+            {
+                isDead = true;
+                animator.SetBool(IsDead, true);
+                animator.Play("Death");
+                input.Disable();
+            }
         }
+        else
+            blocked = false;
     }
 
     private void DisableWithoutMovement()
@@ -245,7 +341,7 @@ public class Player : MonoBehaviour
     }
     
     
-    private void OnEnable() => input.Enable();
+    public void OnEnable() => input.Enable();
 
-    private void OnDisable() => input.Disable();
+    public void OnDisable() => input.Disable();
 }

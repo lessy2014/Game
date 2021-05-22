@@ -8,6 +8,8 @@ public class ThirdAttack : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (Player.Instance.rageMode)
+            Player.Instance.specialAttack = true;
         animator.SetBool(IsSecondAttack, true);
         Player.Instance.cleavePower = 7;
     }
@@ -22,6 +24,7 @@ public class ThirdAttack : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetBool(IsSecondAttack, false);
+        Player.Instance.specialAttack = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\platina\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\platina\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_Game.-1976217036.00" t="ExcludeRecursive" />
-    <e p="C:\Users\platina\Desktop\prog\c#\Game" t="IncludeRecursive">
+    <e p="C:\Users\User\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\User\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_Game.1749400220.00" t="ExcludeRecursive" />
+    <e p="F:\Leonid Programmes\Unity\Projects\TheGame\Game" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Attack_archer_script.cs" t="Include" />
+<<<<<<< HEAD
         <e p="FlyingAttack.cs" t="Include" />
         <e p="FlyingFalling.cs" t="Include" />
         <e p="Jump.cs" t="Include" />
         <e p="MapEnd.cs" t="Include" />
         <e p="MapStart.cs" t="Include" />
+=======
+        <e p="Block_and_parry.cs" t="Include" />
+        <e p="Demon.cs" t="Include" />
+        <e p="FlyingAttack.cs" t="Include" />
+        <e p="FlyingFalling.cs" t="Include" />
+        <e p="Jump.cs" t="Include" />
+>>>>>>> 74735b0843f0f9b8fc1a6949555dc290ad18fb47
         <e p="projectile.cs" t="Include" />
         <e p="Random_warrior.cs" t="Include" />
         <e p="RangeAttacker.cs" t="Include" />
         <e p="Roll.cs" t="Include" />
+        <e p="Ruka_uroda.cs" t="Include" />
         <e p="runningBetweenAttacks.cs" t="Include" />
         <e p="runningBetweenAttacks2.cs" t="Include" />
         <e p="Scripts" t="Include">
@@ -51,13 +60,19 @@
             </e>
           </e>
           <e p="Controls.cs" t="Include" />
+          <e p="DestructibleBoard.cs" t="Include" />
           <e p="GetComponent.cs" t="Include" />
           <e p="HealthBar.cs" t="Include" />
           <e p="InputMaster.cs" t="Include" />
           <e p="PauseMenu.cs" t="Include" />
           <e p="Platform.cs" t="Include" />
           <e p="Trigger.cs" t="Include" />
+          <e p="Triggers" t="Include">
+            <e p="ZoomTrigger.cs" t="Include" />
+          </e>
         </e>
+        <e p="SplashAttack.cs" t="Include" />
+        <e p="SplashSelfDestruction.cs" t="Include" />
         <e p="Sprites" t="Include">
           <e p="BgTemple" t="Include">
             <e p="_license.txt" t="Include" />
@@ -105,7 +120,12 @@
             <e p="public-license.txt" t="Include" />
           </e>
         </e>
+<<<<<<< HEAD
         <e p="Sun.cs" t="Include" />
+=======
+        <e p="Tornado.cs" t="Include" />
+        <e p="TornadoReset.cs" t="Include" />
+>>>>>>> 74735b0843f0f9b8fc1a6949555dc290ad18fb47
         <e p="TransitionThree.cs" t="Include" />
       </e>
       <e p="Game.sln" t="IncludeFlat" />

@@ -28,7 +28,6 @@ namespace Assets.Scripts
         public void Update()
         {
             var entity = FindObjectsOfType<Entity>();
-            
             var tr = new List<Transform>();
             if (entity.Length != 0)
             {

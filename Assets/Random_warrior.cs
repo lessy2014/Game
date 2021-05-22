@@ -74,6 +74,12 @@ public class Random_warrior : Entity
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
     }
 
+    public override void FlyFromTornado()
+    {
+        rigidbody.velocity = new Vector2(0, 10);
+        DisableMovement(1f);
+    }
+
 
     private void FixedUpdate()
     {
@@ -154,7 +160,7 @@ public class Random_warrior : Entity
         if (!movingRight)
             gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
         else
-            gameObject.transform.rotation = quaternion.Euler(0, 0, 0);
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
 
         if (Vector2.Distance(transform.position, player.position) < stoppingDistance && readyToAttack)
         {
@@ -177,17 +183,6 @@ public class Random_warrior : Entity
             StartCoroutine(AttackCoolDown());
         }
     }
-
-    private void JumpOnPlayer()
-    {
-        gameObject.transform.position = rightAttackPosition.position;
-    }
-
-    private void JumpFromPlayer()
-    {
-        gameObject.transform.position = rightAttackPosition.position;
-    }
-
     private void OnAttack()
     {
         var enemiesOnHit = Physics2D.OverlapCircleAll(rightAttackPosition.position, attackRange, players);

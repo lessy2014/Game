@@ -232,6 +232,10 @@ public class TrashMonster : Entity
         yield return new WaitForSeconds(time);
         gotDamage = false;
     }
+    public override void FlyFromTornado()
+    {
+        rigidbody.velocity = new Vector2(0, 10);
+    }
 
     private void Death()
     {
