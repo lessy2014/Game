@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Start
+  - End
+  - UserInterface
   layers:
   - Default
   - TransparentFX
@@ -19,7 +22,7 @@ TagManager:
   - SlownessTriggers
   - Ranger
   - Magic
-  - Destructible gameobjects
+  - 
   - 
   - 
   - 

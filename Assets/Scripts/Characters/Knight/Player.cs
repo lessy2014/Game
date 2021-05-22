@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
     public CapsuleCollider2D collider;
     private new Rigidbody2D rigidbody;
     private Animator animator;
-    private InputMaster input;
+    public InputMaster input;
     public GameObject splash;
     public GameObject tornado;
     
@@ -331,7 +331,7 @@ public class Player : MonoBehaviour
     {
         DisableInputException(input.Player.Move);
     }
-    private void DisableInputException(InputAction exception)
+    public void DisableInputException(InputAction exception)
     {
         input.Player.Attack.Disable();
         input.Player.Jump.Disable();
