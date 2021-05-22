@@ -279,7 +279,7 @@ public class Player : MonoBehaviour
 
     private void StopSound()
     {
-        print("stop");
+        // print("stop");
         sound.Stop();
     }
 
