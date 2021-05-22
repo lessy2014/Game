@@ -7,11 +7,19 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Attack_archer_script.cs" t="Include" />
+<<<<<<< HEAD
+        <e p="FlyingAttack.cs" t="Include" />
+        <e p="FlyingFalling.cs" t="Include" />
+        <e p="Jump.cs" t="Include" />
+        <e p="MapEnd.cs" t="Include" />
+        <e p="MapStart.cs" t="Include" />
+=======
         <e p="Block_and_parry.cs" t="Include" />
         <e p="Demon.cs" t="Include" />
         <e p="FlyingAttack.cs" t="Include" />
         <e p="FlyingFalling.cs" t="Include" />
         <e p="Jump.cs" t="Include" />
+>>>>>>> 74735b0843f0f9b8fc1a6949555dc290ad18fb47
         <e p="projectile.cs" t="Include" />
         <e p="Random_warrior.cs" t="Include" />
         <e p="RangeAttacker.cs" t="Include" />
@@ -112,8 +120,12 @@
             <e p="public-license.txt" t="Include" />
           </e>
         </e>
+<<<<<<< HEAD
+        <e p="Sun.cs" t="Include" />
+=======
         <e p="Tornado.cs" t="Include" />
         <e p="TornadoReset.cs" t="Include" />
+>>>>>>> 74735b0843f0f9b8fc1a6949555dc290ad18fb47
         <e p="TransitionThree.cs" t="Include" />
       </e>
       <e p="Game.sln" t="IncludeFlat" />
