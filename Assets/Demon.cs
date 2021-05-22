@@ -159,9 +159,9 @@ public class Demon : Entity
     {
         yield return new WaitForSeconds(3f);
         if (Player.Instance.right)
-            gameObject.transform.position = player.transform.position + 2 * Vector3.left;
+            gameObject.transform.position = player.transform.position + 2 * Vector3.left + Vector3.up;
         else 
-            gameObject.transform.position = player.transform.position + 2 * Vector3.right;
+            gameObject.transform.position = player.transform.position + 2 * Vector3.right + Vector3.up;
         animator.Play("TeleportTo");
     }
     private void Attack(int id)
@@ -196,9 +196,9 @@ public class Demon : Entity
 
     private void SendRukuUroda()
     {
-        Instantiate(rukaUroda, player.transform.position + 0.8f * Vector3.up + Vector3.right, Quaternion.Euler(0, 0, 0));
-        Instantiate(rukaUroda, player.transform.position + 0.8f * Vector3.up, Quaternion.Euler(0, 0, 0));
         Instantiate(rukaUroda, player.transform.position + 0.8f * Vector3.up + 2 * Vector3.right, Quaternion.Euler(0, 0, 0));
+        Instantiate(rukaUroda, player.transform.position + 0.8f * Vector3.up + Vector3.right, Quaternion.Euler(0, 0, 0));
+        Instantiate(rukaUroda, player.transform.position + 0.8f * Vector3.up + 3 * Vector3.right, Quaternion.Euler(0, 0, 0));
     }
     public override void GetDamage(int damage)
     {
@@ -227,10 +227,14 @@ public class Demon : Entity
     }
     private void Death()
     {
-        animator.Play("Teleport");
+        animator.Play("Death");
+        Instantiate(rukaUroda, transform.position + 3 * Vector3.up, Quaternion.Euler(0, 0, 90));
+        Instantiate(rukaUroda, transform.position + 2 * Vector3.down, Quaternion.Euler(0, 0, -90));
+        Instantiate(rukaUroda, transform.position + Vector3.up , Quaternion.Euler(0, 0, 90));
         enabled = false;
         Destroy(slownessApplier);
         StopAllCoroutines();
+        readyToFight = false;
     }
 
     private void TotallyDead()
