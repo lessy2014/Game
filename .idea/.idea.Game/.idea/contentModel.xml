@@ -7,19 +7,12 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Attack_archer_script.cs" t="Include" />
-<<<<<<< HEAD
-        <e p="projectile.cs" t="Include" />
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <e p="projectile.cs" t="Include" />
-=======
-=======
         <e p="FlyingAttack.cs" t="Include" />
         <e p="FlyingFalling.cs" t="Include" />
         <e p="Jump.cs" t="Include" />
->>>>>>> newPlayer
->>>>>>> 5d713fdaa5ecd350b25d0d2a2693e1b0cbb664f3
+        <e p="MapEnd.cs" t="Include" />
+        <e p="MapStart.cs" t="Include" />
+        <e p="projectile.cs" t="Include" />
         <e p="Random_warrior.cs" t="Include" />
         <e p="RangeAttacker.cs" t="Include" />
         <e p="Roll.cs" t="Include" />
@@ -112,6 +105,7 @@
             <e p="public-license.txt" t="Include" />
           </e>
         </e>
+        <e p="Sun.cs" t="Include" />
         <e p="TransitionThree.cs" t="Include" />
       </e>
       <e p="Game.sln" t="IncludeFlat" />

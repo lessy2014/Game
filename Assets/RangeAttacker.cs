@@ -62,9 +62,9 @@ public class RangeAttacker : Entity
 
     private void Update()
     {
-        if (GetDistanceToPlayer() <= maxAttackRange && !isAttackOnCooldown && IsCanReachPlayer())
+        if (GetDxToPlayer() <= maxAttackRange && !isAttackOnCooldown && IsCanReachPlayer())
             Attack();
-        else if (GetDistanceToPlayer() > maxAttackRange || !IsCanReachPlayer())
+        else if (GetDxToPlayer() > maxAttackRange || !IsCanReachPlayer())
             MoveToPlayer();
     }
 
@@ -99,6 +99,11 @@ public class RangeAttacker : Entity
         isAttackOnCooldown = false;
     }
 
+    private double GetDxToPlayer()
+    {
+        return transform.position.x - playerTransform.position.x;
+    }
+
     private double GetDistanceToPlayer()
     {
         return Vector2.Distance(transform.position, playerTransform.position);
@@ -106,13 +111,13 @@ public class RangeAttacker : Entity
 
     private Vector2 CalculateProjectileVector()
     {
-        var distance = Math.Min(GetDistanceToPlayer(), maxAttackRange);
+        var distance = Math.Min(Math.Abs(GetDxToPlayer()), maxAttackRange);
         var angleSin = 4 * attackHeight /
                        Math.Sqrt(16 * attackHeight * attackHeight + distance * distance);
         var angleCos = Math.Sqrt(1 - angleSin * angleSin);
         var velocity = Math.Sqrt( 2 * attackHeight * 9.81 / (angleSin * angleSin));
 
-        if (transform.position.x > playerTransform.position.x)
+        if (GetDxToPlayer() > 0)
             return new Vector2(-(float) angleCos, (float) angleSin).normalized * (float) velocity;
         return new Vector2((float) angleCos, (float) angleSin).normalized * (float) velocity;
     }
@@ -121,11 +126,11 @@ public class RangeAttacker : Entity
     {
         var isReachGround = false;
         var isReachPlayer = false;
-        var distance = (float) Math.Min(GetDistanceToPlayer(), maxAttackRange);
+        var distance = (float) Math.Min(GetDxToPlayer(), maxAttackRange);
         var position = transform.position;
         var isPlayerRight = playerTransform.position.x > position.x;
         var previous = position;
-        for (var i = partitionStep; i < distance && !(isReachGround || isReachPlayer); i += partitionStep)
+        for (var i = partitionStep; i < maxAttackRange && !(isReachGround || isReachPlayer); i += partitionStep)
         {
             float parabolaValue;
             var x = i;
