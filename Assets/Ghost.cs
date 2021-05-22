@@ -9,6 +9,7 @@ public class Ghost : Entity
 {
     public int damage = 10;
     public float speed = 3;
+    public float startPosition;
     public Vector3 direction;
     public bool rushIsReady;
     public bool preparingRush;
@@ -50,6 +51,8 @@ public class Ghost : Entity
                     gameObject.transform.position += speed * Time.deltaTime * Vector3.right;
                 else
                     gameObject.transform.position += speed * Time.deltaTime * Vector3.left;
+                if (Math.Abs(startPosition - gameObject.transform.position.x) >= 10)
+                    Destroy(gameObject);
             }
         }
         else
