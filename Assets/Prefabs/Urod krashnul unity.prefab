@@ -212,7 +212,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   rukaUroda: {fileID: 0}
-  hp: 100
+  hp: 1000
+  hpToTeleport: 100
   damage: 10
   hyperArmor: 0
   speed: 2

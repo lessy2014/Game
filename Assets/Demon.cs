@@ -26,7 +26,9 @@ public class Demon : Entity
     private Animator animator;
     public GameObject rukaUroda;
 
-    public float hp = 100;
+    public float hp = 1000;
+    public static readonly int HpToTeleportConst = 100;
+    public float hpToTeleport = 100;
     public int damage = 10;
     public bool hyperArmor;
     [SerializeField] private float speed = 2;
@@ -204,6 +206,7 @@ public class Demon : Entity
     {
         preparingAttack = false;
         hp -= damage;
+        hpToTeleport -= damage;
         if (!hyperArmor)
             DoKnockBack();
 
@@ -216,8 +219,12 @@ public class Demon : Entity
     
     public void DoKnockBack()
     {
-        StartCoroutine(DisableMovement(2f));
-        animator.Play("Teleport");
+        if (hpToTeleport <= 0)
+        {
+            StartCoroutine(DisableMovement(2f));
+            animator.Play("Teleport");
+            hpToTeleport = HpToTeleportConst;
+        }
     }
     IEnumerator DisableMovement(float time)
     {
