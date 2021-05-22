@@ -157,7 +157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 55037446}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 139.62, y: 15.88, z: 300.03198}
+  m_LocalPosition: {x: -16.357086, y: 7.444371, z: 300.03198}
   m_LocalScale: {x: 1.6372343, y: 1.4774605, z: 1}
   m_Children:
   - {fileID: 649804781}
@@ -1281,7 +1281,7 @@ GameObject:
   - component: {fileID: 506029497}
   m_Layer: 0
   m_Name: Canvas
-  m_TagString: UserInterface
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1482,11 +1482,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-<<<<<<< HEAD
-  m_LocalPosition: {x: 197.109, y: 6.675, z: -10.42}
-=======
   m_LocalPosition: {x: 122.08, y: -2.64, z: -10.42}
->>>>>>> 95bf4b0810b3c54ae01aa9f45a19be03b0768f16
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2434,7 +2430,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690360146}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 141.138, y: 16.065, z: 300.03198}
+  m_LocalPosition: {x: 141.23, y: 15.69, z: 300.03198}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 396855706}
@@ -3157,7 +3153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144086833}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 142.36, y: 15.14, z: 300.03198}
+  m_LocalPosition: {x: -17.647087, y: 6.6243715, z: 300.03198}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 827400573}
