@@ -1376,7 +1376,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 502
-        y: 464
+        y: 468
         width: 16
         height: 16
       alignment: 0
@@ -1397,7 +1397,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 621
-        y: 465
+        y: 469
         width: 16
         height: 16
       alignment: 0
@@ -1418,7 +1418,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 637
-        y: 465
+        y: 469
         width: 16
         height: 16
       alignment: 0
@@ -1430,27 +1430,6 @@ TextureImporter:
       bones: []
       spriteID: 4a09ff1978d14edc0800000000000000
       internalID: -3610728533137059676
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ground_92
-      rect:
-        serializedVersion: 2
-        x: 653
-        y: 465
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 928e46391cd3093a0800000000000000
-      internalID: -6660755947270117335
       vertices: []
       indices: 
       edges: []
@@ -2237,7 +2216,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 518
-        y: 480
+        y: 468
         width: 16
         height: 16
       alignment: 0
@@ -2254,32 +2233,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ground_85
-      rect:
-        serializedVersion: 2
-        x: 621
-        y: 481
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b0a53e945e9ba9920800000000000000
-      internalID: 2997912896406772235
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: ground_86
       rect:
         serializedVersion: 2
         x: 486
-        y: 464
+        y: 468
         width: 16
         height: 16
       alignment: 0
@@ -2363,7 +2321,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 470
-        y: 448
+        y: 452
         width: 16
         height: 16
       alignment: 0
@@ -2384,7 +2342,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 486
-        y: 448
+        y: 452
         width: 16
         height: 16
       alignment: 0
@@ -2405,7 +2363,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 502
-        y: 448
+        y: 452
         width: 16
         height: 16
       alignment: 0
@@ -2422,32 +2380,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ground_106
-      rect:
-        serializedVersion: 2
-        x: 518
-        y: 448
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b569dcd04397a1790800000000000000
-      internalID: -7558595760111118757
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: ground_107
       rect:
         serializedVersion: 2
         x: 518
-        y: 464
+        y: 452
         width: 16
         height: 16
       alignment: 0
@@ -2468,7 +2405,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 621
-        y: 449
+        y: 453
         width: 16
         height: 16
       alignment: 0
@@ -2489,7 +2426,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 637
-        y: 449
+        y: 453
         width: 16
         height: 16
       alignment: 0
@@ -2510,7 +2447,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 653
-        y: 449
+        y: 453
         width: 16
         height: 16
       alignment: 0
@@ -2531,7 +2468,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 669
-        y: 449
+        y: 453
         width: 16
         height: 16
       alignment: 0
@@ -2720,7 +2657,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 486
-        y: 432
+        y: 436
         width: 16
         height: 16
       alignment: 0
@@ -2741,7 +2678,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 653
-        y: 433
+        y: 437
         width: 16
         height: 16
       alignment: 0
@@ -2762,7 +2699,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 669
-        y: 433
+        y: 437
         width: 16
         height: 16
       alignment: 0
@@ -2783,7 +2720,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 470
-        y: 432
+        y: 436
         width: 16
         height: 16
       alignment: 0
