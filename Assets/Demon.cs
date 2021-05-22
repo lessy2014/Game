@@ -14,6 +14,7 @@ public class Demon : Entity
 
     [SerializeField] private bool isGrounded;
     [SerializeField] private bool teleport;
+    private bool inCage;
     private bool gotDamage = false;
     public LayerMask layerGrounds;
     private float movementX;
@@ -92,19 +93,20 @@ public class Demon : Entity
         {
             yield return new WaitForSeconds(0.5f);
             distanceToPlayer = Math.Abs(player.transform.position.x - transform.position.x);
-            if (distanceToPlayer < 10 && distanceToPlayer > 5)
+            if (!inCage && !gotDamage)
             {
-                onSelf = false;
-                Attack(SimpleAttack);
-            }
-            else if (distanceToPlayer <= 5)
-            {
-                onSelf = true;
-                Attack(OnSelfAttack);
+                if (distanceToPlayer < 10 && distanceToPlayer > 5)
+                {
+                    onSelf = false;
+                    Attack(SimpleAttack);
+                }
+                else if (distanceToPlayer <= 5)
+                {
+                    onSelf = true;
+                    Attack(OnSelfAttack);
+                }
             }
         }
-        else
-            animator.Play("Teleport");
 
         preparingAttack = false;
     }
@@ -121,8 +123,12 @@ public class Demon : Entity
     private void Angry()
     {
         var delta = transform.position.x - player.transform.position.x;
-        if (Math.Abs(delta) > 10 && readyToAttack)
+        if (Math.Abs(delta) > 10 && readyToAttack && !inCage) 
+        {
+            // print("Teleportin from angry");
             animator.Play("Teleport");
+        }
+
         if ((delta < 2 && delta > 0)
             || (delta > -2 && delta < 0))
         {
@@ -144,13 +150,17 @@ public class Demon : Entity
         }
 
         if (teleport && isGrounded)
+        {
+            // print("Teleportion from ground");
             animator.Play("Teleport");
+        }
         else
             movementY = 0;
     }
 
     private void Telepot()
     {
+        inCage = true;
         StartCoroutine(DisableMovement(3f));
         gameObject.transform.position = cagePos.position;
         if (readyToFight)
@@ -166,13 +176,17 @@ public class Demon : Entity
             gameObject.transform.position = player.transform.position + 2 * Vector3.right + Vector3.up;
         animator.Play("TeleportTo");
     }
+
+    private void OnPosition()
+    {
+        inCage = false;
+    }
     private void Attack(int id)
     {
         if (readyToAttack)
         {
-
             readyToAttack = false;
-            StartCoroutine(AttackAnimation(id));
+            animator.Play(id);
             StartCoroutine(AttackCoolDown());
         }
     }
@@ -183,11 +197,6 @@ public class Demon : Entity
         {
             enemy.GetComponent<Player>().TakeDamage(damage);
         }
-    }
-    IEnumerator AttackAnimation(int id)
-    {
-        yield return new WaitForSeconds(0.1f);
-        animator.Play(id);
     }
 
     IEnumerator AttackCoolDown()
@@ -221,6 +230,7 @@ public class Demon : Entity
     {
         if (hpToTeleport <= 0)
         {
+            // print("Teleportion from knockback");
             StartCoroutine(DisableMovement(2f));
             animator.Play("Teleport");
             hpToTeleport = HpToTeleportConst;
