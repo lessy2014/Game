@@ -11,6 +11,7 @@
         <e p="Demon.cs" t="Include" />
         <e p="FlyingAttack.cs" t="Include" />
         <e p="FlyingFalling.cs" t="Include" />
+        <e p="Ghost.cs" t="Include" />
         <e p="Jump.cs" t="Include" />
         <e p="MapEnd.cs" t="Include" />
         <e p="MapStart.cs" t="Include" />
