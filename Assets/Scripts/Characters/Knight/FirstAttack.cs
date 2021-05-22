@@ -5,10 +5,12 @@ using UnityEngine;
 public class FirstAttack : StateMachineBehaviour
 {
     private static readonly int IsAttack = Animator.StringToHash("isAttack");
+    private static readonly int IsSecondAttack = Animator.StringToHash("isSecondAttack");
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetBool(IsAttack, false);
+        animator.SetBool(IsSecondAttack, true);
         Player.Instance.cleavePower = 1;
     }
 

@@ -13,6 +13,7 @@
         <e p="FlyingFalling.cs" t="Include" />
         <e p="Ghost.cs" t="Include" />
         <e p="Jump.cs" t="Include" />
+        <e p="MainMenuController.cs" t="Include" />
         <e p="MapEnd.cs" t="Include" />
         <e p="MapStart.cs" t="Include" />
         <e p="projectile.cs" t="Include" />
