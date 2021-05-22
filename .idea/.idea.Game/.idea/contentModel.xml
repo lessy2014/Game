@@ -16,6 +16,7 @@
         <e p="Random_warrior.cs" t="Include" />
         <e p="RangeAttacker.cs" t="Include" />
         <e p="Roll.cs" t="Include" />
+        <e p="Ruka_uroda.cs" t="Include" />
         <e p="runningBetweenAttacks.cs" t="Include" />
         <e p="runningBetweenAttacks2.cs" t="Include" />
         <e p="Scripts" t="Include">
@@ -59,7 +60,7 @@
           <e p="Platform.cs" t="Include" />
           <e p="Trigger.cs" t="Include" />
           <e p="Triggers" t="Include">
-            <e p="BasementZoomTrigger.cs" t="Include" />
+            <e p="ZoomTrigger.cs" t="Include" />
           </e>
         </e>
         <e p="SplashAttack.cs" t="Include" />

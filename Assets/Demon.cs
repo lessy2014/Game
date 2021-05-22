@@ -24,6 +24,7 @@ public class Demon : Entity
     private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    public GameObject rukaUroda;
 
     public float hp = 100;
     public int damage = 10;
@@ -191,6 +192,13 @@ public class Demon : Entity
     {
         yield return new WaitForSeconds(3f);
         readyToAttack = true;
+    }
+
+    private void SendRukuUroda()
+    {
+        Instantiate(rukaUroda, player.transform.position + 0.8f * Vector3.up + Vector3.right, Quaternion.Euler(0, 0, 0));
+        Instantiate(rukaUroda, player.transform.position + 0.8f * Vector3.up, Quaternion.Euler(0, 0, 0));
+        Instantiate(rukaUroda, player.transform.position + 0.8f * Vector3.up + 2 * Vector3.right, Quaternion.Euler(0, 0, 0));
     }
     public override void GetDamage(int damage)
     {
