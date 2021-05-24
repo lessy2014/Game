@@ -115,6 +115,7 @@ public class Player : MonoBehaviour
         animator.SetBool(IsJumping, rigidbody.velocity.y > 0 && !isGrounded);
         animator.SetBool(IsFalling, rigidbody.velocity.y < 0 && !isGrounded);
         swordInJump = animator.GetBool(IsSecondAttack);
+        isWithSword = animator.GetBool(IsSecondAttack);
         if (rageMode)
         {
             speed = 6;
@@ -267,15 +268,15 @@ public class Player : MonoBehaviour
         sound.PlayOneShot(jumpSound);
     }
 
-    private void WithSword()
-    {
-        isWithSword = true;
-    }
-
-    private void WithoutSword()
-    {
-        isWithSword = false;
-    }
+    // private void WithSword()
+    // {
+    //     isWithSword = true;
+    // }
+    //
+    // private void WithoutSword()
+    // {
+    //     isWithSword = false;
+    // }
 
     private void StopSound()
     {

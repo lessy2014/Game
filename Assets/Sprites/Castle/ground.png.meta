@@ -3581,7 +3581,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 466
-        y: 324
+        y: 312
         width: 16
         height: 16
       alignment: 0
@@ -3602,7 +3602,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 482
-        y: 324
+        y: 312
         width: 16
         height: 16
       alignment: 0
@@ -3748,8 +3748,8 @@ TextureImporter:
       name: ground_226
       rect:
         serializedVersion: 2
-        x: 433
-        y: 308
+        x: 434
+        y: 312
         width: 16
         height: 16
       alignment: 0
@@ -3769,8 +3769,8 @@ TextureImporter:
       name: ground_227
       rect:
         serializedVersion: 2
-        x: 449
-        y: 308
+        x: 450
+        y: 312
         width: 16
         height: 16
       alignment: 0
@@ -3791,7 +3791,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 466
-        y: 308
+        y: 296
         width: 16
         height: 16
       alignment: 0
@@ -3812,7 +3812,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 482
-        y: 308
+        y: 296
         width: 16
         height: 16
       alignment: 0
@@ -4105,8 +4105,8 @@ TextureImporter:
       name: ground_248
       rect:
         serializedVersion: 2
-        x: 433
-        y: 292
+        x: 434
+        y: 296
         width: 16
         height: 16
       alignment: 0
@@ -4126,8 +4126,8 @@ TextureImporter:
       name: ground_249
       rect:
         serializedVersion: 2
-        x: 449
-        y: 292
+        x: 450
+        y: 296
         width: 16
         height: 16
       alignment: 0
@@ -4139,27 +4139,6 @@ TextureImporter:
       bones: []
       spriteID: 42f1c797b33fc41a0800000000000000
       internalID: -6823811898606346460
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ground_250
-      rect:
-        serializedVersion: 2
-        x: 465
-        y: 292
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 62b613694458d8f90800000000000000
-      internalID: -6949752120338715866
       vertices: []
       indices: 
       edges: []
