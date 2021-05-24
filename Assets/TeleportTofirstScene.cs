@@ -8,7 +8,7 @@ public class TeleportTofirstScene : MonoBehaviour
 {
     public GameObject fill;
     private Image background;
-    private GameObject player;
+    public GameObject toMove;
 
     private bool isTriggered;
     private string sceneName = "NewScene1";
@@ -17,7 +17,6 @@ public class TeleportTofirstScene : MonoBehaviour
     {
         fill.SetActive(false);
         background = fill.GetComponent<Image>();
-        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -53,8 +52,8 @@ public class TeleportTofirstScene : MonoBehaviour
         {
             yield return null;
         }
-        SceneManager.MoveGameObjectToScene(player, SceneManager.GetSceneByName(sceneName));
-        player.transform.position = new Vector3(0, 1);
+        SceneManager.MoveGameObjectToScene(toMove, SceneManager.GetSceneByName(sceneName));
+        toMove.transform.position = new Vector3(0, 10);
         SceneManager.UnloadSceneAsync(currentScene);
     }
 }
