@@ -139,7 +139,8 @@ public class RangeAttacker : Entity
             else
             {
                 x *= -1;
-                parabolaValue = -1 * attackHeight / (2 * distance) * x * (x + distance);
+                // parabolaValue = -1 * attackHeight / (2 * distance) * x * (x + distance);
+                parabolaValue = -9;
             }
 
             var current = new Vector3(x + position.x, parabolaValue + position.y);
@@ -157,5 +158,14 @@ public class RangeAttacker : Entity
         }
 
         return isReachPlayer;
+    }
+    
+    private float CalculateDistanceToShoot()
+    {
+        var dx = Math.Abs(transform.position.x - playerTransform.position.x);
+        var dy = playerTransform.position.y - transform.position.y;
+        var distance = -attackHeight * dx * dx
+                       / (2 * dy - attackHeight * dx);
+        return Math.Min(distance, maxAttackRange);
     }
 }
