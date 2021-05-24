@@ -29,6 +29,7 @@ public class TeleportTofirstScene : MonoBehaviour
     
     private IEnumerator Blackout()
     {
+        print("here");
         fill.SetActive(true);
         var backgroundColor = background.color;
         while (background.color.a < 1)
@@ -45,6 +46,7 @@ public class TeleportTofirstScene : MonoBehaviour
 
     private IEnumerator LoadScene()
     {
+        fill.SetActive(false);
         var currentScene = SceneManager.GetActiveScene();
         var asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         
