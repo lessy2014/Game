@@ -1,0 +1,26 @@
+<<<<<<< HEAD
+
+Contact:
+
+ Twitter: @Clembod
+
+ Instagram: @Clembod
+
+ email: Clembod@gmail.com
+
+ Itch.io: https://clembod.itch.io
+
+=======
+
+Contact:
+
+ Twitter: @Clembod
+
+ Instagram: @Clembod
+
+ email: Clembod@gmail.com
+
+ Itch.io: https://clembod.itch.io
+
+>>>>>>> 8834fa4f86e067adf44cef2c1eaedde86fac18bb
+ Artstation: https://www.artstation.com/clembod
