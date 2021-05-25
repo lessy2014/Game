@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 This pack - Huntress 2 is Creative Commons Zero (CC-0).
+=======
+This pack - Huntress 2 is Creative Commons Zero (CC-0).
+>>>>>>> 8834fa4f86e067adf44cef2c1eaedde86fac18bb
 Can be used in commercial and non-commercial projects.

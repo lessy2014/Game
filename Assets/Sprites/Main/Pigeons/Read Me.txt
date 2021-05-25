@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Hello!
 I sincerely hope you enjoy this asset pack! 
 
@@ -6,4 +7,14 @@ for your game in a similair style, or
 want to show off what you've made, please email me at lightoutonfifth@gmail.com
 
 Sincerely,
+=======
+Hello!
+I sincerely hope you enjoy this asset pack! 
+
+If you have questions about any of this art, would like to request more art
+for your game in a similair style, or 
+want to show off what you've made, please email me at lightoutonfifth@gmail.com
+
+Sincerely,
+>>>>>>> 8834fa4f86e067adf44cef2c1eaedde86fac18bb
 Savannah

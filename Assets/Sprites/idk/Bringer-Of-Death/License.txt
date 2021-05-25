@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 You can use this asset for personal and commercial purpose,
 you can modify this object to your needs.
 Credit is not required but would be appreciated
 
+=======
+You can use this asset for personal and commercial purpose,
+you can modify this object to your needs.
+Credit is not required but would be appreciated
+
+>>>>>>> 8834fa4f86e067adf44cef2c1eaedde86fac18bb
 You can NOT redistribute or resell it.

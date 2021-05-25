@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 Artwork created by Szadi art.
 
 License for Everyone. 
 
 Public domain and free to use, personal or commercial. Credit is not required but appreciated. You can edit, but not sell the asset pack.
 
+=======
+Artwork created by Szadi art.
+
+License for Everyone. 
+
+Public domain and free to use, personal or commercial. Credit is not required but appreciated. You can edit, but not sell the asset pack.
+
+>>>>>>> 8834fa4f86e067adf44cef2c1eaedde86fac18bb
