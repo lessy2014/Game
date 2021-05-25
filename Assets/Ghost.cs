@@ -20,6 +20,7 @@ public class Ghost : Entity
     {
         angry = Random.Range(0, 2) == 1;
         movingRight = Random.Range(0, 2) == 1;
+        startPosition = gameObject.transform.position.x;
     }
 
     public override void GetDamage(int damage)

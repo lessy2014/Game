@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   speed: 5
+  startPosition: 0
   direction: {x: 0, y: 0, z: 0}
   rushIsReady: 0
   preparingRush: 0

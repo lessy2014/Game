@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 1797702007}
   - component: {fileID: 1797702006}
   - component: {fileID: 1797702005}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TileMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
