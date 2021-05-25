@@ -9,6 +9,7 @@
         <e p="Attack_archer_script.cs" t="Include" />
         <e p="Block_and_parry.cs" t="Include" />
         <e p="Demon.cs" t="Include" />
+        <e p="DialogTrigger.cs" t="Include" />
         <e p="FlyingAttack.cs" t="Include" />
         <e p="FlyingFalling.cs" t="Include" />
         <e p="Ghost.cs" t="Include" />
@@ -119,6 +120,7 @@
         </e>
         <e p="Sun.cs" t="Include" />
         <e p="TeleportTofirstScene.cs" t="Include" />
+        <e p="TextDisplay.cs" t="Include" />
         <e p="Tornado.cs" t="Include" />
         <e p="TornadoReset.cs" t="Include" />
         <e p="TransitionThree.cs" t="Include" />
