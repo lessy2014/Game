@@ -54,7 +54,6 @@ public class Player : MonoBehaviour
     public InputMaster input;
     public GameObject splash;
     public GameObject tornado;
-    public HPFountain fountain;
     
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
     private static readonly int IsDead = Animator.StringToHash("isDead");
@@ -131,7 +130,6 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        canFillBottle = collider.IsTouching(fountain?.GetComponent<Collider2D>());
         animator.SetBool(IsJumping, rigidbody.velocity.y > 0 && !isGrounded);
         animator.SetBool(IsFalling, rigidbody.velocity.y < 0 && !isGrounded);
         swordInJump = animator.GetBool(IsSecondAttack);
@@ -150,6 +148,7 @@ public class Player : MonoBehaviour
             }
         }
     }
+
 
     private void FixedUpdate()
     {

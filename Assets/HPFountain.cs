@@ -19,7 +19,13 @@ public class HPFountain : MonoBehaviour
     {
         if (!other.CompareTag("Player"))
             return;
-        Player.Instance.fountain = this;
+        Player.Instance.canFillBottle = true;
+    }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Player"))
+            return;
+        Player.Instance.canFillBottle = false;
     }
 }
