@@ -27,10 +27,10 @@ public class TrashMonstersSpawner : MonoBehaviour
         if (canSpawn)
         {
             canSpawn = false;
-            StartCoroutine(SpawnGhosts());
+            StartCoroutine(SpawnMonsters());
         }
     }
-    private IEnumerator SpawnGhosts()
+    private IEnumerator SpawnMonsters()
     {
         for (var i = 0; i < 10; i++)
         {

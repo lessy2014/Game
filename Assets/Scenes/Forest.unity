@@ -553,6 +553,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -6.18
       objectReference: {fileID: 0}
+    - target: {fileID: 5757470212572073064, guid: d605c651304d68d408e016833cd5b41d, type: 3}
+      propertyPath: warrior
+      value: 
+      objectReference: {fileID: 4329510418260177022, guid: ee95f5572a30cf146a19647af31ef78d, type: 3}
+    - target: {fileID: 5757470212572073071, guid: d605c651304d68d408e016833cd5b41d, type: 3}
+      propertyPath: count
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5757470212572073071, guid: d605c651304d68d408e016833cd5b41d, type: 3}
+      propertyPath: warrior
+      value: 
+      objectReference: {fileID: 4329510418260177022, guid: ee95f5572a30cf146a19647af31ef78d, type: 3}
     - target: {fileID: 5757470212854254304, guid: d605c651304d68d408e016833cd5b41d, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[24].m_Data
       value: 
