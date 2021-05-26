@@ -8,6 +8,7 @@
       <e p="Assets" t="Include">
         <e p="Attack_archer_script.cs" t="Include" />
         <e p="Block_and_parry.cs" t="Include" />
+        <e p="BossSpawnTrigger.cs" t="Include" />
         <e p="Demon.cs" t="Include" />
         <e p="DialogTrigger.cs" t="Include" />
         <e p="FlyingAttack.cs" t="Include" />
@@ -68,6 +69,7 @@
           <e p="Trigger.cs" t="Include" />
           <e p="Triggers" t="Include">
             <e p="DestroyTrigger.cs" t="Include" />
+            <e p="FollowTrigger.cs" t="Include" />
             <e p="ZoomTrigger.cs" t="Include" />
           </e>
         </e>
