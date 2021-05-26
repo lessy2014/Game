@@ -117,7 +117,8 @@ public class Player : MonoBehaviour
             if (isHpBottleFull)
             {
                 isHpBottleFull = false;
-                health = (health + 75) % 100;
+                health = health + 75;
+                health = health > 100 ? 100 : health;
             }
         };
         input.Player.FillHPBottle.performed += context =>
