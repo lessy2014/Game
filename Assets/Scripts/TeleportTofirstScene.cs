@@ -46,7 +46,6 @@ public class TeleportTofirstScene : MonoBehaviour
 
     private IEnumerator LoadScene()
     {
-        fill.SetActive(false);
         var currentScene = SceneManager.GetActiveScene();
         var asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         
@@ -56,6 +55,7 @@ public class TeleportTofirstScene : MonoBehaviour
         }
         SceneManager.MoveGameObjectToScene(toMove, SceneManager.GetSceneByName(sceneName));
         toMove.transform.position = new Vector3(0, 10);
+        fill.SetActive(false);
         SceneManager.UnloadSceneAsync(currentScene);
     }
 }

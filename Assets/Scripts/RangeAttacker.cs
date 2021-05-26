@@ -126,7 +126,7 @@ public class RangeAttacker : Entity
     {
         var isReachGround = false;
         var isReachPlayer = false;
-        var distance = (float) Math.Min(GetDxToPlayer(), maxAttackRange);
+        var distance = CalculateShotDistance();
         var position = transform.position;
         var isPlayerRight = playerTransform.position.x > position.x;
         var previous = position;
@@ -135,12 +135,11 @@ public class RangeAttacker : Entity
             float parabolaValue;
             var x = i;
             if (isPlayerRight)
-                parabolaValue = -1 * attackHeight / (2 * distance) * x * (x - distance);
+                parabolaValue = -1 * (8 * attackHeight / distance) / (2 * distance) * x * (x - distance);
             else
             {
                 x *= -1;
-                // parabolaValue = -1 * attackHeight / (2 * distance) * x * (x + distance);
-                parabolaValue = -9;
+                parabolaValue = -1 * (8 * attackHeight / distance) / (2 * distance) * x * (x + distance);
             }
 
             var current = new Vector3(x + position.x, parabolaValue + position.y);
@@ -160,7 +159,7 @@ public class RangeAttacker : Entity
         return isReachPlayer;
     }
     
-    private float CalculateDistanceToShoot()
+    private float CalculateShotDistance()
     {
         var dx = Math.Abs(transform.position.x - playerTransform.position.x);
         var dy = playerTransform.position.y - transform.position.y;

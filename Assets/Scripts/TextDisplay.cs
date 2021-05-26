@@ -6,18 +6,19 @@ using UnityEngine;
 public class TextDisplay : MonoBehaviour
 {
     public string text;
-    public int fontSize = 50;
+    public int fontSize = 40;
     public int labelWidth = 300;
     public float duration;
     public float outlineWidth = 2;
     public Font textFont;
-    public Color textColor;
-    public Color outlineColor;
+    public Color textColor = Color.white;
+    public Color outlineColor = Color.black;
     
     private GUIStyle style;
 
     private void Start()
     {
+        textFont ??= Resources.Load<Font>("Fonts/CoolFont");
         style = new GUIStyle
         {
             fontSize = fontSize,
