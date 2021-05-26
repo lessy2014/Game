@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     private bool canRoll = true;
     public bool rageMode;
     public bool specialAttack;
+    public bool isHpBottleFull;
+    public bool canFillBottle;
     // public bool isJumping;
     public bool isCelled;
     // private bool crouching;
@@ -52,6 +54,7 @@ public class Player : MonoBehaviour
     public InputMaster input;
     public GameObject splash;
     public GameObject tornado;
+    public HPFountain fountain;
     
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
     private static readonly int IsDead = Animator.StringToHash("isDead");
@@ -109,9 +112,25 @@ public class Player : MonoBehaviour
             if (isGrounded && canBlock)
                 Block();
         };
+        input.Player.UseHPBottle.performed += context =>
+        {
+            if (isHpBottleFull)
+            {
+                isHpBottleFull = false;
+                health = (health + 75) % 100;
+            }
+        };
+        input.Player.FillHPBottle.performed += context =>
+        {
+            if (canFillBottle)
+            {
+                isHpBottleFull = true;
+            }
+        };
     }
     void Update()
     {
+        canFillBottle = collider.IsTouching(fountain?.GetComponent<Collider2D>());
         animator.SetBool(IsJumping, rigidbody.velocity.y > 0 && !isGrounded);
         animator.SetBool(IsFalling, rigidbody.velocity.y < 0 && !isGrounded);
         swordInJump = animator.GetBool(IsSecondAttack);

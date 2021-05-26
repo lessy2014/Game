@@ -10,6 +10,7 @@ TagManager:
   - Platform
   - Koldun
   - Archer
+  - fountain
   layers:
   - Default
   - TransparentFX
