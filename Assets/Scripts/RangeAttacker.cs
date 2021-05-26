@@ -126,7 +126,7 @@ public class RangeAttacker : Entity
     {
         var isReachGround = false;
         var isReachPlayer = false;
-        var distance = CalculateDistanceToShoot();
+        var distance = CalculateShotDistance();
         var position = transform.position;
         var isPlayerRight = playerTransform.position.x > position.x;
         var previous = position;
@@ -159,7 +159,7 @@ public class RangeAttacker : Entity
         return isReachPlayer;
     }
     
-    private float CalculateDistanceToShoot()
+    private float CalculateShotDistance()
     {
         var dx = Math.Abs(transform.position.x - playerTransform.position.x);
         var dy = playerTransform.position.y - transform.position.y;
