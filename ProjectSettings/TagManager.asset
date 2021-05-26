@@ -8,6 +8,8 @@ TagManager:
   - End
   - UserInterface
   - Platform
+  - Koldun
+  - Archer
   layers:
   - Default
   - TransparentFX

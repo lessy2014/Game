@@ -27,15 +27,17 @@ public class Koldun : Support
     
     public override void FixedUpdate()
     {
-        State();
-        rigidbody.velocity = new Vector2( movementX, rigidbody.velocity.y);
-        animator.SetBool(IsRunning, movementX != 0);
-        if (isGrounded && jumped)
+        if (isFollowPlayer)
         {
-            animator.SetBool(IsJumping, false);
-            jumped = false;
+            State();
+            rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
+            animator.SetBool(IsRunning, movementX != 0);
+            if (isGrounded && jumped)
+            {
+                animator.SetBool(IsJumping, false);
+                jumped = false;
+            }
         }
-
     }
 
     public void Update()

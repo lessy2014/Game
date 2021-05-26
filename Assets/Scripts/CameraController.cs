@@ -23,6 +23,7 @@ public class CameraController : MonoBehaviour
 
     private void FollowPlayer()
     {
+        player.OnEnable();
         if (player.isWithSword && camera.orthographicSize < 5)
         {
             position.y += 2;
@@ -50,6 +51,7 @@ public class CameraController : MonoBehaviour
 
     private void FocusOnObject(GameObject gameObject)
     {
+        player.OnDisable();
         transform.position = Vector3.Lerp(this.transform.position, objectInFocus.transform.position, Time.deltaTime);
         var distance = this.transform.position.magnitude - objectInFocus.transform.position.magnitude;
         if (distance*distance < 0.2)
