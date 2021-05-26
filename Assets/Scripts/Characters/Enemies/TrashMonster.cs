@@ -224,7 +224,8 @@ public class TrashMonster : Entity
     public void DoKnockBack()
     {
         StartCoroutine(DisableMovement(1f));
-        rigidbody.velocity = new Vector2(0, 5f);
+        
+        rigidbody.velocity = new Vector2(0, Random.Range(3f, 5f));
     }
     IEnumerator DisableMovement(float time)
     {

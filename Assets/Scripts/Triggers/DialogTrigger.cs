@@ -16,6 +16,5 @@ public class DialogTrigger : MonoBehaviour
         a.outlineColor = Color.black;
         a.textColor = Color.white;
         a.duration = 5;
-        
     }
 }

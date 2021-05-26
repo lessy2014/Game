@@ -34,51 +34,11 @@ namespace Assets.Scripts
                 if (rayInfo.collider.gameObject.layer == 14 && Ghost_king_boss.Instance.solidSnake ||
                     rayInfo.collider.gameObject.layer != 14)
                     Attack(distanceToEnemy);
-
-            // var entity = FindObjectsOfType<Entity>();
-            // var tr = new List<Transform>();
-            // if (entity.Length != 0)
-            // {
-            //     foreach (var i in entity)
-            //         tr.Add(i.transform);
-            //     var closesetEnemyTransform = GetClosestEnemy(tr.ToArray());
-            //     if (closesetEnemyTransform != null)
-            //     {
-            //         distanceToEnemy = closesetEnemyTransform.position - transform.position;
-            //         closestEnemy = distanceToEnemy.magnitude;
-            //         if (distanceToEnemy.magnitude < 20 && !isAtacking)
-            //         {
-            //             var wallInfo = Physics2D.Raycast(transform.position, distanceToEnemy,
-            //                 distanceToEnemy.magnitude, rayTo);
-            //             if (wallInfo.collider != null && wallInfo.collider.gameObject.layer != 8)
-            //             {
-            //                 if (wallInfo.collider.gameObject.layer == 14 && Ghost_king_boss.Instance.solidSnake || wallInfo.collider.gameObject.layer != 14)
-            //                     Attack(distanceToEnemy);
-            //             }
-            //         }
-            //     }
-            // }
         }
         void OnDrawGizmosSelected()
         {
             Gizmos.DrawRay(transform.position, distanceToEnemy);
         }
-        // public Transform GetClosestEnemy(Transform[] enemies)
-        // {
-        //     Transform tMin = null;
-        //     float minDist = Mathf.Infinity;
-        //     Vector3 currentPos = transform.position;
-        //     foreach (Transform t in enemies)
-        //     {
-        //         float dist = Vector3.Distance(t.position, currentPos);
-        //         if (dist < minDist && isRight == (t.position - currentPos).x > 0)  
-        //         {
-        //             tMin = t;
-        //             minDist = dist;
-        //         }
-        //     }
-        //     return tMin;
-        // }
         public void Attack(Vector3 enemyDirection)
         {
             animator.Play("Attack_archer");
