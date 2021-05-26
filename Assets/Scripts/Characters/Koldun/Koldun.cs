@@ -18,7 +18,7 @@ public class Koldun : Support
     public AudioSource sound;
     public AudioClip fireballSound;
 
-    public override void Awake()
+    public void Awake()
     {
         GetComponents();
         sound = gameObject.GetComponentInChildren<AudioSource>();
