@@ -10,6 +10,7 @@ public class WarriorSpawnTrigger : MonoBehaviour
     public Random_warrior warrior;
     public bool canSpawn = true;
     public int count;
+    private bool isTriggered;
     void Start()
     {
 
@@ -23,8 +24,9 @@ public class WarriorSpawnTrigger : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (!other.CompareTag("Player"))
+        if (!other.CompareTag("Player") || isTriggered)
             return;
+        isTriggered = true;
         if (canSpawn)
         {
             canSpawn = false;

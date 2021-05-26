@@ -171,7 +171,7 @@ MonoBehaviour:
   layerGrounds:
     serializedVersion: 2
     m_Bits: 256
-  hp: 100
+  hp: 350
   speed: 2
   patrolRadius: 7
   movingRight: 0
