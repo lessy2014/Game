@@ -73,7 +73,7 @@ public class Support : MonoBehaviour
             State();
             animator.SetBool(IsJumping, movementY > 0 && !isGrounded);
             animator.SetBool(IsFalling, movementY < 0 && !isGrounded);
-            animator.SetBool(IsRunning, movementX != 0 && previousPositionX - transform.position.x != 0 || previousPositionY - transform.position.y != 0);
+            animator.SetBool(IsRunning, movementX != 0 && previousPositionX - transform.position.x != 0 || previousPositionY - transform.position.y > 0.2);
             rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
             previousPositionX = this.transform.position.x;
             previousPositionY = this.transform.position.y;
