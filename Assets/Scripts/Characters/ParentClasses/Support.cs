@@ -173,7 +173,7 @@ public class Support : MonoBehaviour
     virtual public void jump()
     {
         // animator.SetBool(IsRunning, false);
-        if (isGrounded)
+        if (isGrounded && isFollowPlayer)
         {
             idle();
             // spriteRenderer.flipX = !isRight;

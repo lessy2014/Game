@@ -11,7 +11,7 @@ public class TeleportTofirstScene : MonoBehaviour
     public GameObject toMove;
 
     private bool isTriggered;
-    private string sceneName = "NewScene1";
+    private string sceneName = "SampleScene";
     
     private void Awake()
     {

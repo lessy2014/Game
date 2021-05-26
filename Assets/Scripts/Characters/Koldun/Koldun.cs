@@ -72,7 +72,7 @@ public class Koldun : Support
     {
         rigidbody.velocity = new Vector2(0, movementY);
         movementX = 0;
-        animator.SetBool(IsJumping, true);
+        animator.SetBool(IsJumping, isFollowPlayer);
         jumped = true;
     }
 
@@ -80,7 +80,7 @@ public class Koldun : Support
     {
         rigidbody.velocity = new Vector2(0, movementY);
         movementX = 0;
-        animator.SetBool(IsJumping, true);
+        animator.SetBool(IsJumping, isFollowPlayer);
         jumped = true;
     }
 
