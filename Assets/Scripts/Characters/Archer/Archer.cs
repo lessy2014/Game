@@ -11,15 +11,15 @@ using System.Linq;
 namespace Assets.Scripts
 {
 
-    class Archer: Support
+    class Archer : Support
     {
         public bool isAtacking;
         private Vector3 distanceToEnemy;
         public Transform arrowPos;
         public GameObject arrow;
-        private LayerMask rayIgnore = (1 << 12) | (1 << 11) | (1 << 10) | (1 << 0);
-        private LayerMask rayTo = (1 << 8) | (1 << 9);
-        public float closestEnemy;
+        private LayerMask rayTo = (1 << 8) | (1 << 9) | (1 << 14);
+
+    public float closestEnemy;
         public override void Awake()
         {
             GetComponents();
@@ -42,13 +42,10 @@ namespace Assets.Scripts
                     {
                         var wallInfo = Physics2D.Raycast(transform.position, distanceToEnemy,
                             distanceToEnemy.magnitude, rayTo);
-                        if (wallInfo.collider != null)
+                        if (wallInfo.collider != null && wallInfo.collider.gameObject.layer != 8)
                         {
-                            // print(wallInfo.collider.gameObject.layer);
-                            if (wallInfo.collider.gameObject.layer == 9)
-                            {
+                            if (wallInfo.collider.gameObject.layer == 14 && Ghost_king_boss.Instance.solidSnake || wallInfo.collider.gameObject.layer != 14)
                                 Attack(distanceToEnemy);
-                            }
                         }
                     }
                 }
@@ -76,7 +73,7 @@ namespace Assets.Scripts
         }
         public void Attack(Vector3 enemyDirection)
         {
-            // animator.Play("Attack_archer");
+            animator.Play("Attack_archer");
             isAtacking = true;
             StartCoroutine(AttackCooldown());
         }

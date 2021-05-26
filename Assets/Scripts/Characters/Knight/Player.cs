@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     public Transform supportPosition;
     
     public LayerMask layerGrounds;
-    public LayerMask enemies;
+    private readonly LayerMask enemies = (1 << 9) | (1 << 14);
     public LayerMask destructibleObjects;
     public HealthBar healthBar;
     public HealthBar rageBar;

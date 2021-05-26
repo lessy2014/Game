@@ -25,7 +25,7 @@ public class magic_ball_script : MonoBehaviour
         rigidbody.velocity = (transform.up + transform.right) * speed;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == 8 && other.gameObject.tag != "Platform" || other.gameObject.layer == 9 || other.gameObject.layer == 14)
         {
@@ -34,6 +34,16 @@ public class magic_ball_script : MonoBehaviour
             animator.Play("EXPLOSION");
         }
     }
+
+    // private void OnCollisionEnter2D(Collision2D other)
+    // {
+    //     if (other.gameObject.layer == 8 && other.gameObject.tag != "Platform" || other.gameObject.layer == 9 || other.gameObject.layer == 14)
+    //     {
+    //         speed = 0;
+    //         DealDamage();
+    //         animator.Play("EXPLOSION");
+    //     }
+    // }
 
     private void DealDamage()
     {

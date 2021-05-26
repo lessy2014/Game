@@ -10,7 +10,7 @@ public class SplashAttack : MonoBehaviour
     public float cleavePower = 5f;
     // public CapsuleCollider2D Collider2D;
     public Animator animator;
-    public LayerMask enemies;
+    private readonly LayerMask enemies = (1 << 9) | (1 << 14);
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
