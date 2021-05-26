@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     public bool rolling;
     public bool blocked;
     public bool isWithSword;
-    private bool canBlock = true;
+    public bool canBlock = true;
     private bool canRoll = true;
     public bool rageMode;
     public bool specialAttack;

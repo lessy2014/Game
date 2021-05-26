@@ -42,7 +42,7 @@ public class Koldun : Support
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !isAtacking)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !isAtacking && isFollowPlayer)
         {
             isAtacking = true;
             StartCoroutine(AttackCooldown());
