@@ -12,6 +12,7 @@ public class Support : MonoBehaviour
     public bool isInJump;
     public bool isDead;
     public bool isGrounded;
+    public bool isFollowPlayer;
     public float speed = 4f;
     public float jumpForce = 7;
     private float distanceToPlayer;
@@ -67,13 +68,16 @@ public class Support : MonoBehaviour
 
     public virtual void FixedUpdate()
     {
-        State();
-        animator.SetBool(IsJumping, movementY>0 && !isGrounded);
-        animator.SetBool(IsFalling, movementY<0 && !isGrounded);
-        animator.SetBool(IsRunning, movementX != 0 && previousPositionX - transform.position.x != 0 || previousPositionY - transform.position.y != 0);
-        rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
-        previousPositionX = this.transform.position.x;
-        previousPositionY = this.transform.position.y;
+        if (isFollowPlayer)
+        {
+            State();
+            animator.SetBool(IsJumping, movementY > 0 && !isGrounded);
+            animator.SetBool(IsFalling, movementY < 0 && !isGrounded);
+            animator.SetBool(IsRunning, movementX != 0 && previousPositionX - transform.position.x != 0 || previousPositionY - transform.position.y != 0);
+            rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
+            previousPositionX = this.transform.position.x;
+            previousPositionY = this.transform.position.y;
+        }
     }
 
 
@@ -106,7 +110,7 @@ public class Support : MonoBehaviour
         }
         else if (!isGrounded)
             AirControl();
-        else if (realDistanceToPlayer > 0.5)
+        else if (realDistanceToPlayer > 0.5 && this.tag =="Koldun" || realDistanceToPlayer > 4 && this.tag == "Archer")
         {
             movingToPlayer(playerPosition);
         }
