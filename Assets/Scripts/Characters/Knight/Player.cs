@@ -327,8 +327,6 @@ public class Player : MonoBehaviour
         input.Player.Attack.Disable();
         input.Player.Jump.Disable();
         input.Player.Roll.Disable();
-        OnDisable();
-        // exception.Enable();
     }
     
     

@@ -42,13 +42,6 @@ public class CameraController : MonoBehaviour
 
     }
 
-    IEnumerable FocusTimer(int time)
-    {
-        yield return new WaitForSeconds(time);
-        print("end");
-        isFocused = false;
-        Player.Instance.OnEnable();
-    }
 
     private void FocusOnObject(GameObject gameObject)
     {
@@ -56,7 +49,10 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.Lerp(this.transform.position, objectInFocus.transform.position, Time.deltaTime);
         var distance = this.transform.position.magnitude - objectInFocus.transform.position.magnitude;
         if (distance*distance < 0.2)
+        {
+            Player.Instance.OnEnable();
             isFocused = false;
+        }
         position.z = -10f;
     }
 
