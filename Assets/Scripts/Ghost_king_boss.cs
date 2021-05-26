@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using System.Linq;
 
 public class Ghost_king_boss : Entity
 {
@@ -22,6 +23,9 @@ public class Ghost_king_boss : Entity
     public int rushModifier = 9;
     public GameObject ghost;
     public GameObject magic;
+    public GameObject PrisonDoor;
+    public GameObject PrisonFocusPoint;
+    public CameraController camera;
 
     private BoxCollider2D collider;
     private Animator animator;
@@ -34,6 +38,9 @@ public class Ghost_king_boss : Entity
     
     private void GetComponents()
     {
+        camera = FindObjectOfType<CameraController>();
+        PrisonFocusPoint = GameObject.FindGameObjectsWithTag("PrisonFocus").FirstOrDefault();
+        PrisonDoor = GameObject.FindGameObjectsWithTag("PrisonDoor").FirstOrDefault();
         Instance = this;
         animator = gameObject.GetComponentInChildren<Animator>();
         collider = gameObject.GetComponent<BoxCollider2D>();
@@ -155,13 +162,24 @@ public class Ghost_king_boss : Entity
         if (solidSnake)
             hp -= damage;
         else
-            hp += damage;
+            hp = hp+damage > 1000? 1000: hp+damage;
         if (hp < 0)
         {
             animator.Play("Death");
             collider.enabled = false;
-            Destroy(this);
+            Destroy(PrisonDoor);
+            StartCoroutine(FocusOnPrison());
+            
+            
         }
+    }
+
+    IEnumerator FocusOnPrison()
+    {
+        yield return new WaitForSeconds(3f);
+        camera.objectInFocus = PrisonFocusPoint;
+        camera.isFocused = true;
+        Destroy(this.gameObject);
     }
 
     private IEnumerator ActionCooldown(float length)

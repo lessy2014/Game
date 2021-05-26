@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3686649165267167534
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3686649165267167535}
-  m_Layer: 9
-  m_Name: Kletka dlya uroda
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3686649165267167535
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3686649165267167534}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -132.86, y: 4.44, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3686649165695052137}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3686649165387594735
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +123,6 @@ Transform:
   - {fileID: 3686649166570540311}
   - {fileID: 3686649166721692169}
   - {fileID: 3686649165688845499}
-  - {fileID: 3686649165267167535}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -261,10 +230,11 @@ MonoBehaviour:
   groundRadius: 0
   groundCheck: {fileID: 3686649166721692169}
   rightWallCheck: {fileID: 3686649165387594736}
-  cagePos: {fileID: 3686649165267167535}
+  cagePos: {fileID: 0}
   slownessApplier: {fileID: 3686649165688845497}
   isGrounded: 0
   teleport: 0
+  inCage: 0
   layerGrounds:
     serializedVersion: 2
     m_Bits: 256

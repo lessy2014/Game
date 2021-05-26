@@ -113,16 +113,13 @@ public class Player : MonoBehaviour
         };
         input.Player.UseHPBottle.performed += context =>
         {
-            if (isHpBottleFull)
+            if (isHpBottleFull && health != 100)
             {
                 isHpBottleFull = false;
                 health = health + 75;
                 health = health > 100 ? 100 : health;
             }
-        };
-        input.Player.FillHPBottle.performed += context =>
-        {
-            if (canFillBottle)
+            else if(canFillBottle)
             {
                 isHpBottleFull = true;
             }

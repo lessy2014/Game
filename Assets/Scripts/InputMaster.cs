@@ -73,14 +73,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
-                },
-                {
-                    ""name"": ""FillHPBottle"",
-                    ""type"": ""Button"",
-                    ""id"": ""a030ba16-0aff-4a52-943c-bad563d3f8c7"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -193,17 +185,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""UseHPBottle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""80a232e5-f30b-4ffe-9083-03bb1ee38e1f"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""FillHPBottle"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -219,7 +200,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
         m_Player_UseHPBottle = m_Player.FindAction("UseHPBottle", throwIfNotFound: true);
-        m_Player_FillHPBottle = m_Player.FindAction("FillHPBottle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -276,7 +256,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Roll;
     private readonly InputAction m_Player_Block;
     private readonly InputAction m_Player_UseHPBottle;
-    private readonly InputAction m_Player_FillHPBottle;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -288,7 +267,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Roll => m_Wrapper.m_Player_Roll;
         public InputAction @Block => m_Wrapper.m_Player_Block;
         public InputAction @UseHPBottle => m_Wrapper.m_Player_UseHPBottle;
-        public InputAction @FillHPBottle => m_Wrapper.m_Player_FillHPBottle;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -319,9 +297,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @UseHPBottle.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseHPBottle;
                 @UseHPBottle.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseHPBottle;
                 @UseHPBottle.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseHPBottle;
-                @FillHPBottle.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFillHPBottle;
-                @FillHPBottle.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFillHPBottle;
-                @FillHPBottle.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFillHPBottle;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -347,9 +322,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @UseHPBottle.started += instance.OnUseHPBottle;
                 @UseHPBottle.performed += instance.OnUseHPBottle;
                 @UseHPBottle.canceled += instance.OnUseHPBottle;
-                @FillHPBottle.started += instance.OnFillHPBottle;
-                @FillHPBottle.performed += instance.OnFillHPBottle;
-                @FillHPBottle.canceled += instance.OnFillHPBottle;
             }
         }
     }
@@ -363,6 +335,5 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnRoll(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
         void OnUseHPBottle(InputAction.CallbackContext context);
-        void OnFillHPBottle(InputAction.CallbackContext context);
     }
 }

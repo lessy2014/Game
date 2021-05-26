@@ -11,6 +11,8 @@ TagManager:
   - Koldun
   - Archer
   - fountain
+  - PrisonFocus
+  - PrisonDoor
   layers:
   - Default
   - TransparentFX

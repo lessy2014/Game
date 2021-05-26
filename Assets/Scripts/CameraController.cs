@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
     }
 
 
-    private void FocusOnObject(GameObject gameObject)
+    public void FocusOnObject(GameObject gameObject)
     {
         player.OnDisable();
         transform.position = Vector3.Lerp(this.transform.position, objectInFocus.transform.position, Time.deltaTime);
