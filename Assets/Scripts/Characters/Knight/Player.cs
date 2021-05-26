@@ -152,6 +152,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        healthBar.SetHealth(health);
         movementY = rigidbody.velocity.y;
         rigidbody.velocity = new Vector2(movementX * speed, movementY);
         // print(rigidbody.velocity.x);
