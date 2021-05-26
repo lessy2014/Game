@@ -42,6 +42,6 @@ public class MainMenuController : MonoBehaviour
             background.color = backgroundColor;
             yield return new WaitForSeconds(0.1f);
         }
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Forest");
     }
 }
