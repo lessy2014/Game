@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour
 
     private void FollowPlayer()
     {
-        player.OnEnable();
+        // player.OnEnable();
         if (player.isWithSword && camera.orthographicSize < 5)
         {
             position.y += 2;
@@ -47,6 +47,7 @@ public class CameraController : MonoBehaviour
         yield return new WaitForSeconds(time);
         print("end");
         isFocused = false;
+        Player.Instance.OnEnable();
     }
 
     private void FocusOnObject(GameObject gameObject)
