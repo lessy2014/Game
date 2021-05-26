@@ -27,7 +27,7 @@ public class magic_ball_script : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == 8 || other.gameObject.layer == 9 || other.gameObject.layer == 14)
+        if (other.gameObject.layer == 8 && other.gameObject.tag != "Platform" || other.gameObject.layer == 9 || other.gameObject.layer == 14)
         {
             speed = 0;
             DealDamage();
