@@ -15,6 +15,7 @@
         <e p="Ghost.cs" t="Include" />
         <e p="Ghost_king_boss.cs" t="Include" />
         <e p="Jump.cs" t="Include" />
+        <e p="Magic.cs" t="Include" />
         <e p="MainMenuController.cs" t="Include" />
         <e p="MapEnd.cs" t="Include" />
         <e p="MapStart.cs" t="Include" />
@@ -73,50 +74,54 @@
         <e p="SplashAttack.cs" t="Include" />
         <e p="SplashSelfDestruction.cs" t="Include" />
         <e p="Sprites" t="Include">
-          <e p="BgTemple" t="Include">
-            <e p="_license.txt" t="Include" />
-          </e>
-          <e p="Bringer-Of-Death" t="Include">
-            <e p="Contact.txt" t="Include" />
-            <e p="License.txt" t="Include" />
-          </e>
-          <e p="Castle" t="Include">
-            <e p="about.txt" t="Include" />
-          </e>
-          <e p="Castle2" t="Include">
-            <e p="public-license.txt" t="Include" />
-          </e>
-          <e p="DarkForest" t="Include">
-            <e p="about.txt" t="Include" />
-          </e>
-          <e p="DarkTileset" t="Include">
-            <e p="public-license.txt" t="Include" />
-          </e>
-          <e p="Forest" t="Include">
-            <e p="Free Pixel Art Forest" t="Include">
+          <e p="idk" t="Include">
+            <e p="BgTemple" t="Include">
+              <e p="_license.txt" t="Include" />
+            </e>
+            <e p="Bringer-Of-Death" t="Include">
               <e p="Contact.txt" t="Include" />
-              <e p="readme.txt" t="Include" />
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="DarkForest" t="Include">
+              <e p="about.txt" t="Include" />
+            </e>
+            <e p="DarkTileset" t="Include">
+              <e p="public-license.txt" t="Include" />
+            </e>
+            <e p="free01 King ghost" t="Include">
+              <e p="Documentation" t="Include">
+                <e p="Instructions and notes.txt" t="Include" />
+              </e>
+            </e>
+            <e p="Houses" t="Include">
+              <e p="public-license.txt" t="Include" />
             </e>
           </e>
-          <e p="free01 King ghost" t="Include">
-            <e p="Documentation" t="Include">
-              <e p="Instructions and notes.txt" t="Include" />
+          <e p="Main" t="Include">
+            <e p="Castle" t="Include">
+              <e p="about.txt" t="Include" />
             </e>
-          </e>
-          <e p="Houses" t="Include">
-            <e p="public-license.txt" t="Include" />
-          </e>
-          <e p="Huntress 2" t="Include">
-            <e p="License.txt" t="Include" />
-          </e>
-          <e p="Martial Hero" t="Include">
-            <e p="License.txt" t="Include" />
-          </e>
-          <e p="Pigeons" t="Include">
-            <e p="Read Me.txt" t="Include" />
-          </e>
-          <e p="SET1" t="Include">
-            <e p="public-license.txt" t="Include" />
+            <e p="Castle2" t="Include">
+              <e p="public-license.txt" t="Include" />
+            </e>
+            <e p="Forest" t="Include">
+              <e p="Free Pixel Art Forest" t="Include">
+                <e p="Contact.txt" t="Include" />
+                <e p="readme.txt" t="Include" />
+              </e>
+            </e>
+            <e p="Huntress 2" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="Martial Hero" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="Pigeons" t="Include">
+              <e p="Read Me.txt" t="Include" />
+            </e>
+            <e p="SET1" t="Include">
+              <e p="public-license.txt" t="Include" />
+            </e>
           </e>
         </e>
         <e p="Sun.cs" t="Include" />

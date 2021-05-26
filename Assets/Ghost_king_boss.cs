@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Ghost_king_boss : Entity
 {
@@ -17,10 +19,13 @@ public class Ghost_king_boss : Entity
     public int attackCounter;
     public int rushCounter = 0;
     public int rushConstant = 3;
+    public int rushModifier = 9;
     public GameObject ghost;
-    
+    public GameObject magic;
+
     private BoxCollider2D collider;
     private Animator animator;
+    public static Ghost_king_boss Instance;
 
     void Start()
     {
@@ -29,6 +34,7 @@ public class Ghost_king_boss : Entity
     
     private void GetComponents()
     {
+        Instance = this;
         animator = gameObject.GetComponentInChildren<Animator>();
         collider = gameObject.GetComponent<BoxCollider2D>();
     }
@@ -63,7 +69,7 @@ public class Ghost_king_boss : Entity
             speed = 0;
             canChangeAction = false;
             direction = Player.Instance.transform.position - gameObject.transform.position;
-            direction += 10 * direction.normalized; 
+            direction += rushModifier  * direction.normalized; 
             SetDirection(direction.x);
             animator.Play("ToRushTransition");
             attackCounter++;
@@ -72,7 +78,7 @@ public class Ghost_king_boss : Entity
         {
             speed = 0;
             direction = Player.Instance.transform.position - gameObject.transform.position;
-            direction += 10 * direction.normalized; 
+            direction += rushModifier * direction.normalized; 
             SetDirection(direction.x);
             animator.Play("ToRushTransition");
         }
@@ -97,6 +103,13 @@ public class Ghost_king_boss : Entity
         }
 
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == 10)
+            Player.Instance.TakeDamage(damage);
+    }
+    
 
     void RangeAttack()
     {
@@ -158,12 +171,13 @@ public class Ghost_king_boss : Entity
         cameToThrone = false;
         canChangeAction = true;
     }
+    
 
-    private IEnumerator SpawnGhosts(float quantity)
+    private IEnumerator SpawnObject(GameObject obj, int quantity)
     {
         for (var i = 0; i < quantity; i++)
         {
-            Instantiate(ghost, gameObject.transform.position, Quaternion.identity);
+            Instantiate(obj, gameObject.transform.position, Quaternion.identity);
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -176,6 +190,9 @@ public class Ghost_king_boss : Entity
             gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 
+    private IEnumerator SpawnGhosts(int quantity) => SpawnObject(ghost, quantity);
+
+    private IEnumerator CastMagic(int quantity) => SpawnObject(magic, quantity);
     private void Solid() => solidSnake = true;
 
     private void Ghost() => solidSnake = false;

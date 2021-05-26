@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 606777140828197213}
   - component: {fileID: 606777140828197210}
   - component: {fileID: 606777140828197211}
-  m_Layer: 9
+  m_Layer: 14
   m_Name: Ghost king
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.02142334, y: -0.5203811}
@@ -137,7 +137,9 @@ MonoBehaviour:
   attackCounter: 0
   rushCounter: 0
   rushConstant: 3
+  rushModifier: 9
   ghost: {fileID: 6430700287713243273, guid: 8a83306494f13fb46b3cb5c0e7f4e2bc, type: 3}
+  magic: {fileID: 8014176931657463513, guid: c6d807228b3f4be428e49cd726d1b041, type: 3}
 --- !u!95 &606777140828197211
 Animator:
   serializedVersion: 3

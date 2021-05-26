@@ -17,7 +17,7 @@ public class arrow_fly : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == 9)
+        if (other.gameObject.layer == 9 || other.gameObject.layer == 14)
         {
             other.gameObject.GetComponent<Entity>().GetDamage(50);
             Destroy(gameObject);
