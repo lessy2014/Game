@@ -267,20 +267,10 @@ public class Player : MonoBehaviour
     {
         sound.PlayOneShot(jumpSound);
     }
-
-    // private void WithSword()
-    // {
-    //     isWithSword = true;
-    // }
-    //
-    // private void WithoutSword()
-    // {
-    //     isWithSword = false;
-    // }
+    
 
     private void StopSound()
     {
-        // print("stop");
         sound.Stop();
     }
 
@@ -316,12 +306,12 @@ public class Player : MonoBehaviour
         {
             health -= damage;
             healthBar.SetHealth(health);
-            if (health <= 0)
+            if (health <= 0 && !isDead)
             {
                 isDead = true;
                 animator.SetBool(IsDead, true);
                 animator.Play("Death");
-                input.Disable();
+                OnDisable();
             }
         }
         else

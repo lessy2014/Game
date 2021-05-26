@@ -15,7 +15,7 @@ public class Support : MonoBehaviour
     public bool isFollowPlayer;
     public float speed = 4f;
     public float jumpForce = 7;
-    private float distanceToPlayer;
+    public float realDistanceToPlayerLimit;
     public float realDistanceToPlayer;
     public float groundRadius = 1;
     
@@ -40,7 +40,7 @@ public class Support : MonoBehaviour
     public Transform rightFall;
     public Transform leftFall;
     public Transform groundCheck;
-    public static Support Instance;
+    private static float realDistanceToPlayerNext = 0.5f;
 
 
     // private static readonly int IsIdle = Animator.StringToHash("isIdling");
@@ -51,13 +51,13 @@ public class Support : MonoBehaviour
     // private static readonly int IsDying = Animator.StringToHash("isDying");
     public static readonly int IsAttack = Animator.StringToHash("isAttack");
     // Start is called before the first frame update
-    public virtual void Awake()
-    {
-        Instance = this;
-        // throw new NotImplementedException();
-        // input = new InputMaster();
-        // BindMovement();
-    }
+    // public virtual void Awake()
+    // {
+    //     Instance = this;
+    //     // throw new NotImplementedException();
+    //     // input = new InputMaster();
+    //     // BindMovement();
+    // }
     public void GetComponents()
     {
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
@@ -87,7 +87,7 @@ public class Support : MonoBehaviour
         isDead = player.GetComponent<Player>().isDead;
         movementY = rigidbody.velocity.y;
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(groundCheck.position, groundRadius, destructibleObjects);
-        distanceToPlayer = playerPosition.position.x - transform.position.x;
+        // distanceToPlayer = playerPosition.position.x - transform.position.x;
         // if (distanceToPlayer > 0)
         //     isRight = true;
         // else
@@ -110,7 +110,7 @@ public class Support : MonoBehaviour
         }
         else if (!isGrounded)
             AirControl();
-        else if (realDistanceToPlayer > 0.5 && this.tag =="Koldun" || realDistanceToPlayer > 4 && this.tag == "Archer")
+        else if (realDistanceToPlayer > realDistanceToPlayerLimit)
         {
             movingToPlayer(playerPosition);
         }
@@ -190,6 +190,12 @@ public class Support : MonoBehaviour
     public void TakeDamage(int damage)
     {
         
+    }
+
+    public void SetToPlayerPosition()
+    {
+        realDistanceToPlayerLimit = realDistanceToPlayerNext;
+        realDistanceToPlayerNext += 2f;
     }
 
 }

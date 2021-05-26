@@ -22,8 +22,10 @@ public class FollowTrigger : MonoBehaviour
     {
         if (!other.CompareTag("Player") || isTriggered)
             return;
+        
         isTriggered = true;
         follower.isFollowPlayer = true;
+        follower.SetToPlayerPosition();
 
     }
 }

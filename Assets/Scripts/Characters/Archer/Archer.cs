@@ -18,9 +18,10 @@ namespace Assets.Scripts
         public Transform arrowPos;
         public GameObject arrow;
         private LayerMask rayTo = (1 << 8) | (1 << 9) | (1 << 14);
+        public Archer Instance;
 
     public float closestEnemy;
-        public override void Awake()
+        public void Awake()
         {
             GetComponents();
             Instance = this;
