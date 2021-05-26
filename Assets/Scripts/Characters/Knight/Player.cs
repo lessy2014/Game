@@ -228,7 +228,7 @@ public class Player : MonoBehaviour
         {
             if (i > enemiesOnHit.Length-1) break;
             enemiesOnHit[i].GetComponent<Entity>().GetDamage(50);
-            rage += 50;
+            rage += 5;
             rageBar.SetHealth(rage);
             if (rage >= 100)
             {
