@@ -6,17 +6,21 @@ using UnityEngine.PlayerLoop;
 
 public class Koldun : Support
 {
-    public GameObject hat;
     public GameObject magicBall;
-    public bool jumped;
-    public static Koldun Instance;
-    public bool isAtacking;
-    public Transform hatPos;
-    public Transform magicBallPos;
-    public float offset = - 45;
-    public Quaternion rotation;
     public AudioSource sound;
     public AudioClip fireballSound;
+    
+    public Transform hatPos;
+    public Transform magicBallPos;
+    
+    public bool jumped;
+    public bool isAtacking;
+    
+    public float offset = - 45;
+    
+    public Quaternion rotation;
+    
+    public static Koldun Instance;
 
     public void Awake()
     {
@@ -28,28 +32,23 @@ public class Koldun : Support
     
     public override void FixedUpdate()
     {
-        if (isFollowPlayer)
-        {
-            State();
-            rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
-            animator.SetBool(IsRunning, movementX != 0);
-            if (isGrounded && jumped)
-            {
-                animator.SetBool(IsJumping, false);
-                jumped = false;
-            }
-        }
+        if (!isFollowPlayer) return;
+        State();
+        rigidbody.velocity = new Vector2(movementX, rigidbody.velocity.y);
+        animator.SetBool(IsRunning, movementX != 0);
+        
+        if (!isGrounded || !jumped) return;
+        animator.SetBool(IsJumping, false);
+        jumped = false;
     }
 
     public void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.F)) && !isAtacking && isFollowPlayer)
-        {
-            isAtacking = true;
-            StartCoroutine(AttackCooldown());
-            var difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - magicBallPos.position;
-            Attack(difference);
-        }
+        if ((!Input.GetKeyDown(KeyCode.F) && !Input.GetKeyDown(KeyCode.F)) || isAtacking || !isFollowPlayer) return;
+        isAtacking = true;
+        StartCoroutine(AttackCooldown());
+        var difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - magicBallPos.position;
+        Attack(difference);
     }
 
     public void Attack(Vector3 direction)
