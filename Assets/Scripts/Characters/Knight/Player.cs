@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
     public float shortJumpForce = 3;
     public float jumpForce = 7;
     public float groundRadius = 0.2f;
-    public float attackRange = 2f;
+    public float attackRange = 3f;
+    public float maxHealth = 200;
     public float health = 200;
     public float rage = 0;
     public float rageMoidfier = 1;
@@ -120,7 +121,7 @@ public class Player : MonoBehaviour
             {
                 isHpBottleFull = false;
                 health = health + 75;
-                health = health > 100 ? 100 : health;
+                health = health > maxHealth ? maxHealth : health;
             }
             else if(canFillBottle)
             {
