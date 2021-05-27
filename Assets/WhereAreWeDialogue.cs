@@ -10,7 +10,6 @@ public class WhereAreWeDialogue : DialogTrigger
         mage = Koldun.Instance.gameObject;
         player = Player.Instance.gameObject;
         archer = Archer.Instance.gameObject;
-        yield return new WaitForSeconds(3f);
         DisplayText(player, "Вот, зараза", 3);
         DisplayText(archer, "Мага, где мы?", 3);
         yield return new WaitForSeconds(3f);
@@ -29,7 +28,7 @@ public class WhereAreWeDialogue : DialogTrigger
         yield return new WaitForSeconds(2f);
         CameraController.Instance.objectInFocus = zoomObject;
         CameraController.Instance.isFocused = true;
-        while(CameraController.Instance.camera.orthographicSize < 10)
+        while(CameraController.Instance.camera.orthographicSize < 15)
             CameraController.Instance.camera.orthographicSize += Time.deltaTime;
         yield return new WaitForSeconds(5f);
         DisplayText(mage, "По-видимому, нам его не обойти...",3 );

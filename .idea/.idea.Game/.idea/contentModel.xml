@@ -16,6 +16,7 @@
         <e p="MageDialogue.cs" t="Include" />
         <e p="Magic.cs" t="Include" />
         <e p="MeetArcherDialogue.cs" t="Include" />
+        <e p="PortalToCastle.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="CameraController.cs" t="Include" />
           <e p="Characters" t="Include">
@@ -27,6 +28,9 @@
             <e p="Enemies" t="Include">
               <e p="Demon.cs" t="Include" />
               <e p="TrashMonster.cs" t="Include" />
+            </e>
+            <e p="Forg" t="Include">
+              <e p="Frog.cs" t="Include" />
             </e>
             <e p="Knight" t="Include">
               <e p="AnimatorBoolFalse.cs" t="Include" />
@@ -93,6 +97,7 @@
             <e p="ZoomTrigger.cs" t="Include" />
           </e>
         </e>
+        <e p="SpawnForg.cs" t="Include" />
         <e p="Sprites" t="Include">
           <e p="idk" t="Include">
             <e p="BgTemple" t="Include">
