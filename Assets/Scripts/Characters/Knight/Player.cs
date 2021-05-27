@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     public int damage = 50;
+    public int cleavePower = 3;
     public float speed = 4;
     public float shortJumpForce = 3;
     public float jumpForce = 7;
@@ -18,8 +19,7 @@ public class Player : MonoBehaviour
     public float health = 200;
     public float rage = 0;
     public float rageMoidfier = 1;
-    public int cleavePower = 3;
-    
+
     public float movementX;
     public float movementY;
 
@@ -31,16 +31,14 @@ public class Player : MonoBehaviour
     public bool blocked;
     public bool isWithSword;
     public bool canBlock = true;
-    private bool canRoll = true;
     public bool rageMode;
     public bool specialAttack;
     public bool isHpBottleFull;
     public bool canFillBottle;
     public bool gameOver;
     public bool victory;
-    // public bool isJumping;
     public bool isCelled;
-    // private bool crouching;
+    private bool canRoll = true;
 
     public Transform groundCheck;
     public Transform cellCheck;
@@ -48,20 +46,19 @@ public class Player : MonoBehaviour
     public Transform supportPosition;
     
     public LayerMask layerGrounds;
-    private readonly LayerMask enemies = (1 << 9) | (1 << 14);
     public LayerMask destructibleObjects;
     public HealthBar healthBar;
     public HealthBar rageBar;
     public CapsuleCollider2D collider;
-    private new Rigidbody2D rigidbody;
-    private Animator animator;
-    public InputMaster input;
     public GameObject splash;
     public GameObject tornado;
+    private Animator animator;
+    private InputMaster input;
+    private new Rigidbody2D rigidbody;
+    private readonly LayerMask enemies = (1 << 9) | (1 << 14);
     
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
     private static readonly int IsDead = Animator.StringToHash("isDead");
-    // private static readonly int IsCrouching = Animator.StringToHash("isCrouching");
     private static readonly int IsFalling = Animator.StringToHash("isFalling");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
     private static readonly int IsAttack = Animator.StringToHash("isAttack");
@@ -80,11 +77,10 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Difficult = PlayerPrefs.GetInt("difficult");
-        Debug.Log(Difficult);
         GetComponents();
+        BindMovement();
         Instance = this;
         input = new InputMaster();
-        BindMovement();
         healthBar.SetMaxHealth(health);
         rageBar.SetMaxHealth(100);
         rageBar.SetHealth(0);
@@ -106,7 +102,6 @@ public class Player : MonoBehaviour
             if (isGrounded)
                 Jump();
         };
-        // input.Player.Jump.canceled += context => CancelJump();
         input.Player.Attack.performed += context => Attack();
         input.Player.Roll.performed += context =>
         {
@@ -138,19 +133,17 @@ public class Player : MonoBehaviour
         animator.SetBool(IsFalling, rigidbody.velocity.y < 0 && !isGrounded);
         swordInJump = animator.GetBool(IsSecondAttack);
         isWithSword = animator.GetBool(IsSecondAttack);
-        if (rageMode)
-        {
-            speed = 6;
-            animator.speed = 1.5f;
-            rage -= 30 * Time.deltaTime;
-            rageBar.SetHealth(rage);
-            if (rage <= 0)
-            {
-                animator.speed = 1;
-                speed = 4;
-                rageMode = false;
-            }
-        }
+        
+        if (!rageMode) return;
+        speed = 6;
+        animator.speed = 1.5f;
+        rage -= 30 * Time.deltaTime;
+        rageBar.SetHealth(rage);
+        
+        if (!(rage <= 0)) return;
+        animator.speed = 1;
+        speed = 4;
+        rageMode = false;
     }
 
 
@@ -159,11 +152,10 @@ public class Player : MonoBehaviour
         healthBar.SetHealth(health);
         movementY = rigidbody.velocity.y;
         rigidbody.velocity = new Vector2(movementX * speed, movementY);
-        // print(rigidbody.velocity.x);
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(groundCheck.position, groundRadius, destructibleObjects);
-        // if (isGrounded && isJumping)
-        //     isJumping = false;
-        isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds) || Physics2D.OverlapCircle(cellCheck.position, groundRadius, destructibleObjects);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, layerGrounds)
+                     || Physics2D.OverlapCircle(groundCheck.position, groundRadius, destructibleObjects);
+        isCelled = Physics2D.OverlapCircle(cellCheck.position, groundRadius, layerGrounds)
+                   || Physics2D.OverlapCircle(cellCheck.position, groundRadius, destructibleObjects);
     }
 
     private void Move(float axis)
@@ -191,8 +183,6 @@ public class Player : MonoBehaviour
         rigidbody.velocity = new Vector2(movementX, jumpForce);
         FindObjectOfType<Support>().jump();
         animator.Play("NEW jump");
-        // swordInJump = false;
-        // isJumping = true;
     }
 
     private void Block()
@@ -230,18 +220,16 @@ public class Player : MonoBehaviour
         if (rageMode && !specialAttack || Difficult == 0 && !specialAttack)
             CreateSplash();
         var enemiesOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, enemies);
-        var objOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, destructibleObjects);
         for (var i = 0; i < cleavePower; i++)
         {
             if (i > enemiesOnHit.Length-1) break;
             enemiesOnHit[i].GetComponent<Entity>().GetDamage(damage);
             rage += damage * rageMoidfier;
             rageBar.SetHealth(rage);
-            if (rage >= 100)
-            {
-                rageMode = true;
-                rage = 100;
-            }
+            
+            if (!(rage >= 100)) continue;
+            rageMode = true;
+            rage = 100;
         }
     }
 
@@ -342,13 +330,12 @@ public class Player : MonoBehaviour
         {
             health -= damage;
             healthBar.SetHealth(health);
-            if (health <= 0 && !isDead)
-            {
-                isDead = true;
-                animator.SetBool(IsDead, true);
-                animator.Play("Death");
-                OnDisable();
-            }
+            
+            if (!(health <= 0) || isDead) return;
+            isDead = true;
+            animator.SetBool(IsDead, true);
+            animator.Play("Death");
+            OnDisable();
         }
         else
             blocked = false;
@@ -358,13 +345,13 @@ public class Player : MonoBehaviour
     {
         DisableInputException(input.Player.Move);
     }
+    
     public void DisableInputException(InputAction exception)
     {
         input.Player.Attack.Disable();
         input.Player.Jump.Disable();
         input.Player.Roll.Disable();
     }
-    
     
     public void OnEnable() => input.Enable();
 
