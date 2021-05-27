@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts;
 using UnityEngine;
 
 public class OpenPortalJabi : DialogTrigger
@@ -14,14 +13,14 @@ public class OpenPortalJabi : DialogTrigger
         archer = Archer.Instance.gameObject;
         mage = Koldun.Instance.gameObject;
         player = Player.Instance.gameObject;
-        DisplayText(player, "Вейгар, куда ты нас закинул?", 2);
+        DisplayText(player, "Р’РµР№РіР°СЂ, РєСѓРґР° С‚С‹ РЅР°СЃ Р·Р°РєРёРЅСѓР»?", 2);
         yield return new WaitForSeconds(2f);
-        DisplayText(mage, "Мы в карак-ыбаж. \n Здесь 40 часов в сутки с неба падают форги", 2);
+        DisplayText(mage, "РњС‹ РІ РєР°СЂР°Рє-С‹Р±Р°Р¶. \n Р—РґРµСЃСЊ 40 С‡Р°СЃРѕРІ РІ СЃСѓС‚РєРё СЃ РЅРµР±Р° РїР°РґР°СЋС‚ С„РѕСЂРіРё", 2);
         yield return new WaitForSeconds(2f);
-        DisplayText(player, "Форги", 2);
-        DisplayText(archer, "40 часов?", 2);
+        DisplayText(player, "Р¤РѕСЂРіРё", 2);
+        DisplayText(archer, "40 С‡Р°СЃРѕРІ?", 2);
         yield return new WaitForSeconds(2f);
-        DisplayText(mage, "Мы на другой планете... \n А, неважно идём вперёд, пока я не восстановлю силы для телепортации", 4);
+        DisplayText(mage, "РњС‹ РЅР° РґСЂСѓРіРѕР№ РїР»Р°РЅРµС‚Рµ... \n Рђ, РЅРµРІР°Р¶РЅРѕ РёРґС‘Рј РІРїРµСЂС‘Рґ, РїРѕРєР° СЏ РЅРµ РІРѕСЃСЃС‚Р°РЅРѕРІР»СЋ СЃРёР»С‹ РґР»СЏ С‚РµР»РµРїРѕСЂС‚Р°С†РёРё", 4);
         
 
     }

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\User\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\User\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_Game.1749400220.00" t="ExcludeRecursive" />
-    <e p="F:\Leonid Programmes\Unity\Projects\TheGame\Game" t="IncludeRecursive">
+    <e p="C:\Users\platina\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\platina\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_Game.-1976217036.00" t="ExcludeRecursive" />
+    <e p="C:\Users\platina\Desktop\prog\c#\Game" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="AfterKillDialogue.cs" t="Include" />
         <e p="BossSpawnTrigger.cs" t="Include" />
         <e p="DemonTrigger.cs" t="Include" />
         <e p="FallenTreeDialogue.cs" t="Include" />
+        <e p="GameOver.cs" t="Include" />
         <e p="GhostSpawnTrigger.cs" t="Include" />
         <e p="HpBottle.cs" t="Include" />
         <e p="HPFountain.cs" t="Include" />
         <e p="MageDialogue.cs" t="Include" />
         <e p="Magic.cs" t="Include" />
         <e p="MeetArcherDialogue.cs" t="Include" />
-        <e p="PortalToCastle.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="CameraController.cs" t="Include" />
           <e p="Characters" t="Include">
@@ -28,9 +28,6 @@
             <e p="Enemies" t="Include">
               <e p="Demon.cs" t="Include" />
               <e p="TrashMonster.cs" t="Include" />
-            </e>
-            <e p="Forg" t="Include">
-              <e p="Frog.cs" t="Include" />
             </e>
             <e p="Knight" t="Include">
               <e p="AnimatorBoolFalse.cs" t="Include" />
@@ -97,7 +94,6 @@
             <e p="ZoomTrigger.cs" t="Include" />
           </e>
         </e>
-        <e p="SpawnForg.cs" t="Include" />
         <e p="Sprites" t="Include">
           <e p="idk" t="Include">
             <e p="BgTemple" t="Include">
@@ -149,12 +145,11 @@
             </e>
           </e>
         </e>
-<<<<<<< HEAD
         <e p="Tests" t="Include">
           <e p="NewTestScript.cs" t="Include" />
           <e p="Tests.asmdef" t="Include" />
+          <e p="TrashDealsDamage.cs" t="Include" />
         </e>
-=======
         <e p="TownDialogue.cs" t="Include" />
         <e p="Trap.cs" t="Include" />
         <e p="TrashMonsterDialogue.cs" t="Include" />
@@ -162,7 +157,6 @@
         <e p="TrashMonstersSpawner.cs" t="Include" />
         <e p="WhereAreWeDialogue.cs" t="Include" />
         <e p="YamaDialogue.cs" t="Include" />
->>>>>>> 3b33c670787fe9c4e37fd2de960daff38c5456e3
       </e>
       <e p="DocCodeExamples.csproj" t="IncludeRecursive" />
       <e p="Game.sln" t="IncludeFlat" />
