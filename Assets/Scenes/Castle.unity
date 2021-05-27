@@ -2418,6 +2418,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4203870086354812028, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203870086354812028, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 394.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203870086354812028, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000012649
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203870086354812028, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00047112
+      objectReference: {fileID: 0}
     - target: {fileID: 4203870087540214505, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
       propertyPath: m_Name
       value: FriendlyCharacters
@@ -2465,6 +2481,14 @@ PrefabInstance:
     - target: {fileID: 4203870087540214506, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203870087629726779, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
+      propertyPath: health
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203870087629726779, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
+      propertyPath: maxHealth
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4203870087732689457, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
       propertyPath: m_AnchorMax.x

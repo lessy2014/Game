@@ -875,8 +875,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 98.2, y: -9.3961}
-  m_SizeDelta: {x: 996.4, y: 458}
+  m_AnchoredPosition: {x: -0.0000076294, y: 0.00047112}
+  m_SizeDelta: {x: 800, y: 394.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4203870086354812016
 Canvas:
@@ -2623,16 +2623,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50
+  cleavePower: 3
   speed: 4
   shortJumpForce: 3
   jumpForce: 7
   groundRadius: 0.2
   attackRange: 1
-  maxHealth: 200
-  health: 250
+  maxHealth: 300
+  health: 300
   rage: 0
   rageMoidfier: 1
-  cleavePower: 3
   movementX: 0
   movementY: 0
   swordInJump: 0
