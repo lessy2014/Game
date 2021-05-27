@@ -65,6 +65,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""UseHPBottle"",
+                    ""type"": ""Button"",
+                    ""id"": ""d5b03b0d-9b07-4d1a-9c75-c4dcc2977dc6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -166,6 +174,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Block"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f40c7844-7cb3-4fb3-a00a-1b485d0471ff"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseHPBottle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -180,6 +199,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
+        m_Player_UseHPBottle = m_Player.FindAction("UseHPBottle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -235,6 +255,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Roll;
     private readonly InputAction m_Player_Block;
+    private readonly InputAction m_Player_UseHPBottle;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -245,6 +266,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Roll => m_Wrapper.m_Player_Roll;
         public InputAction @Block => m_Wrapper.m_Player_Block;
+        public InputAction @UseHPBottle => m_Wrapper.m_Player_UseHPBottle;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -272,6 +294,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Block.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
                 @Block.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
                 @Block.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
+                @UseHPBottle.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseHPBottle;
+                @UseHPBottle.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseHPBottle;
+                @UseHPBottle.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseHPBottle;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -294,6 +319,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Block.started += instance.OnBlock;
                 @Block.performed += instance.OnBlock;
                 @Block.canceled += instance.OnBlock;
+                @UseHPBottle.started += instance.OnUseHPBottle;
+                @UseHPBottle.performed += instance.OnUseHPBottle;
+                @UseHPBottle.canceled += instance.OnUseHPBottle;
             }
         }
     }
@@ -306,5 +334,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
+        void OnUseHPBottle(InputAction.CallbackContext context);
     }
 }

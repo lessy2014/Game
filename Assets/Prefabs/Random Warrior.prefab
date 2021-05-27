@@ -348,7 +348,7 @@ MonoBehaviour:
   layerGrounds:
     serializedVersion: 2
     m_Bits: 256
-  hp: 50
+  hp: 200
   damage: 10
   hyperArmor: 0
   speed: 5

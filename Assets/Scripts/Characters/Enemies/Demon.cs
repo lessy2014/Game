@@ -14,7 +14,7 @@ public class Demon : Entity
 
     [SerializeField] private bool isGrounded;
     [SerializeField] private bool teleport;
-    private bool inCage;
+    public bool inCage;
     private bool gotDamage = false;
     public LayerMask layerGrounds;
     private float movementX;
@@ -233,7 +233,17 @@ public class Demon : Entity
             // print("Teleportion from knockback");
             StartCoroutine(DisableMovement(2f));
             animator.Play("Teleport");
-            hpToTeleport = HpToTeleportConst;
+            StartCoroutine(RestoreHP());
+        }
+    }
+
+    IEnumerator RestoreHP()
+    {
+        for(var i = 0; i < 10; i++)
+        {
+            yield return new WaitForSeconds(2f);
+            if(hpToTeleport < 100)
+            hpToTeleport += 10;
         }
     }
     IEnumerator DisableMovement(float time)

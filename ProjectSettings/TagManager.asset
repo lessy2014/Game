@@ -10,6 +10,9 @@ TagManager:
   - Platform
   - Koldun
   - Archer
+  - fountain
+  - PrisonFocus
+  - PrisonDoor
   layers:
   - Default
   - TransparentFX
