@@ -1,17 +1,22 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{8fc1fbdd-9693-3731-9cfe-deb2cdb74636}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{DDFBC18F-9396-3137-9CFE-DEB2CDB74636}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8fc1fbdd-9693-3731-9cfe-deb2cdb74636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8fc1fbdd-9693-3731-9cfe-deb2cdb74636}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDFBC18F-9396-3137-9CFE-DEB2CDB74636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDFBC18F-9396-3137-9CFE-DEB2CDB74636}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D74BF39C-25C3-4184-BDDF-15904AFC2F3E}
 	EndGlobalSection
 EndGlobal

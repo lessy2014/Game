@@ -1300,6 +1300,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1257197909043265460, guid: 888582012057610439885d70e49607f7, type: 3}
+      propertyPath: zoomObject
+      value: 
+      objectReference: {fileID: 1251844659}
     - target: {fileID: 5027339190615450482, guid: 888582012057610439885d70e49607f7, type: 3}
       propertyPath: m_RootOrder
       value: 0
