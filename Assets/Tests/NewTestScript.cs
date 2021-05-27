@@ -28,8 +28,8 @@ public class NewTestScript
         yield return new WaitForSeconds(0.3f);
         Assert.Greater(startTrashHealth, trash.hp);
         
-        Object.Destroy(player);
-        Object.Destroy(trash);
+        GameObject.Destroy(player.gameObject);
+        GameObject.Destroy(trash.gameObject);
     }
 
     [UnityTest]
@@ -37,6 +37,7 @@ public class NewTestScript
     {
         var trash = Object.Instantiate(Resources.Load<TrashMonster>("Prefabs/TrashMonster 1"),
             Vector3.zero, Quaternion.identity);
+        trash.homePoint = new GameObject().transform;
         var player = Object.Instantiate(Resources.Load<Player>("Prefabs/Player"),
             Vector3.zero, Quaternion.identity);
         var startPlayerHp = player.health;
@@ -44,9 +45,8 @@ public class NewTestScript
 
         yield return new WaitForSeconds(2f);
         Assert.Greater(startPlayerHp, player.health);
-        
-        Object.Destroy(player);
-        Object.Destroy(trash);
+        GameObject.Destroy(player.gameObject);
+        GameObject.Destroy(trash.gameObject);
     }
 
     [UnityTest]
@@ -64,7 +64,7 @@ public class NewTestScript
         yield return new WaitForSeconds(1f);
         Assert.Greater(startPlayerPos.x, player.transform.position.x);
         
-        Object.Destroy(player);
+        GameObject.Destroy(player.gameObject);
     }
 
     [UnityTest]
@@ -85,8 +85,8 @@ public class NewTestScript
         Assert.AreEqual(player.transform.position.y, koldun.transform.position.y, 1);
         Assert.AreEqual(player.transform.position.x, koldun.transform.position.x, 1);
         
-        Object.Destroy(player);
-        Object.Destroy(koldun);
+        GameObject.Destroy(player.gameObject);
+        GameObject.Destroy(koldun.gameObject);
     }
 
     [UnityTest]
@@ -98,7 +98,7 @@ public class NewTestScript
         yield return new WaitForSeconds(1f);
         Assert.NotNull(Object.FindObjectOfType<magic_ball_script>());
         
-        Object.Destroy(koldun);
+        GameObject.Destroy(koldun.gameObject);
     }
 
     [UnityTest]
@@ -110,12 +110,14 @@ public class NewTestScript
             Vector3.zero, Quaternion.identity);
         var trash = Object.Instantiate(Resources.Load<TrashMonster>("Prefabs/TrashMonster 1"),
             new Vector3(2, 0), Quaternion.identity);
+        trash.homePoint = new GameObject().transform;
         var startTrashHp = trash.hp;
         yield return new WaitForSeconds(1f);
         Assert.Greater(startTrashHp, trash.hp);
         
-        Object.Destroy(player);
-        Object.Destroy(archer);
+        GameObject.Destroy(player.gameObject);
+        GameObject.Destroy(archer.gameObject);
+        GameObject.Destroy(trash.gameObject);
     }
 
     [UnityTest]
@@ -135,8 +137,8 @@ public class NewTestScript
         Assert.AreEqual(player.transform.position.y, archer.transform.position.y, 1);
         Assert.AreEqual(player.transform.position.x, archer.transform.position.x, 1);
         
-        Object.Destroy(player);
-        Object.Destroy(archer);
+        GameObject.Destroy(player.gameObject);
+        GameObject.Destroy(archer.gameObject);
     }
 
     // [UnityTest]
