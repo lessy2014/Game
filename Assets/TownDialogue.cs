@@ -8,6 +8,7 @@ public class TownDialogue : DialogTrigger
     {
         mage = Koldun.Instance.gameObject;
         player = Player.Instance.gameObject;
+        Player.Instance.SetRageModifierAfterScene();
         DisplayText(player, "Пожар! Нульн горит!",2);
         DisplayText(mage.gameObject, "Опоздали... Поможем защитникам", 2);
         yield return new WaitForSeconds(2f);

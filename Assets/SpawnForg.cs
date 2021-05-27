@@ -14,11 +14,6 @@ public class SpawnForg : MonoBehaviour
         StartCoroutine(SpawnForgs());
     }
 
-    // void Update()
-    // {
-    //     StartCoroutine(SpawnForgs());
-    // }
-
     private IEnumerator SpawnForgs()
     {
         while (true)
