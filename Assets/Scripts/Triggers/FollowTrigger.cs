@@ -33,7 +33,7 @@ public class FollowTrigger : DialogTrigger
             singleTrash.homePoint = player.transform;
             singleTrash.hp = 1000;
         }
-
+        yield return new WaitForSeconds(2f);
         DisplayText(mage, "Орда! Нам с ней не справиться!", 2);
         DisplayText(player, "О, нет-НеТ-НЕТ-НЕТ, бежим!", 2);
         // DisplayText(mage, "Орда! Нам с ней не справиться!", 2);

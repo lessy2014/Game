@@ -149,6 +149,7 @@
         <e p="TrashMonsterDialogue.cs" t="Include" />
         <e p="TrashMonsterDialogue2.cs" t="Include" />
         <e p="TrashMonstersSpawner.cs" t="Include" />
+        <e p="WhereAreWeDialogue.cs" t="Include" />
         <e p="YamaDialogue.cs" t="Include" />
       </e>
       <e p="Game.sln" t="IncludeFlat" />
