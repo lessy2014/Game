@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     public bool specialAttack;
     public bool isHpBottleFull;
     public bool canFillBottle;
+    public bool gameOver;
     // public bool isJumping;
     public bool isCelled;
     // private bool crouching;
@@ -291,6 +292,11 @@ public class Player : MonoBehaviour
     private void StopSound()
     {
         sound.Stop();
+    }
+
+    private void GameOver()
+    {
+        gameOver = true;
     }
 
 

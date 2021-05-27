@@ -5,9 +5,10 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Player player;
-    private Camera camera;
+    public Camera camera;
     private Vector3 position;
     public bool isFocused;
+    public int CameraSize;
     public GameObject objectInFocus;
     public static CameraController Instance;
 
