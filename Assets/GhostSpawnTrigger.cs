@@ -32,7 +32,7 @@ public class GhostSpawnTrigger : MonoBehaviour
     }
     private IEnumerator SpawnGhosts()
     {
-        for (var i = 0; i < 10; i++)
+        for (var i = 0; i < 5; i++)
         {
             Instantiate(ghost, spawnPoint.transform.position, Quaternion.identity);
             yield return new WaitForSeconds(1f);

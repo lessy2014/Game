@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public float shortJumpForce = 3;
     public float jumpForce = 7;
     public float groundRadius = 0.2f;
-    public float attackRange = 1f;
+    public float attackRange = 2f;
     public float health = 100;
     public float rage = 0;
     public float rageMoidfier = 1;

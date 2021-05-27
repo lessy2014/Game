@@ -27,9 +27,8 @@ public class WhereAreWeDialogue : DialogTrigger
         DisplayText(player, "Охтыж...", 2);
         yield return new WaitForSeconds(2f);
         CameraController.Instance.objectInFocus = zoomObject;
+        CameraController.Instance.size = 15;
         CameraController.Instance.isFocused = true;
-        while(CameraController.Instance.camera.orthographicSize < 15)
-            CameraController.Instance.camera.orthographicSize += Time.deltaTime;
         yield return new WaitForSeconds(5f);
         DisplayText(mage, "По-видимому, нам его не обойти...",3 );
         yield return new WaitForSeconds(3f);

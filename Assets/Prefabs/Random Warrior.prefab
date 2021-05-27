@@ -348,8 +348,9 @@ MonoBehaviour:
   layerGrounds:
     serializedVersion: 2
     m_Bits: 256
-  hp: 200
+  hp: 150
   damage: 10
+  randomModifier: 3
   hyperArmor: 0
   speed: 5
   patrolRadius: 7

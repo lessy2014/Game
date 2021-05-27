@@ -10,6 +10,7 @@ public class CameraController : MonoBehaviour
     public bool isFocused;
     public int CameraSize;
     public GameObject objectInFocus;
+    public float size = 5;
     public static CameraController Instance;
 
     private void Awake()
@@ -24,6 +25,7 @@ public class CameraController : MonoBehaviour
 
     private void FollowPlayer()
     {
+        size = 5;
         // player.OnEnable();
         if (player.isWithSword && camera.orthographicSize < 4.9)
         {
@@ -51,6 +53,16 @@ public class CameraController : MonoBehaviour
 
     public void FocusOnObject(GameObject gameObject)
     {
+        if (camera.orthographicSize < size)
+        {
+            position.y += 2;
+            camera.orthographicSize += Time.deltaTime * 4;
+        }
+        else if (camera.orthographicSize > size+0.3)
+        {
+            position.y += 2;
+            camera.orthographicSize -= Time.deltaTime * 4;
+        }
         player.OnDisable();
         transform.position = Vector3.Lerp(this.transform.position, objectInFocus.transform.position, Time.deltaTime);
         var distance = this.transform.position.magnitude - objectInFocus.transform.position.magnitude;
