@@ -80,9 +80,8 @@ public class Player : MonoBehaviour
         print(Difficult);
         Instance = this;
         GetComponents();
-        BindMovement();
-        
         input = new InputMaster();
+        BindMovement();
         healthBar.SetMaxHealth(health);
         rageBar.SetMaxHealth(100);
         rageBar.SetHealth(0);
