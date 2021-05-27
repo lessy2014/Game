@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class BossSpawnTrigger : MonoBehaviour
 {
@@ -12,6 +13,13 @@ public class BossSpawnTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            var hp = GameObject.FindGameObjectWithTag("KingHPBar");
+            for(var i =0; i<3;i ++)
+            {
+                hp.transform.GetChild(i).gameObject.SetActive(true);
+            }
+            print(hp.name);
+                
             boss.thronePosition = spawnPos;
             Instantiate(boss, spawnPos.position, Quaternion.identity);
             Destroy(this);

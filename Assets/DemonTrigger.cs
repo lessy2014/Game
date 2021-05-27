@@ -22,7 +22,10 @@ public class DemonTrigger : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
         if (Demon.Instance.hpToTeleport >= 100)
+        {
             Demon.Instance.readyToFight = true;
+            Demon.Instance.inCage = false;
+        }
         else
             Demon.Instance.readyToFight = false;
     }
