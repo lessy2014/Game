@@ -1847,6 +1847,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2388412815657872486, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388412815657872486, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4203870087540214505, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
       propertyPath: m_Name
       value: FriendlyCharacters
@@ -1910,6 +1918,14 @@ PrefabInstance:
     - target: {fileID: 4203870087834878756, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460961624163335201, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460961624163335201, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
+      propertyPath: m_TagString
+      value: KingHPBar
       objectReference: {fileID: 0}
     - target: {fileID: 6542212321036146135, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
       propertyPath: m_LocalPosition.z

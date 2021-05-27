@@ -25,6 +25,8 @@ public class Ghost_king_boss : Entity
     public GameObject magic;
     public GameObject PrisonDoor;
     public GameObject PrisonFocusPoint;
+    public KingHealthBar HPBar;
+    public GameObject HPCanvas;
     public CameraController camera;
 
     private BoxCollider2D collider;
@@ -34,6 +36,7 @@ public class Ghost_king_boss : Entity
     void Start()
     {
         GetComponents();
+        HPCanvas.SetActive(true);
     }
     
     private void GetComponents()
@@ -44,11 +47,15 @@ public class Ghost_king_boss : Entity
         Instance = this;
         animator = gameObject.GetComponentInChildren<Animator>();
         collider = gameObject.GetComponent<BoxCollider2D>();
+        HPCanvas = GameObject.FindGameObjectWithTag("KingHPBar");
+        HPBar = GameObject.FindGameObjectWithTag("KingHPBar").GetComponent<KingHealthBar>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        HPBar.SetHealth(hp);
         if (canChangeAction)
         {
             if (attackCounter<3)
@@ -161,8 +168,6 @@ public class Ghost_king_boss : Entity
     {
         if (solidSnake)
             hp -= damage;
-        else
-            hp = hp+damage > 1000? 1000: hp+damage;
         if (hp < 0)
         {
             animator.Play("Death");
