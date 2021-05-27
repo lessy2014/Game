@@ -1,4 +1,5 @@
 ﻿
+<<<<<<< HEAD
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEngine.TestRunner", "UnityEngine.TestRunner.csproj", "{178e766a-8168-c584-0092-9c11be3b1449}"
@@ -26,6 +27,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests.csproj", "{c226fc73-03b4-e65b-6d5b-8e23c427a44f}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{8fc1fbdd-9693-3731-9cfe-deb2cdb74636}"
+=======
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{DDFBC18F-9396-3137-9CFE-DEB2CDB74636}"
+>>>>>>> 3b33c670787fe9c4e37fd2de960daff38c5456e3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.2D.Common.Runtime", "Unity.2D.Common.Runtime.csproj", "{04334920-0169-3a69-45b9-b1432700f283}"
 EndProject
@@ -96,8 +102,10 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+<<<<<<< HEAD
 		{178e766a-8168-c584-0092-9c11be3b1449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{178e766a-8168-c584-0092-9c11be3b1449}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{c620d840-0e58-c6d7-c5b0-e21e0f2eb07e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -190,6 +198,12 @@ Global
 		{60f1cf24-65ae-4f2d-27f6-6675a7f80dfa}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{db36cbfd-cf43-287f-b576-1b94027719ad}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{db36cbfd-cf43-287f-b576-1b94027719ad}.Debug|Any CPU.Build.0 = Debug|Any CPU
+=======
+		{DDFBC18F-9396-3137-9CFE-DEB2CDB74636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDFBC18F-9396-3137-9CFE-DEB2CDB74636}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDFBC18F-9396-3137-9CFE-DEB2CDB74636}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDFBC18F-9396-3137-9CFE-DEB2CDB74636}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> 3b33c670787fe9c4e37fd2de960daff38c5456e3
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

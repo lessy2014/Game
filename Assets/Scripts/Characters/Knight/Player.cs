@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public int damage = 50;
     public float speed = 4;
     public float shortJumpForce = 3;
     public float jumpForce = 7;
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     public float attackRange = 1f;
     public float health = 100;
     public float rage = 0;
+    public float rageMoidfier = 1;
     public int cleavePower = 3;
     
     public float movementX;
@@ -31,6 +33,10 @@ public class Player : MonoBehaviour
     private bool canRoll = true;
     public bool rageMode;
     public bool specialAttack;
+    public bool isHpBottleFull;
+    public bool canFillBottle;
+    public bool gameOver;
+    public bool victory;
     // public bool isJumping;
     public bool isCelled;
     // private bool crouching;
@@ -108,6 +114,19 @@ public class Player : MonoBehaviour
             if (isGrounded && canBlock)
                 Block();
         };
+        input.Player.UseHPBottle.performed += context =>
+        {
+            if (isHpBottleFull && health != 100)
+            {
+                isHpBottleFull = false;
+                health = health + 75;
+                health = health > 100 ? 100 : health;
+            }
+            else if(canFillBottle)
+            {
+                isHpBottleFull = true;
+            }
+        };
     }
     void Update()
     {
@@ -119,7 +138,7 @@ public class Player : MonoBehaviour
         {
             speed = 6;
             animator.speed = 1.5f;
-            rage -= 10 * Time.deltaTime;
+            rage -= 30 * Time.deltaTime;
             rageBar.SetHealth(rage);
             if (rage <= 0)
             {
@@ -130,8 +149,10 @@ public class Player : MonoBehaviour
         }
     }
 
+
     private void FixedUpdate()
     {
+        healthBar.SetHealth(health);
         movementY = rigidbody.velocity.y;
         rigidbody.velocity = new Vector2(movementX * speed, movementY);
         // print(rigidbody.velocity.x);
@@ -209,8 +230,8 @@ public class Player : MonoBehaviour
         for (var i = 0; i < cleavePower; i++)
         {
             if (i > enemiesOnHit.Length-1) break;
-            enemiesOnHit[i].GetComponent<Entity>().GetDamage(50);
-            rage += 50;
+            enemiesOnHit[i].GetComponent<Entity>().GetDamage(damage);
+            rage += damage * rageMoidfier;
             rageBar.SetHealth(rage);
             if (rage >= 100)
             {
@@ -273,6 +294,11 @@ public class Player : MonoBehaviour
         sound.Stop();
     }
 
+    private void GameOver()
+    {
+        gameOver = true;
+    }
+
 
     private void OnDrawGizmosSelected()
      {
@@ -332,4 +358,6 @@ public class Player : MonoBehaviour
     public void OnEnable() => input.Enable();
 
     public void OnDisable() => input.Disable();
+
+    public void SetRageModifierAfterScene() => rageMoidfier = 0.1f;
 }

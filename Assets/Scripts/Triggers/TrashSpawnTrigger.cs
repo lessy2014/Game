@@ -19,13 +19,22 @@ public class TrashSpawnTrigger : MonoBehaviour
     {
 
     }
+
+    private IEnumerator SpawnMonsters()
+    {
+        for (var i = 0; i < count; i++)
+        {
+            trashmonster.homePoint = spawnPoint.transform;
+            Instantiate(trashmonster, spawnPoint.transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player") || isTriggered)
             return;
         isTriggered = true;
-        trashmonster.homePoint = spawnPoint.transform;
-        for (var i = 0; i < count; i++)
-            Instantiate(trashmonster, spawnPoint.transform.position, Quaternion.identity);
+        StartCoroutine(SpawnMonsters());
     }
 }

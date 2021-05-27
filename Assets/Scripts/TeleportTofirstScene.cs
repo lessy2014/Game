@@ -29,7 +29,6 @@ public class TeleportTofirstScene : MonoBehaviour
     
     private IEnumerator Blackout()
     {
-        print("here");
         fill.SetActive(true);
         var backgroundColor = background.color;
         while (background.color.a < 1)
@@ -54,7 +53,7 @@ public class TeleportTofirstScene : MonoBehaviour
             yield return null;
         }
         SceneManager.MoveGameObjectToScene(toMove, SceneManager.GetSceneByName(sceneName));
-        toMove.transform.position = new Vector3(0, 10);
+        toMove.transform.position = new Vector3(-19, 10);
         fill.SetActive(false);
         SceneManager.UnloadSceneAsync(currentScene);
     }

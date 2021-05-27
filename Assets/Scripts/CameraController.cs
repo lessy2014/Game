@@ -5,9 +5,10 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Player player;
-    private Camera camera;
+    public Camera camera;
     private Vector3 position;
     public bool isFocused;
+    public int CameraSize;
     public GameObject objectInFocus;
     public static CameraController Instance;
 
@@ -43,7 +44,7 @@ public class CameraController : MonoBehaviour
     }
 
 
-    private void FocusOnObject(GameObject gameObject)
+    public void FocusOnObject(GameObject gameObject)
     {
         player.OnDisable();
         transform.position = Vector3.Lerp(this.transform.position, objectInFocus.transform.position, Time.deltaTime);

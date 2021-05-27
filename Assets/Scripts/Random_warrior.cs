@@ -28,6 +28,7 @@ public class Random_warrior : Entity
 
     public float hp = 100;
     public int damage = 10;
+    public int randomModifier = 3;
     public bool hyperArmor;
     [SerializeField] private float speed = 5;
     [SerializeField] private int patrolRadius = 5;
@@ -100,7 +101,7 @@ public class Random_warrior : Entity
     IEnumerator WaitBeforeAttack()
     {
         preparingAttack = true;
-        var id = Random.Range(0, 3);
+        var id = Random.Range(0, randomModifier);
         var attack = 0;
         var waitBeforeAttack = 0f;
         if (id == 0)
@@ -145,13 +146,15 @@ public class Random_warrior : Entity
                 onSelf = false;
                 Attack(attack);
             }
+            else
+                preparingAttack = false;
         }
         else
         {
+            preparingAttack = false;
             animator.Play("Run");
         }
-
-        preparingAttack = false;
+        
     }
 
     private void Update()
@@ -306,4 +309,6 @@ public class Random_warrior : Entity
             yield return new WaitForSeconds(1);
         }
     }
+
+    private void JustAttacker() => preparingAttack = false;
 }
