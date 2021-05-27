@@ -8,20 +8,28 @@ public class HpBottle : MonoBehaviour
     public bool isFull;
     public Sprite fullBottle;
     public Sprite emptyBottle;
-    Image bottleImage;
+    public Image bottleImage;
+    public Player player;
     // Start is called before the first frame update
     void Start()
     {
-        bottleImage = this.GetComponent<Image>();
+        bottleImage = this.GetComponentInChildren<Image>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Player.Instance.isHpBottleFull)
+        isFull = player.isHpBottleFull;
+        if (player.isHpBottleFull)
+        {
+            print('f');
             bottleImage.sprite = fullBottle;
-        else
-            bottleImage.sprite = emptyBottle;
+        }
             
+        else
+        {
+            print('e');
+            bottleImage.sprite = emptyBottle;
+        }            
     }
 }

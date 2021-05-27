@@ -1,5 +1,98 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2147794380707547464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6883804619692983413}
+  - component: {fileID: 473550771003276525}
+  - component: {fileID: 8070531879109081970}
+  - component: {fileID: 6173259200676360269}
+  m_Layer: 0
+  m_Name: HPBottle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6883804619692983413
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147794380707547464}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4203870086354812028}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -64.200035, y: 145.3}
+  m_SizeDelta: {x: 54.4052, y: 69.852}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &473550771003276525
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147794380707547464}
+  m_CullTransparentMesh: 1
+--- !u!114 &8070531879109081970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147794380707547464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c83ddc0f3262eb14db3bd7d3b664140d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFull: 0
+  fullBottle: {fileID: 21300000, guid: 0fd783c0c40ecfb41b20e6e77bc45dc8, type: 3}
+  emptyBottle: {fileID: 21300000, guid: aee81e448ab964441a97e0eb07ec8090, type: 3}
+  bottleImage: {fileID: 6173259200676360269}
+  player: {fileID: 4203870087629726779}
+--- !u!114 &6173259200676360269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147794380707547464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3685356547491340212
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,6 +787,7 @@ RectTransform:
   m_Children:
   - {fileID: 4203870086885186996}
   - {fileID: 66287940930942255}
+  - {fileID: 6883804619692983413}
   m_Father: {fileID: 4203870086930625637}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1177,7 +1271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4203870086885186996
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2464,7 +2558,7 @@ MonoBehaviour:
   canBlock: 1
   rageMode: 0
   specialAttack: 0
-  isHpBottleFull: 0
+  isHpBottleFull: 1
   canFillBottle: 0
   gameOver: 0
   isCelled: 0
