@@ -259,6 +259,13 @@ public class Player : MonoBehaviour
                 Instantiate(tornado, attackPosition.position + 1.5f * Vector3.left + Vector3.up, quaternion.Euler(0, 180, 0));
             specialAttack = false;
         }
+        else
+        {
+            if (right)
+                Instantiate(splash, attackPosition.position + 1.5f * Vector3.right, Quaternion.Euler(0, 0, 0));
+            else
+                Instantiate(splash, attackPosition.position + 1.5f * Vector3.left, quaternion.Euler(0, 180, 0));
+        }
     }
     
 
