@@ -146,6 +146,8 @@ public class Random_warrior : Entity
                 onSelf = false;
                 Attack(attack);
             }
+            else
+                preparingAttack = false;
         }
         else
         {
