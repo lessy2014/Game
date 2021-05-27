@@ -568,6 +568,7 @@ MonoBehaviour:
   rightFall: {fileID: 4203870087825947131}
   leftFall: {fileID: 4203870087508883696}
   groundCheck: {fileID: 4203870087168434369}
+  smoke: {fileID: 472357239982263578, guid: f1ebeafa1be118d448b293cf36708b32, type: 3}
   isAtacking: 0
   arrowPos: {fileID: 4203870086341060074}
   arrow: {fileID: 3160899355911795218, guid: 032edf2524dc4594696c0f382659b052, type: 3}
@@ -1796,6 +1797,7 @@ MonoBehaviour:
   isFocused: 0
   CameraSize: 0
   objectInFocus: {fileID: 0}
+  size: 5
 --- !u!1 &4203870087168434368
 GameObject:
   m_ObjectHideFlags: 0

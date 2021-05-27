@@ -40,6 +40,7 @@ public class Support : MonoBehaviour
     public Transform rightFall;
     public Transform leftFall;
     public Transform groundCheck;
+    public Smoke smoke;
     private static float realDistanceToPlayerNext = 0.5f;
 
 
@@ -167,7 +168,9 @@ public class Support : MonoBehaviour
     }
     public void TeleportToPlayer()
     {
+        print("teleported");        
         transform.position = player.transform.position;
+        Instantiate(smoke, transform.position, Quaternion.Euler(0, 0, 0));
     }
 
     virtual public void jump()

@@ -71,6 +71,7 @@ public class Koldun : Support
 
     public override void jump()
     {
+        print("here");
         rigidbody.velocity = new Vector2(0, movementY);
         movementX = 0;
         animator.SetBool(IsJumping, isFollowPlayer);
@@ -87,7 +88,13 @@ public class Koldun : Support
 
     public void TeleportToPlayer()
     {
+        print("teleported");
         transform.position = player.transform.position;
+    }
+
+    public void Smoke()
+    {
+        Instantiate(smoke, transform.position, Quaternion.Euler(0, 0, 0));
     }
 
     public void PlayFireBallSound()
