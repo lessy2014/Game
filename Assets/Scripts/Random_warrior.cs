@@ -149,6 +149,7 @@ public class Random_warrior : Entity
         }
         else
         {
+            preparingAttack = false;
             animator.Play("Run");
         }
         
