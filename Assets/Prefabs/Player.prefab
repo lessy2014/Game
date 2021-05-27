@@ -237,6 +237,7 @@ MonoBehaviour:
   rolling: 0
   blocked: 0
   isWithSword: 0
+  canBlock: 1
   rageMode: 0
   specialAttack: 0
   isCelled: 0
@@ -247,14 +248,11 @@ MonoBehaviour:
   layerGrounds:
     serializedVersion: 2
     m_Bits: 256
-  enemies:
-    serializedVersion: 2
-    m_Bits: 512
   destructibleObjects:
     serializedVersion: 2
     m_Bits: 16384
-  healthBar: {fileID: 0}
-  rageBar: {fileID: 0}
+  healthBar: {fileID: 6898378479526602441, guid: c7ba7f569ccc5b64db167e62028ae784, type: 3}
+  rageBar: {fileID: 1438648661657610721, guid: adab8cea0f1320244b0f2ebd7649c2f0, type: 3}
   collider: {fileID: 0}
   splash: {fileID: 1997589832465964479, guid: 76a119b688696824fae82dd780f38b93, type: 3}
   tornado: {fileID: 841369804366453264, guid: 914dda333d072ad48ad1b638bdb37873, type: 3}

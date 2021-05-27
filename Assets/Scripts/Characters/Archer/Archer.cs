@@ -8,10 +8,8 @@ using UnityEngine;
 using System.Linq;
 
 
-namespace Assets.Scripts
-{
 
-    class Archer : Support
+public class Archer : Support
     {
         private float attackRange = 10;
         public bool isAtacking;
@@ -99,5 +97,4 @@ namespace Assets.Scripts
             isAtacking = false;
         }
         
-    }
 }
