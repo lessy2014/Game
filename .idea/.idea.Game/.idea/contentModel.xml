@@ -8,7 +8,11 @@
       <e p="Assets" t="Include">
         <e p="AfterKillDialogue.cs" t="Include" />
         <e p="BossSpawnTrigger.cs" t="Include" />
+        <e p="DemonTrigger.cs" t="Include" />
         <e p="FallenTreeDialogue.cs" t="Include" />
+        <e p="GhostSpawnTrigger.cs" t="Include" />
+        <e p="HpBottle.cs" t="Include" />
+        <e p="HPFountain.cs" t="Include" />
         <e p="MageDialogue.cs" t="Include" />
         <e p="Magic.cs" t="Include" />
         <e p="MeetArcherDialogue.cs" t="Include" />
@@ -144,6 +148,7 @@
         <e p="Trap.cs" t="Include" />
         <e p="TrashMonsterDialogue.cs" t="Include" />
         <e p="TrashMonsterDialogue2.cs" t="Include" />
+        <e p="TrashMonstersSpawner.cs" t="Include" />
         <e p="YamaDialogue.cs" t="Include" />
       </e>
       <e p="Game.sln" t="IncludeFlat" />

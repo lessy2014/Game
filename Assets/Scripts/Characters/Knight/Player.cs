@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public int damage = 50;
     public float speed = 4;
     public float shortJumpForce = 3;
     public float jumpForce = 7;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     public float attackRange = 1f;
     public float health = 100;
     public float rage = 0;
+    public float rageMoidfier = 1;
     public int cleavePower = 3;
     
     public float movementX;
@@ -135,7 +137,7 @@ public class Player : MonoBehaviour
         {
             speed = 6;
             animator.speed = 1.5f;
-            rage -= 10 * Time.deltaTime;
+            rage -= 30 * Time.deltaTime;
             rageBar.SetHealth(rage);
             if (rage <= 0)
             {
@@ -227,8 +229,8 @@ public class Player : MonoBehaviour
         for (var i = 0; i < cleavePower; i++)
         {
             if (i > enemiesOnHit.Length-1) break;
-            enemiesOnHit[i].GetComponent<Entity>().GetDamage(50);
-            rage += 5;
+            enemiesOnHit[i].GetComponent<Entity>().GetDamage(damage);
+            rage += damage * rageMoidfier;
             rageBar.SetHealth(rage);
             if (rage >= 100)
             {
@@ -350,4 +352,6 @@ public class Player : MonoBehaviour
     public void OnEnable() => input.Enable();
 
     public void OnDisable() => input.Disable();
+
+    public void SetRageModifierAfterScene() => rageMoidfier = 0.1f;
 }
