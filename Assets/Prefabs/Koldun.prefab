@@ -396,6 +396,7 @@ MonoBehaviour:
   isFollowPlayer: 0
   speed: 5
   jumpForce: 7
+  realDistanceToPlayerLimit: 0
   realDistanceToPlayer: 0
   groundRadius: 1
   layerGrounds:

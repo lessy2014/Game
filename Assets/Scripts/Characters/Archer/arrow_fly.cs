@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class arrow_fly : MonoBehaviour
 {
+    public int damage = 25;
     public float speed = 10;
     public new Rigidbody2D rigidbody;
     void Start()
@@ -19,7 +20,7 @@ public class arrow_fly : MonoBehaviour
     {
         if (other.gameObject.layer == 9 || other.gameObject.layer == 14)
         {
-            other.gameObject.GetComponent<Entity>().GetDamage(50);
+            other.gameObject.GetComponent<Entity>().GetDamage(damage);
             Destroy(gameObject);
         }
         else if (other.gameObject.layer == 8 )

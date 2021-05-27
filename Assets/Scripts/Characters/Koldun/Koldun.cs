@@ -23,6 +23,7 @@ public class Koldun : Support
         GetComponents();
         sound = gameObject.GetComponentInChildren<AudioSource>();
         Instance = this;
+        animator.Play("get_back_mage");
     }
     
     public override void FixedUpdate()
@@ -42,7 +43,7 @@ public class Koldun : Support
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !isAtacking && isFollowPlayer)
+        if (Input.GetKeyDown(KeyCode.F) && !isAtacking && isFollowPlayer)
         {
             isAtacking = true;
             StartCoroutine(AttackCooldown());
@@ -87,7 +88,6 @@ public class Koldun : Support
     public void TeleportToPlayer()
     {
         transform.position = player.transform.position;
-        print("teleported");
     }
 
     public void PlayFireBallSound()
