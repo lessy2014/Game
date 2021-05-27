@@ -77,9 +77,11 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Difficult = PlayerPrefs.GetInt("difficult");
+        print(Difficult);
+        Instance = this;
         GetComponents();
         BindMovement();
-        Instance = this;
+        
         input = new InputMaster();
         healthBar.SetMaxHealth(health);
         rageBar.SetMaxHealth(100);
