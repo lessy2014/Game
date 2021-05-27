@@ -1847,10 +1847,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4203870086320640624, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
-      propertyPath: m_TagString
-      value: Music
-      objectReference: {fileID: 0}
     - target: {fileID: 4203870087540214505, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
       propertyPath: m_Name
       value: FriendlyCharacters
@@ -1899,10 +1895,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4203870087629726779, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
-      propertyPath: isHpBottleFull
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4203870087732689457, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1919,8 +1911,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4203870088088471059, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 6542212321036146135, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

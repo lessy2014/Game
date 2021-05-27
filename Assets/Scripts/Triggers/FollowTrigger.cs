@@ -26,7 +26,7 @@ public class FollowTrigger : DialogTrigger
         yield return new WaitForSeconds(2f);
         DisplayText(mage, "Быстро же мы сдались...", 1);
         yield return new WaitForSeconds(1f);
-        for (var i = 0; i < 80; i++)
+        for (var i = 0; i < 30; i++)
         {
             var singleTrash = Instantiate(trash, spawnPos.position, Quaternion.identity);
             singleTrash.homePoint = player.transform;

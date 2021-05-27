@@ -36,8 +36,10 @@ public class Random_warrior : Entity
     public Transform homePoint;
     public Transform player;
     public float stoppingDistance;
+    public AudioSource sound;
+    public AudioClip hitSound;
 
-    
+
     private bool readyToAttack = true;
     private bool onSelf = false;
     private bool preparingAttack = false;
@@ -73,6 +75,7 @@ public class Random_warrior : Entity
         boxCollider = gameObject.GetComponent<BoxCollider2D>();
         animator = gameObject.GetComponent<Animator>();
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+        sound = gameObject.GetComponent<AudioSource>();
     }
 
     public override void FlyFromTornado()
@@ -218,6 +221,7 @@ public class Random_warrior : Entity
     {
         preparingAttack = false;
         hp -= damage;
+        PlayHitSound();
         if (!hyperArmor)
             DoKnockBack();
 
@@ -299,8 +303,11 @@ public class Random_warrior : Entity
         else
             movementY = 0;
     }
-    
-    
+
+    public void PlayHitSound()
+    {
+        sound.PlayOneShot(hitSound);
+    }
     IEnumerator RandomSpeed()
     {
         for(; ; )

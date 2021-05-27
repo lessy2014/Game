@@ -2754,7 +2754,7 @@ MonoBehaviour:
   jumpForce: 7
   groundRadius: 0.2
   attackRange: 1
-  health: 100
+  health: 250
   rage: 0
   rageMoidfier: 1
   cleavePower: 3

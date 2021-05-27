@@ -43,7 +43,7 @@ public class Koldun : Support
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && !isAtacking && isFollowPlayer)
+        if ((Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.F)) && !isAtacking && isFollowPlayer)
         {
             isAtacking = true;
             StartCoroutine(AttackCooldown());
