@@ -42,6 +42,8 @@ public class MainMenuController : MonoBehaviour
             background.color = backgroundColor;
             yield return new WaitForSeconds(0.1f);
         }
+
+        Player.Difficult = 2;
         SceneManager.LoadScene("Forest");
     }
 }

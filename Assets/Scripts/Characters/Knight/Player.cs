@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
     public AudioClip jumpSound;
 
     public static Player Instance;
+    public static int Difficult;
     
     private void Awake()
     {
@@ -224,7 +225,7 @@ public class Player : MonoBehaviour
 
     private void OnAttack()
     {
-        if (rageMode && !specialAttack)
+        if (rageMode && !specialAttack || Difficult == 0 && !specialAttack)
             CreateSplash();
         var enemiesOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, enemies);
         var objOnHit = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, destructibleObjects);
@@ -260,7 +261,7 @@ public class Player : MonoBehaviour
                 Instantiate(tornado, attackPosition.position + 1.5f * Vector3.left + Vector3.up, quaternion.Euler(0, 180, 0));
             specialAttack = false;
         }
-        else
+        else if (Difficult == 1)
         {
             if (right)
                 Instantiate(splash, attackPosition.position + 1.5f * Vector3.right, Quaternion.Euler(0, 0, 0));
