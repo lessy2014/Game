@@ -598,6 +598,11 @@ Transform:
   m_Father: {fileID: 77679969}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &265306362 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4813790370671267678, guid: 888582012057610439885d70e49607f7, type: 3}
+  m_PrefabInstance: {fileID: 874952967}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &306640141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,7 +1858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTriggered: 0
-  zoomObject: {fileID: 0}
+  zoomObject: {fileID: 265306362}
 --- !u!1 &1484612690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,6 +2012,8 @@ MonoBehaviour:
   homePoint: {fileID: 926169630}
   player: {fileID: 0}
   stoppingDistance: 10
+  sound: {fileID: 0}
+  hitSound: {fileID: 0}
   swordAttackPosition: {fileID: 1224620740}
   greatSwordAttackPosition: {fileID: 1484612691}
   lanceAtttackPosition: {fileID: 1394877394}
