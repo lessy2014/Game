@@ -79,6 +79,8 @@ public class Player : MonoBehaviour
     
     private void Awake()
     {
+        Difficult = PlayerPrefs.GetInt("difficult");
+        Debug.Log(Difficult);
         GetComponents();
         Instance = this;
         input = new InputMaster();
