@@ -598,11 +598,6 @@ Transform:
   m_Father: {fileID: 77679969}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &265306362 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4813790370671267678, guid: 888582012057610439885d70e49607f7, type: 3}
-  m_PrefabInstance: {fileID: 874952967}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &306640141
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +800,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &474095658
 GameObject:
@@ -1067,112 +1062,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &730341617
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 730341618}
-  m_Layer: 0
-  m_Name: DialogueTriggers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &730341618
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 730341617}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 810913554}
-  m_Father: {fileID: 0}
-  m_RootOrder: 17
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &810913553
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 810913554}
-  - component: {fileID: 810913556}
-  - component: {fileID: 810913555}
-  m_Layer: 0
-  m_Name: WhereAreWe
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &810913554
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 810913553}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 148.4, y: 6.63, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 730341618}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &810913555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 810913553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 589c8d9acb84477449060e1f93d88817, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  archer: {fileID: 0}
-  player: {fileID: 0}
-  mage: {fileID: 0}
-  speakers: []
-  zoomObject: {fileID: 431438958}
---- !u!61 &810913556
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 810913553}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.473732, y: 0.9474721}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.947464, y: 2.8949442}
-  m_EdgeRadius: 0
 --- !u!1 &816555099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,18 +1182,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 810913555, guid: 888582012057610439885d70e49607f7, type: 3}
+      propertyPath: zoomObject
+      value: 
+      objectReference: {fileID: 431438958}
     - target: {fileID: 1257197909043265460, guid: 888582012057610439885d70e49607f7, type: 3}
       propertyPath: zoomObject
       value: 
       objectReference: {fileID: 1251844659}
-    - target: {fileID: 2851648544319360481, guid: 888582012057610439885d70e49607f7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 95.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 2851648544319360481, guid: 888582012057610439885d70e49607f7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.35
-      objectReference: {fileID: 0}
     - target: {fileID: 5027339190615450482, guid: 888582012057610439885d70e49607f7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1845,25 +1730,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1413588732 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3933997712441281998, guid: 888582012057610439885d70e49607f7, type: 3}
-  m_PrefabInstance: {fileID: 874952967}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1413588734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1413588732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b89decf79721c804da1753fe7b7f847b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTriggered: 0
-  zoomObject: {fileID: 265306362}
 --- !u!1 &1484612690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2562,11 +2428,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4203870087540214506, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 305.4
+      value: 154.87
       objectReference: {fileID: 0}
     - target: {fileID: 4203870087540214506, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.8
+      value: 7.74
       objectReference: {fileID: 0}
     - target: {fileID: 4203870087540214506, guid: a27289df4a96f3c479425596e00f44f6, type: 3}
       propertyPath: m_LocalPosition.z

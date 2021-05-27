@@ -18,8 +18,6 @@ public class BossSpawnTrigger : MonoBehaviour
             {
                 hp.transform.GetChild(i).gameObject.SetActive(true);
             }
-            print(hp.name);
-                
             boss.thronePosition = spawnPos;
             Instantiate(boss, spawnPos.position, Quaternion.identity);
             Destroy(this);

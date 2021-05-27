@@ -168,7 +168,6 @@ public class Support : MonoBehaviour
     }
     public void TeleportToPlayer()
     {
-        print("teleported");        
         transform.position = player.transform.position;
         Instantiate(smoke, transform.position, Quaternion.Euler(0, 0, 0));
     }

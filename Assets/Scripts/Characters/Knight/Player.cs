@@ -14,8 +14,8 @@ public class Player : MonoBehaviour
     public float jumpForce = 7;
     public float groundRadius = 0.2f;
     public float attackRange = 3f;
-    public float maxHealth = 200;
-    public float health = 200;
+    public float maxHealth = 300;
+    public float health = 300;
     public float rage = 0;
     public float rageMoidfier = 1;
     public int cleavePower = 3;
