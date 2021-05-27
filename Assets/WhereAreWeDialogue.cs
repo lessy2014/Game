@@ -11,7 +11,6 @@ public class WhereAreWeDialogue : DialogTrigger
         mage = Koldun.Instance.gameObject;
         player = Player.Instance.gameObject;
         archer = Archer.Instance.gameObject;
-        yield return new WaitForSeconds(3f);
         DisplayText(player, "Вот, зараза", 3);
         DisplayText(archer, "Мага, где мы?", 3);
         yield return new WaitForSeconds(3f);

@@ -481,7 +481,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 167166346}
-  - component: {fileID: 167166349}
   - component: {fileID: 167166348}
   - component: {fileID: 167166347}
   m_Layer: 0
@@ -548,22 +547,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.947464, y: 2.8949442}
   m_EdgeRadius: 0
---- !u!114 &167166349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 167166345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19f931b689dd50847b9e019ca0c7e2ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  archer: {fileID: 0}
-  player: {fileID: 0}
-  mage: {fileID: 0}
-  speakers: []
 --- !u!1 &257431477
 GameObject:
   m_ObjectHideFlags: 0

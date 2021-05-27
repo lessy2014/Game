@@ -25,10 +25,15 @@ public class CameraController : MonoBehaviour
     private void FollowPlayer()
     {
         // player.OnEnable();
-        if (player.isWithSword && camera.orthographicSize < 5)
+        if (player.isWithSword && camera.orthographicSize < 4.9)
         {
             position.y += 2;
             camera.orthographicSize += Time.deltaTime * 4;
+        }
+        else if (player.isWithSword && camera.orthographicSize > 5.3)
+        {
+            position.y += 2;
+            camera.orthographicSize -= Time.deltaTime * 4;
         }
         else if (camera.orthographicSize > 3 && !player.isWithSword)
         {
