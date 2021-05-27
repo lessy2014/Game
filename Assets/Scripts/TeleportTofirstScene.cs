@@ -11,7 +11,7 @@ public class TeleportTofirstScene : MonoBehaviour
     public GameObject toMove;
 
     private bool isTriggered;
-    private string sceneName = "SampleScene";
+    private string sceneName = "Jabi";
     
     private void Awake()
     {
@@ -53,7 +53,10 @@ public class TeleportTofirstScene : MonoBehaviour
             yield return null;
         }
         SceneManager.MoveGameObjectToScene(toMove, SceneManager.GetSceneByName(sceneName));
-        toMove.transform.position = new Vector3(-19, 10);
+        //toMove.transform.position = new Vector3(0, 0, 0 );
+        Player.Instance.transform.position = new Vector3(-24, -7, 0);
+
+        // toMove.transform.position = new Vector3(-19, 10);
         fill.SetActive(false);
         SceneManager.UnloadSceneAsync(currentScene);
     }
