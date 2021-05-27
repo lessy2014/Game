@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameOver : MonoBehaviour
 {
     public GameObject GameOverUi;
+    public GameObject Victory;
     private bool active;
 
     private void Awake()
@@ -17,13 +18,24 @@ public class GameOver : MonoBehaviour
     {
         if (Player.Instance.gameOver && !active)
         {
-                Open();
+                OpenGameOver();
+        }
+        if(Player.Instance.victory && !active)
+        {
+            OpenVictory();
         }
     }
 
-    public void Open()
+    public void OpenGameOver()
     {
         GameOverUi.SetActive(true);
+        Time.timeScale = 0f;
+        active = true;
+    }
+
+    public void OpenVictory()
+    {
+        Victory.SetActive(true);
         Time.timeScale = 0f;
         active = true;
     }

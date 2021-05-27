@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     public bool isHpBottleFull;
     public bool canFillBottle;
     public bool gameOver;
+    public bool victory;
     // public bool isJumping;
     public bool isCelled;
     // private bool crouching;
