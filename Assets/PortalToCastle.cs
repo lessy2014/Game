@@ -4,14 +4,14 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TeleportTofirstScene : MonoBehaviour
+public class PortalToCastle : MonoBehaviour
 {
     public GameObject fill;
     private Image background;
     public GameObject toMove;
 
     private bool isTriggered;
-    private string sceneName = "Jabi";
+    private string sceneName = "SampleScene";
     
     private void Awake()
     {
@@ -23,6 +23,7 @@ public class TeleportTofirstScene : MonoBehaviour
     {
         if (!other.CompareTag("Player") || isTriggered)
             return;
+        toMove = GameObject.Find("FriendlyCharacters");
         isTriggered = true;
         StartCoroutine(Blackout());
     }
@@ -53,10 +54,8 @@ public class TeleportTofirstScene : MonoBehaviour
             yield return null;
         }
         SceneManager.MoveGameObjectToScene(toMove, SceneManager.GetSceneByName(sceneName));
-        //toMove.transform.position = new Vector3(0, 0, 0 );
-        Player.Instance.transform.position = new Vector3(-24, -7, 0);
-
-        // toMove.transform.position = new Vector3(-19, 10);
+        // toMove.transform.position = new Vector3(-24.5f, -7.5f, 0 );
+        Player.Instance.transform.position = new Vector3(140, 7.5f, 0);
         fill.SetActive(false);
         SceneManager.UnloadSceneAsync(currentScene);
     }
