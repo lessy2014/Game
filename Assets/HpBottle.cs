@@ -22,6 +22,6 @@ public class HpBottle : MonoBehaviour
             bottleImage.sprite = fullBottle;
         else
             bottleImage.sprite = emptyBottle;
-            
+
     }
 }

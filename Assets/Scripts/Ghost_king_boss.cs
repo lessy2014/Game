@@ -166,6 +166,7 @@ public class Ghost_king_boss : Entity
         if (hp < 0)
         {
             animator.Play("Death");
+            Player.Instance.victory = true;
             collider.enabled = false;
             Destroy(PrisonDoor);
             StartCoroutine(FocusOnPrison());

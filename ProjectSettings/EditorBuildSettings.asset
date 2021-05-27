@@ -12,10 +12,13 @@ EditorBuildSettings:
     path: Assets/Scenes/Forest.unity
     guid: 5c15dc126445809419e447333af5c0bf
   - enabled: 1
-    path: Assets/Scenes/Jabi.unity
-    guid: 0df7234a87aca9748a990d86db422227
-  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Castle.unity
+    guid: 7124a76273d61554f8c8cd8108f209e8
+  - enabled: 1
+    path: Assets/Scenes/Jabi.unity
+    guid: 0df7234a87aca9748a990d86db422227
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3db30d3fa8a69a54ab1ea1233d7bdbd5, type: 2}
